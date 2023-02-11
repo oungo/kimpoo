@@ -1,4 +1,4 @@
-import { UPBIT_COIN_LIST } from 'constants/constants';
+import { TICKER_LIST } from 'constants/constants';
 import { useState, useEffect } from 'react';
 import { Ticker } from '../types';
 
@@ -7,7 +7,7 @@ const WEBSOCKET_REQUEST_PARAMS = [
   { ticket: 'test' },
   {
     type: 'ticker',
-    codes: UPBIT_COIN_LIST,
+    codes: TICKER_LIST.map((ticker) => `KRW-${ticker}`),
   },
   {
     format: 'SIMPLE',
