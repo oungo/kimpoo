@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.3"],\
             ["lint-staged", "npm:13.1.1"],\
             ["next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
+            ["pinst", "npm:3.0.0"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:18.2.0"],\
@@ -2588,6 +2589,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.3"],\
             ["lint-staged", "npm:13.1.1"],\
             ["next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
+            ["pinst", "npm:3.0.0"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:18.2.0"],\
@@ -3189,6 +3191,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pidtree-npm-0.6.0-3d92e16117-8fbc073ede.zip/node_modules/pidtree/",\
           "packageDependencies": [\
             ["pidtree", "npm:0.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["pinst", [\
+        ["npm:3.0.0", {\
+          "packageLocation": "./.yarn/cache/pinst-npm-3.0.0-5d2b6c1dda-4ae48a6a60.zip/node_modules/pinst/",\
+          "packageDependencies": [\
+            ["pinst", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
