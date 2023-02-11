@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Ticker } from './types/types';
+import { Ticker } from './types';
 
 interface Props {
   ticker: Ticker;

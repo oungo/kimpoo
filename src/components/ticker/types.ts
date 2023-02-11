@@ -14,5 +14,5 @@ export interface Ticker {
   /** 52주 최저가 */
   l52wp: number;
   /** 유의 종목 여부 */
-  mw: "NONE" | "CAUTION";
+  mw: 'NONE' | 'CAUTION';
 }
