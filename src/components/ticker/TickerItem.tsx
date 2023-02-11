@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { Ticker } from "./types/types";
+import { memo } from 'react';
+import { Ticker } from './types/types';
 
 interface Props {
   ticker: Ticker;

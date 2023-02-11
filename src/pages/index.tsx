@@ -1,4 +1,4 @@
-import TableTicker from "@/components/ticker/TableTicker";
+import TableTicker from '@/components/ticker/TableTicker';
 
 const index = () => {
   return <TableTicker />;

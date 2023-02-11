@@ -1,5 +1,5 @@
-import { useTickers } from "./hooks/useTickers";
-import TickerItem from "./TickerItem";
+import { useTickers } from './hooks/useTickers';
+import TickerItem from './TickerItem';
 
 const TableTicker = () => {
   const tickers = useTickers();
