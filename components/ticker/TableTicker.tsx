@@ -1,7 +1,7 @@
 import { useTickers } from "./hooks/useTickers";
 import TickerItem from "./TickerItem";
 
-export default function TableTicker() {
+const TableTicker = () => {
   const tickers = useTickers();
 
   return (
@@ -23,4 +23,6 @@ export default function TableTicker() {
       </tbody>
     </table>
   );
-}
+};
+
+export default TableTicker;

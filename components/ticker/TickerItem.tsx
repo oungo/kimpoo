@@ -5,7 +5,7 @@ interface Props {
   ticker: Ticker;
 }
 
-const TickerItem = memo(({ ticker }: Props) => {
+const TickerItem = ({ ticker }: Props) => {
   return (
     <tr key={ticker.cd}>
       <td>{ticker.cd}</td>
@@ -15,6 +15,6 @@ const TickerItem = memo(({ ticker }: Props) => {
       <td>{ticker.mw}</td>
     </tr>
   );
-});
+};
 
-export default TickerItem;
+export default memo(TickerItem);

@@ -1,5 +1,7 @@
 import TableTicker from "../components/ticker/TableTicker";
 
-export default function index() {
+const Index = () => {
   return <TableTicker />;
-}
+};
+
+export default Index;
