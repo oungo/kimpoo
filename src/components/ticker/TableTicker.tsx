@@ -1,8 +1,8 @@
-import { useTickers } from './hooks/useTickers';
+import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
 const TableTicker = () => {
-  const tickers = useTickers();
+  const tickers = useUpbitTickers();
 
   return (
     <table>

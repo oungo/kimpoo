@@ -14,7 +14,7 @@ const WEBSOCKET_REQUEST_PARAMS = [
   },
 ];
 
-export const useTickers = () => {
+export const useUpbitTickers = () => {
   const [tickers, setTickers] = useState<Map<Ticker['cd'], Ticker>>(new Map());
 
   useEffect(() => {
