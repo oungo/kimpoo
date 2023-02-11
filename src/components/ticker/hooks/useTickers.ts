@@ -1,6 +1,6 @@
+import { UPBIT_COIN_LIST } from "constants/constants";
 import { useState, useEffect } from "react";
 import { Ticker } from "../types/types";
-import { UPBIT_COIN_LIST } from "../utils/common";
 
 const UPBIT_WEBSOCKET_URL = "wss://api.upbit.com/websocket/v1";
 const WEBSOCKET_REQUEST_PARAMS = [
