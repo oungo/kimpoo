@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
             ["eslint-config-prettier", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:8.6.0"],\
+            ["husky", "npm:8.0.3"],\
             ["lint-staged", "npm:13.1.1"],\
             ["next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
             ["prettier", "npm:2.8.4"],\
@@ -2133,6 +2134,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["husky", [\
+        ["npm:8.0.3", {\
+          "packageLocation": "./.yarn/cache/husky-npm-8.0.3-b0b59c5127-837bc7e441.zip/node_modules/husky/",\
+          "packageDependencies": [\
+            ["husky", "npm:8.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ignore", [\
         ["npm:5.2.4", {\
           "packageLocation": "./.yarn/cache/ignore-npm-5.2.4-fbe6e989e5-3d4c309c60.zip/node_modules/ignore/",\
@@ -2575,6 +2585,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
             ["eslint-config-prettier", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:8.6.0"],\
+            ["husky", "npm:8.0.3"],\
             ["lint-staged", "npm:13.1.1"],\
             ["next", "virtual:3fd1c1adaedfcf19d99e149a4b00d97659a1da6ffa12d51d0edef81df1ca004da25f717559de2787f6004d6ce1ed7978213cfcf4b92daab9b8d31b584d5e98df#npm:13.1.6"],\
             ["prettier", "npm:2.8.4"],\
