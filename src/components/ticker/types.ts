@@ -16,3 +16,20 @@ export interface Ticker {
   /** 유의 종목 여부 */
   mw: 'NONE' | 'CAUTION';
 }
+
+export interface BinanceTicker {
+  /** Symbol */
+  s: string;
+  /** Close price */
+  c: string;
+  /** Open price */
+  o: string;
+  /** High price */
+  h: string;
+  /** Low price */
+  l: string;
+  /** Total traded base asset volume */
+  v: string;
+  /** Symbol  */
+  q: string;
+}
