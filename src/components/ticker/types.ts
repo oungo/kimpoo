@@ -32,6 +32,6 @@ export interface BinanceTicker {
   l: string;
   /** Total traded base asset volume */
   v: string;
-  /** Symbol  */
+  /** Total traded quote asset volume  */
   q: string;
 }
