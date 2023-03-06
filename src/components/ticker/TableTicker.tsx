@@ -1,4 +1,5 @@
 import { useTickerStore } from 'store/useTickerStore';
+import { useBinanceTickers } from './hooks/useBinanceTickers';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
@@ -6,6 +7,7 @@ const TableTicker = () => {
   const ticker = useTickerStore((state) => state.tickerList);
 
   useUpbitTickers();
+  useBinanceTickers();
 
   return (
     <table>

@@ -1,4 +1,6 @@
-export interface Ticker {
+export type Ticker = UpbitTicker & BinanceTicker;
+
+export interface UpbitTicker {
   /** 마켓 코드  */
   cd: string;
   /** 현재가 */

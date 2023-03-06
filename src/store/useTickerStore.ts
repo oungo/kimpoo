@@ -9,6 +9,8 @@ interface TickerState {
 export const useTickerStore = create<TickerState>()((set) => ({
   tickerList: new Map(),
   setTickerList: (code, ticker) => {
-    set(({ tickerList }) => ({ tickerList: new Map(tickerList).set(code, ticker) }));
+    set(({ tickerList }) => ({
+      tickerList: new Map(tickerList).set(code, { ...tickerList.get(code), ...ticker }),
+    }));
   },
 }));

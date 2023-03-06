@@ -1,6 +1,7 @@
 import { TICKER_LIST } from 'constants/constants';
-import { useState, useEffect } from 'react';
-import { BinanceTicker } from '../types';
+import { useEffect } from 'react';
+import { useTickerStore } from 'store/useTickerStore';
+import { Ticker } from '../types';
 
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 const WEBSOCKET_REQUEST_PARAMS = {
@@ -10,7 +11,7 @@ const WEBSOCKET_REQUEST_PARAMS = {
 };
 
 export const useBinanceTickers = () => {
-  const [tickers, setTickers] = useState<Map<BinanceTicker['s'], BinanceTicker>>(new Map());
+  const setTickerList = useTickerStore((state) => state.setTickerList);
 
   useEffect(() => {
     const socket = new WebSocket(WEBSOCKET_URL);
@@ -20,14 +21,13 @@ export const useBinanceTickers = () => {
     };
 
     socket.onmessage = async (event) => {
-      const ticker: BinanceTicker = JSON.parse(event.data);
-      setTickers((prev) => new Map(prev).set(ticker.s, ticker));
+      const ticker: Ticker = JSON.parse(event.data);
+      const newTickerCode = ticker.s?.replace('USDT', '');
+      setTickerList(newTickerCode, ticker);
     };
 
     return () => {
       socket.close();
     };
-  }, []);
-
-  return tickers;
+  }, [setTickerList]);
 };
