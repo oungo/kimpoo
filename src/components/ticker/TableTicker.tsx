@@ -1,17 +1,8 @@
-import { useTickerStore } from 'store/useTickerStore';
-import { useBinanceTickers } from './hooks/useBinanceTickers';
-import { useUpbitTickers } from './hooks/useUpbitTickers';
-import TickerItem from './TickerItem';
+import TableTickerBody from './TableTickerBody';
 
 const TableTicker = () => {
-  const ticker = useTickerStore((state) => state.tickerList);
-
-  useUpbitTickers();
-  useBinanceTickers();
-
   return (
     <table>
-      <caption>{ticker.size}</caption>
       <thead>
         <tr>
           <th>이름</th>
@@ -23,11 +14,7 @@ const TableTicker = () => {
           <th>거래액(일)</th>
         </tr>
       </thead>
-      <tbody>
-        {Array.from(ticker.entries()).map(([code, ticker]) => (
-          <TickerItem key={code} code={code} ticker={ticker} />
-        ))}
-      </tbody>
+      <TableTickerBody />
     </table>
   );
 };
