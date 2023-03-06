@@ -20,11 +20,18 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
       <td>{code}</td>
 
       <td>
-        <p>{formatPrice(ticker.tp)}</p>
-        {ticker.c && <p>{formatPrice(convertUSDtoKRW(ticker.c, quotation), 0)}</p>}
+        <p>{ticker.tp > 1 ? formatPrice(ticker.tp) : ticker.tp}</p>
+        {ticker.c && (
+          <p>
+            {formatPrice(
+              convertUSDtoKRW(ticker.c, quotation),
+              convertUSDtoKRW(ticker.c, quotation) > 1 ? 0 : 4
+            )}
+          </p>
+        )}
       </td>
 
-      {ticker.c && <td>{kimp}%</td>}
+      <td>{ticker.c ? `${kimp}%` : ''}</td>
 
       <td>{formatPrice(ticker.scr * 100)}%</td>
 
