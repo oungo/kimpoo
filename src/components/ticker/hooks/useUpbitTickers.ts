@@ -28,6 +28,7 @@ export const useUpbitTickers = () => {
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const stringData = await event.data.text();
       const ticker: Ticker = JSON.parse(stringData);
+      delete ticker.c;
       const newTickerCode = ticker.cd.replace('KRW-', '');
       setTicker(newTickerCode, ticker);
     };
