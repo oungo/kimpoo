@@ -24,8 +24,8 @@ const TableTicker = () => {
         </tr>
       </thead>
       <tbody>
-        {Array.from(ticker.values()).map((ticker) => (
-          <TickerItem key={ticker.cd} ticker={ticker} />
+        {Array.from(ticker.entries()).map(([code, ticker]) => (
+          <TickerItem key={code} code={code} ticker={ticker} />
         ))}
       </tbody>
     </table>

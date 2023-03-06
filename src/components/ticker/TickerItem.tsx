@@ -3,13 +3,14 @@ import { formatPrice, formatPriceText } from 'utils/common';
 import { Ticker } from './types';
 
 interface Props {
+  code: string;
   ticker: Ticker;
 }
 
-const TickerItem = ({ ticker }: Props) => {
+const TickerItem = ({ code, ticker }: Props) => {
   return (
     <tr>
-      <td>{ticker.cd}</td>
+      <td>{code}</td>
       <td>
         <p>{formatPrice(ticker.tp)}</p>
         {ticker.o && <p>{formatPrice(ticker.o)}</p>}

@@ -22,7 +22,9 @@ export const useBinanceTickers = () => {
 
     socket.onmessage = async (event) => {
       const ticker: Ticker = JSON.parse(event.data);
-      const newTickerCode = ticker.s?.replace('USDT', '');
+      if (!ticker.s) return;
+
+      const newTickerCode = ticker.s.replace('USDT', '');
       setTickerList(newTickerCode, ticker);
     };
 
