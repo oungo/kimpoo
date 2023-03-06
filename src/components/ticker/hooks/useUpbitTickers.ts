@@ -1,5 +1,6 @@
 import { TICKER_LIST } from 'constants/constants';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useTickerStore } from 'store/useTickerStore';
 import { Ticker } from '../types';
 
 const UPBIT_WEBSOCKET_URL = 'wss://api.upbit.com/websocket/v1';
@@ -15,7 +16,7 @@ const WEBSOCKET_REQUEST_PARAMS = [
 ];
 
 export const useUpbitTickers = () => {
-  const [tickers, setTickers] = useState<Map<Ticker['cd'], Ticker>>(new Map());
+  const setTicker = useTickerStore((state) => state.setTickerList);
 
   useEffect(() => {
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
@@ -27,13 +28,12 @@ export const useUpbitTickers = () => {
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const stringData = await event.data.text();
       const ticker: Ticker = JSON.parse(stringData);
-      setTickers((prev) => new Map(prev).set(ticker.cd, ticker));
+      const newTickerCode = ticker.cd.replace('KRW-', '');
+      setTicker(newTickerCode, ticker);
     };
 
     return () => {
       socket.close();
     };
-  }, []);
-
-  return tickers;
+  }, [setTicker]);
 };

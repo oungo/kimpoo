@@ -1,12 +1,15 @@
+import { useTickerStore } from 'store/useTickerStore';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
 const TableTicker = () => {
-  const tickers = useUpbitTickers();
+  const ticker = useTickerStore((state) => state.tickerList);
+
+  useUpbitTickers();
 
   return (
     <table>
-      <caption>{tickers.size}</caption>
+      <caption>{ticker.size}</caption>
       <thead>
         <tr>
           <th>이름</th>
@@ -17,7 +20,7 @@ const TableTicker = () => {
         </tr>
       </thead>
       <tbody>
-        {Array.from(tickers.values()).map((ticker) => (
+        {Array.from(ticker.values()).map((ticker) => (
           <TickerItem key={ticker.cd} ticker={ticker} />
         ))}
       </tbody>
