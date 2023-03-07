@@ -16,30 +16,34 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
   const kimp = formatPrice((ticker.tp / convertUSDtoKRW(ticker.c, quotation)) * 100 - 100);
 
   return (
-    <tr>
-      <td>{code}</td>
+    <tr className="text-right border-b-gray-200 border-b">
+      <td className="text-left">
+        <p>a</p>
+        <p className="inline-block text-gray-500">{code}</p>
+        {ticker.mw === 'CAUTION' && <span>유</span>}
+      </td>
 
-      <td>
+      <td className="flex flex-col">
         <p>{ticker.tp > 1 ? formatPrice(ticker.tp) : ticker.tp}</p>
-        {ticker.c && (
-          <p>
-            {formatPrice(
-              convertUSDtoKRW(ticker.c, quotation),
-              convertUSDtoKRW(ticker.c, quotation) > 1 ? 0 : 4
-            )}
-          </p>
-        )}
+        <p className="text-gray-500">
+          {ticker.c
+            ? formatPrice(
+                convertUSDtoKRW(ticker.c, quotation),
+                convertUSDtoKRW(ticker.c, quotation) > 1 ? 0 : 4
+              )
+            : ''}
+        </p>
       </td>
 
       <td>{ticker.c ? `${kimp}%` : ''}</td>
 
       <td>{formatPrice(ticker.scr * 100)}%</td>
 
-      <td>{ticker.mw}</td>
-
-      <td>
+      <td className="flex flex-col">
         <p>{formatPriceText(ticker.atp24h)}</p>
-        {ticker.q && <p>{formatPriceText(convertUSDtoKRW(ticker.q, quotation))}</p>}
+        {ticker.q && (
+          <p className="text-gray-500">{formatPriceText(convertUSDtoKRW(ticker.q, quotation))}</p>
+        )}
       </td>
     </tr>
   );

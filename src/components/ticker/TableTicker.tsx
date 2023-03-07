@@ -8,15 +8,14 @@ const TableTicker = () => {
   });
 
   return (
-    <table>
+    <table className="table-fixed text-sm">
       <thead>
-        <tr>
-          <th>이름</th>
-          <th>현재가</th>
-          <th>김프</th>
-          <th>전일 대비</th>
-          <th>유의 종목</th>
-          <th>거래액(일)</th>
+        <tr className="text-right border-b border-b-gray-500">
+          <th className="w-20 text-left">이름</th>
+          <th className="w-28">현재가</th>
+          <th className="w-20">김프</th>
+          <th className="w-20">전일 대비</th>
+          <th className="w-24">거래액(일)</th>
         </tr>
       </thead>
       <TableTickerBody quotation={quotation?.[0].basePrice} />
