@@ -1,3 +1,4 @@
+import { TICKER_MAP } from 'constants/constants';
 import { memo } from 'react';
 import { formatPrice } from 'utils/common';
 import { Ticker } from './types';
@@ -22,7 +23,7 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
   return (
     <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
-        <p>a</p>
+        <p>{TICKER_MAP.get(code)}</p>
         <p className="inline-block text-gray-500">{code}</p>
         {ticker.mw === 'CAUTION' && <span>유</span>}
       </td>
