@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { formatPrice, formatPriceText } from 'utils/common';
+import { formatPrice } from 'utils/common';
 import { Ticker } from './types';
 
 interface Props {
@@ -49,9 +49,11 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
       </td>
 
       <td className="flex flex-col">
-        <p>{formatPriceText(ticker.atp24h)}</p>
+        <p>{formatPrice(ticker.atp24h, { notation: 'compact' })}</p>
         {ticker.q && (
-          <p className="text-gray-500">{formatPriceText(convertUSDtoKRW(ticker.q, quotation))}</p>
+          <p className="text-gray-500">
+            {formatPrice(convertUSDtoKRW(ticker.q, quotation), { notation: 'compact' })}
+          </p>
         )}
       </td>
     </tr>
