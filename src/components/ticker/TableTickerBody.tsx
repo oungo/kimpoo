@@ -1,5 +1,5 @@
-import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from './hooks/useBinanceTickers';
+import { useTickerList } from './hooks/useTickerList';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
@@ -8,15 +8,16 @@ interface Props {
 }
 
 const TableTickerBody = ({ quotation }: Props) => {
-  const ticker = useTickerStore((state) => state.tickerList);
+  const tickerList = useTickerList();
 
+  // useBitthumbTickers();
   useUpbitTickers();
   useBinanceTickers();
 
   return (
     <tbody>
-      {Array.from(ticker.entries()).map(([code, ticker]) => (
-        <TickerItem key={code} code={code} ticker={ticker} quotation={quotation} />
+      {tickerList.map((ticker) => (
+        <TickerItem key={ticker.symbol} ticker={ticker} quotation={quotation} />
       ))}
     </tbody>
   );
