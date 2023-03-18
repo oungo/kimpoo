@@ -1,4 +1,17 @@
-export type Ticker = UpbitTicker & BinanceTicker;
+export type Ticker = DomesticTicker & OverseasTicker;
+
+export interface DomesticTicker {
+  symbol: string;
+  currentPrice: number;
+  changeRate: number;
+  transactionAmount: number;
+  caution?: boolean;
+}
+
+type PickedOverseasTicker = Pick<DomesticTicker, 'symbol' | 'currentPrice' | 'transactionAmount'>;
+export type OverseasTicker = {
+  [Property in keyof PickedOverseasTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
+};
 
 export interface UpbitTicker {
   /** 마켓 코드  */
@@ -17,6 +30,7 @@ export interface UpbitTicker {
   l52wp: number;
   /** 유의 종목 여부 */
   mw: 'NONE' | 'CAUTION';
+  c: string;
 }
 
 export interface BinanceTicker {
