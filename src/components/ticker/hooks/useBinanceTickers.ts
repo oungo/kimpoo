@@ -1,7 +1,24 @@
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { BinanceTicker, OverseasTicker } from '../types';
+import { OverseasTicker } from '../types';
+
+export interface BinanceTicker {
+  /** Symbol */
+  s: string;
+  /** Close price */
+  c: string;
+  /** Open price */
+  o: string;
+  /** High price */
+  h: string;
+  /** Low price */
+  l: string;
+  /** Total traded base asset volume */
+  v: string;
+  /** Total traded quote asset volume  */
+  q: string;
+}
 
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 const WEBSOCKET_REQUEST_PARAMS = {
