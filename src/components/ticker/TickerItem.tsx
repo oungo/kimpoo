@@ -4,7 +4,6 @@ import { formatPrice } from 'utils/common';
 import { Ticker } from './types';
 
 interface Props {
-  code: string;
   ticker: Ticker;
   quotation?: number;
 }
@@ -13,7 +12,7 @@ const convertUSDtoKRW = (price: number, quotation: number) => {
   return price * quotation;
 };
 
-const TickerItem = ({ code, ticker, quotation }: Props) => {
+const TickerItem = ({ ticker, quotation }: Props) => {
   const kimp = formatPrice(
     ticker.currentPrice / convertUSDtoKRW(ticker.oCurrentPrice, quotation) - 1,
     {
@@ -26,8 +25,8 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
   return (
     <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
-        <p>{TICKER_MAP.get(code)}</p>
-        <p className="inline-block text-gray-500">{code}</p>
+        <p>{TICKER_MAP.get(ticker.symbol)}</p>
+        <p className="inline-block text-gray-500">{ticker.symbol}</p>
         {ticker.caution && <span>유</span>}
       </td>
 
@@ -52,15 +51,15 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
             : 'text-red-600'
         }
       >
-        {ticker.oCurrentPrice ? `${kimp}` : ''}
+        {ticker.currentPrice && ticker.oCurrentPrice ? `${kimp}` : ''}
       </td>
 
       <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600'}>
         {formatPrice(ticker.changeRate, {
-          style: 'percent',
           signDisplay: 'exceptZero',
           maximumFractionDigits: 2,
         })}
+        %
       </td>
 
       <td className="flex flex-col">
