@@ -28,12 +28,12 @@ export const useUpbitTickers = () => {
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const stringData = await event.data.text();
       const ticker: UpbitTicker = JSON.parse(stringData);
-      delete ticker.c;
+
       const symbol = ticker.cd.replace('KRW-', '');
       const newData: DomesticTicker = {
         symbol,
         currentPrice: ticker.tp,
-        changeRate: ticker.scr,
+        changeRate: ticker.scr * 100,
         transactionAmount: ticker.atp24h,
         caution: ticker.mw === 'CAUTION',
       };
