@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.selected::before {
+  content: '\2713';
+  position: absolute;
+  left: 1rem;
+}
