@@ -9,8 +9,8 @@ interface Props {
   quotation?: number;
 }
 
-const convertUSDtoKRW = (price: number | string, quotation: number) => {
-  return Number(price) * quotation;
+const convertUSDtoKRW = (price: number, quotation: number) => {
+  return price * quotation;
 };
 
 const TickerItem = ({ code, ticker, quotation }: Props) => {
