@@ -14,42 +14,49 @@ const convertUSDtoKRW = (price: number | string, quotation: number) => {
 };
 
 const TickerItem = ({ code, ticker, quotation }: Props) => {
-  const kimp = formatPrice(ticker.tp / convertUSDtoKRW(ticker.c, quotation) - 1, {
-    style: 'percent',
-    signDisplay: 'exceptZero',
-    maximumFractionDigits: 2,
-  });
+  const kimp = formatPrice(
+    ticker.currentPrice / convertUSDtoKRW(ticker.oCurrentPrice, quotation) - 1,
+    {
+      style: 'percent',
+      signDisplay: 'exceptZero',
+      maximumFractionDigits: 2,
+    }
+  );
 
   return (
     <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
         <p>{TICKER_MAP.get(code)}</p>
         <p className="inline-block text-gray-500">{code}</p>
-        {ticker.mw === 'CAUTION' && <span>유</span>}
+        {ticker.caution && <span>유</span>}
       </td>
 
       <td className="flex flex-col">
-        <p>{ticker.tp > 1 ? formatPrice(ticker.tp) : ticker.tp}</p>
+        <p>{ticker.currentPrice > 1 ? formatPrice(ticker.currentPrice) : ticker.currentPrice}</p>
         <p
-          className={`text-gray-500 transition-opacity ${ticker.c ? 'opacity-100' : 'opacity-0 '}`}
+          className={`text-gray-500 transition-opacity ${
+            ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '
+          }`}
         >
-          {ticker.c &&
-            formatPrice(convertUSDtoKRW(ticker.c, quotation), {
-              maximumFractionDigits: convertUSDtoKRW(ticker.c, quotation) > 1 ? 0 : 4,
+          {ticker.oCurrentPrice &&
+            formatPrice(convertUSDtoKRW(ticker.oCurrentPrice, quotation), {
+              maximumFractionDigits: convertUSDtoKRW(ticker.oCurrentPrice, quotation) > 1 ? 0 : 4,
             })}
         </p>
       </td>
 
       <td
         className={
-          ticker.tp / convertUSDtoKRW(ticker.c, quotation) > 1 ? 'text-teal-600' : 'text-red-600'
+          ticker.currentPrice / convertUSDtoKRW(ticker.currentPrice, quotation) > 1
+            ? 'text-teal-600'
+            : 'text-red-600'
         }
       >
-        {ticker.c ? `${kimp}` : ''}
+        {ticker.oCurrentPrice ? `${kimp}` : ''}
       </td>
 
-      <td className={ticker.scr > 0 ? 'text-teal-600' : 'text-red-600'}>
-        {formatPrice(ticker.scr, {
+      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600'}>
+        {formatPrice(ticker.changeRate, {
           style: 'percent',
           signDisplay: 'exceptZero',
           maximumFractionDigits: 2,
@@ -57,10 +64,12 @@ const TickerItem = ({ code, ticker, quotation }: Props) => {
       </td>
 
       <td className="flex flex-col">
-        <p>{formatPrice(ticker.atp24h, { notation: 'compact' })}</p>
-        {ticker.q && (
+        <p>{formatPrice(ticker.transactionAmount, { notation: 'compact' })}</p>
+        {ticker.oTransactionAmount && (
           <p className="text-gray-500">
-            {formatPrice(convertUSDtoKRW(ticker.q, quotation), { notation: 'compact' })}
+            {formatPrice(convertUSDtoKRW(ticker.oTransactionAmount, quotation), {
+              notation: 'compact',
+            })}
           </p>
         )}
       </td>

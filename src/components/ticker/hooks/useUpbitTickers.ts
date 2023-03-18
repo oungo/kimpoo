@@ -1,7 +1,7 @@
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { Ticker } from '../types';
+import { DomesticTicker, UpbitTicker } from '../types';
 
 const UPBIT_WEBSOCKET_URL = 'wss://api.upbit.com/websocket/v1';
 const WEBSOCKET_REQUEST_PARAMS = [
@@ -27,10 +27,18 @@ export const useUpbitTickers = () => {
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const stringData = await event.data.text();
-      const ticker: Ticker = JSON.parse(stringData);
+      const ticker: UpbitTicker = JSON.parse(stringData);
       delete ticker.c;
-      const newTickerCode = ticker.cd.replace('KRW-', '');
-      setTicker(newTickerCode, ticker);
+      const symbol = ticker.cd.replace('KRW-', '');
+      const newData: DomesticTicker = {
+        symbol,
+        currentPrice: ticker.tp,
+        changeRate: ticker.scr,
+        transactionAmount: ticker.atp24h,
+        caution: ticker.mw === 'CAUTION',
+      };
+
+      setTicker(symbol, newData);
     };
 
     return () => {
