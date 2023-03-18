@@ -15,13 +15,13 @@ const Select = ({ children, defaultValue = '', placeholder }: Props) => {
 
   const selectContainerRef = useRef(null);
 
-  const updateSelectedOption = (option: string) => {
+  const changeSelectedOption = (option: string) => {
     setSelectedOption(option);
     setShowDropdown(false);
   };
 
   return (
-    <SelectContext.Provider value={{ selectedOption, changeSelectedOption: updateSelectedOption }}>
+    <SelectContext.Provider value={{ selectedOption, changeSelectedOption }}>
       <div className="relative w-60" ref={selectContainerRef}>
         <button
           className="w-full p-2 border border-gray-200 rounded-md"
