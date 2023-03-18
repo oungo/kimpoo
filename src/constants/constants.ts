@@ -113,6 +113,7 @@ export const TICKER_MAP = new Map([
   ['IOTA', '아이오타'],
   ['THETA', '쎄타토큰'],
   ['BTT', '비트토렌트'],
+  ['MASK', '마스크프로토콜'],
 ]);
 
-export const TICKER_LIST = Array.from(TICKER_MAP).values();
+export const TICKER_LIST = Array.from(TICKER_MAP.keys());
