@@ -11,6 +11,8 @@ interface TickerState {
   setTickerList: (symbol: string, tickerList: DomesticTicker | OverseasTicker) => void;
   domesticExchange: DomesticExchangeList;
   setDomesticExchange: (exchange: DomesticExchangeList) => void;
+  loadingSocketChange: boolean;
+  setLoadingSocketChange: (loading: boolean) => void;
 }
 
 export const useTickerStore = create<TickerState>()((set) => ({
@@ -22,4 +24,6 @@ export const useTickerStore = create<TickerState>()((set) => ({
   },
   domesticExchange: DomesticExchangeList.UPBIT,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
+  loadingSocketChange: false,
+  setLoadingSocketChange: (loading: boolean) => set({ loadingSocketChange: loading }),
 }));

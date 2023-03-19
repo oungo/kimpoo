@@ -8,7 +8,7 @@ const TableTicker = () => {
   });
 
   return (
-    <table className="table-fixed text-sm w-full max-w-screen-lg">
+    <table className="w-full max-w-screen-lg text-sm table-fixed">
       <thead>
         <tr className="text-right border-b border-b-gray-500">
           <th className="w-20 text-left">이름</th>

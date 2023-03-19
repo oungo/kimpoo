@@ -1,6 +1,7 @@
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
+import { DomesticExchangeList } from '../types';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';
@@ -53,13 +54,17 @@ const WEBSOCKET_REQUEST_PARAMS = {
   tickTypes: ['24H'],
 };
 
-export const useBitthumbTickers = () => {
+export const useBitthumbTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
+  const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
+    if (domesticExchange !== DomesticExchangeList.BITTHUMB) return;
+
     const socket = new WebSocket(WEBSOCKET_URL);
 
     socket.onopen = () => {
+      setLoadingSocketChange(false);
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
@@ -81,7 +86,8 @@ export const useBitthumbTickers = () => {
     };
 
     return () => {
+      setLoadingSocketChange(true);
       socket.close();
     };
-  }, [setTicker]);
+  }, [setTicker, domesticExchange, setLoadingSocketChange]);
 };

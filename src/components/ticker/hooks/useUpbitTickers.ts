@@ -1,7 +1,7 @@
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { DomesticTicker } from '../types';
+import { DomesticExchangeList, DomesticTicker } from '../types';
 
 interface UpbitTicker {
   /** 마켓 코드  */
@@ -35,13 +35,17 @@ const WEBSOCKET_REQUEST_PARAMS = [
   },
 ];
 
-export const useUpbitTickers = () => {
+export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
+  const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
+    if (domesticExchange !== DomesticExchangeList.UPBIT) return;
+
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 
     socket.onopen = () => {
+      setLoadingSocketChange(false);
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
@@ -62,7 +66,8 @@ export const useUpbitTickers = () => {
     };
 
     return () => {
+      setLoadingSocketChange(true);
       socket.close();
     };
-  }, [setTicker]);
+  }, [setTicker, domesticExchange, setLoadingSocketChange]);
 };
