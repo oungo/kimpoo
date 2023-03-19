@@ -12,7 +12,7 @@ const ExchangeSelectGroup = () => {
   return (
     <Select defaultValue={DomesticExchangeList.UPBIT} onSelect={handleSelect}>
       <Option value={DomesticExchangeList.UPBIT}>업비트</Option>
-      <Option value={DomesticExchangeList.BITTHUMB}>빗썸</Option>
+      <Option value={DomesticExchangeList.BITHUMB}>빗썸</Option>
       <Option value={DomesticExchangeList.COINONE}>코인원</Option>
     </Select>
   );

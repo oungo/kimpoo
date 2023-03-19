@@ -1,6 +1,6 @@
 import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from './hooks/useBinanceTickers';
-import { useBitthumbTickers } from './hooks/useBitthumbTickers';
+import { useBithumbTickers } from './hooks/useBithumbTickers';
 import { useTickerList } from './hooks/useTickerList';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
@@ -14,7 +14,7 @@ const TableTickerBody = ({ quotation }: Props) => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const loadingSocketChange = useTickerStore((state) => state.loadingSocketChange);
 
-  useBitthumbTickers(domesticExchange);
+  useBithumbTickers(domesticExchange);
   useUpbitTickers(domesticExchange);
   useBinanceTickers();
 

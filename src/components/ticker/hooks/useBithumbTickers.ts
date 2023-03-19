@@ -8,7 +8,7 @@ interface SocketStatusResponse {
   resmsg: string;
 }
 
-interface BitthumbTicker {
+interface BithumbTicker {
   type: 'ticker';
   content: {
     /** 통화코드 */
@@ -54,13 +54,13 @@ const WEBSOCKET_REQUEST_PARAMS = {
   tickTypes: ['24H', 'MID'],
 };
 
-export const useBitthumbTickers = (domesticExchange: DomesticExchangeList) => {
+export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
   const resetTickerList = useTickerStore((state) => state.resetTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchangeList.BITTHUMB) return;
+    if (domesticExchange !== DomesticExchangeList.BITHUMB) return;
 
     const socket = new WebSocket(WEBSOCKET_URL);
 
@@ -70,7 +70,7 @@ export const useBitthumbTickers = (domesticExchange: DomesticExchangeList) => {
     };
 
     socket.onmessage = async (event: MessageEvent<string>) => {
-      const data: SocketStatusResponse | BitthumbTicker = JSON.parse(event.data);
+      const data: SocketStatusResponse | BithumbTicker = JSON.parse(event.data);
 
       if ('status' in data) return;
 

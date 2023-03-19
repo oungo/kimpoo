@@ -15,6 +15,6 @@ export type OverseasTicker = {
 
 export enum DomesticExchangeList {
   UPBIT = 'upbit',
-  BITTHUMB = 'bitthumb',
+  BITHUMB = 'bithumb',
   COINONE = 'coinone',
 }
