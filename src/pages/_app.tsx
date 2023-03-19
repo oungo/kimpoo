@@ -1,12 +1,20 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { AppProps } from 'next/app';
+import { useState } from 'react';
+import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import '../styles/globals.css';
 
-const queryClient = new QueryClient();
+interface PageProps {
+  dehydratedState?: DehydratedState;
+}
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }: AppProps<PageProps>) => {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </Hydrate>
     </QueryClientProvider>
   );
 };
