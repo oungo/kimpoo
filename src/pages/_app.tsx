@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import '../styles/globals.css';
 
-interface PageProps {
+export interface PageProps {
   dehydratedState?: DehydratedState;
 }
 
