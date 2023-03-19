@@ -10,9 +10,10 @@ interface Props {
   children: ReactElement<ChildrenProps>[];
   defaultValue?: string;
   placeholder?: string;
+  onSelect?: (option: string) => void;
 }
 
-const Select = ({ children, defaultValue, placeholder }: Props) => {
+const Select = ({ children, defaultValue, placeholder, onSelect }: Props) => {
   const [selectedOption, setSelectedOption] = useState(defaultValue);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -23,6 +24,7 @@ const Select = ({ children, defaultValue, placeholder }: Props) => {
   const selectContainerRef = useRef(null);
 
   const changeSelectedOption = (option: string) => {
+    onSelect(option);
     setSelectedOption(option);
     setShowDropdown(false);
   };
