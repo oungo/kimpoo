@@ -51,11 +51,12 @@ const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 const WEBSOCKET_REQUEST_PARAMS = {
   type: 'ticker',
   symbols: TICKER_LIST.map((ticker) => `${ticker}_KRW`),
-  tickTypes: ['24H'],
+  tickTypes: ['24H', 'MID'],
 };
 
 export const useBitthumbTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
+  const resetTickerList = useTickerStore((state) => state.resetTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
@@ -87,7 +88,8 @@ export const useBitthumbTickers = (domesticExchange: DomesticExchangeList) => {
 
     return () => {
       setLoadingSocketChange(true);
+      resetTickerList();
       socket.close();
     };
-  }, [setTicker, domesticExchange, setLoadingSocketChange]);
+  }, [setTicker, domesticExchange, setLoadingSocketChange, resetTickerList]);
 };

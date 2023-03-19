@@ -37,6 +37,7 @@ const WEBSOCKET_REQUEST_PARAMS = [
 
 export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
+  const resetTickerList = useTickerStore((state) => state.resetTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
@@ -67,7 +68,8 @@ export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
 
     return () => {
       setLoadingSocketChange(true);
+      resetTickerList();
       socket.close();
     };
-  }, [setTicker, domesticExchange, setLoadingSocketChange]);
+  }, [setTicker, domesticExchange, setLoadingSocketChange, resetTickerList]);
 };

@@ -9,6 +9,7 @@ import { create } from 'zustand';
 interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
   setTickerList: (symbol: string, tickerList: DomesticTicker | OverseasTicker) => void;
+  resetTickerList: () => void;
   domesticExchange: DomesticExchangeList;
   setDomesticExchange: (exchange: DomesticExchangeList) => void;
   loadingSocketChange: boolean;
@@ -22,6 +23,7 @@ export const useTickerStore = create<TickerState>()((set) => ({
       tickerList: new Map(tickerList).set(symbol, { ...tickerList.get(symbol), ...ticker }),
     }));
   },
+  resetTickerList: () => set({ tickerList: new Map() }),
   domesticExchange: DomesticExchangeList.UPBIT,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   loadingSocketChange: false,
