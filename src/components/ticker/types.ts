@@ -12,3 +12,9 @@ type PickedOverseasTicker = Pick<DomesticTicker, 'symbol' | 'currentPrice' | 'tr
 export type OverseasTicker = {
   [Property in keyof PickedOverseasTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
 };
+
+export enum DomesticExchangeList {
+  UPBIT = 'upbit',
+  BITTHUMB = 'bitthumb',
+  COINONE = 'coinone',
+}
