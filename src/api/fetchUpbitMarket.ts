@@ -6,7 +6,7 @@ interface UpbitMarket {
 }
 
 export const fetchUpbitMarket = async (): Promise<UpbitMarket[]> => {
-  const response = await fetch('https://api.upbit.com/v1/market/all?isDetails=true');
+  const response = await fetch('https://api.upbit.com/v1/market/all');
 
   if (response.ok) {
     return response.json();
