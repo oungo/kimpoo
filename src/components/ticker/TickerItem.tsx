@@ -1,4 +1,3 @@
-import { TICKER_MAP } from 'constants/constants';
 import { memo } from 'react';
 import { formatPrice } from 'utils/common';
 import { Ticker } from './types';
@@ -6,13 +5,14 @@ import { Ticker } from './types';
 interface Props {
   ticker: Ticker;
   quotation?: number;
+  koreanSymbolName: string;
 }
 
 const convertUSDtoKRW = (price: number, quotation: number) => {
   return price * quotation;
 };
 
-const TickerItem = ({ ticker, quotation }: Props) => {
+const TickerItem = ({ ticker, quotation, koreanSymbolName }: Props) => {
   const kimp = formatPrice(
     ticker.currentPrice / convertUSDtoKRW(ticker.oCurrentPrice, quotation) - 1,
     {
@@ -25,7 +25,7 @@ const TickerItem = ({ ticker, quotation }: Props) => {
   return (
     <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
-        <p>{TICKER_MAP.get(ticker.symbol)}</p>
+        <p>{koreanSymbolName}</p>
         <p className="inline-block text-gray-500">{ticker.symbol}</p>
         {ticker.caution && <span>유</span>}
       </td>

@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from './hooks/useBinanceTickers';
 import { useBithumbMarketListQuery } from './hooks/useBithumbMarketListQuery';
 import { useBithumbTickers } from './hooks/useBithumbTickers';
 import { useTickerList } from './hooks/useTickerList';
+import { useUpbitMarketListQuery } from './hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 import { DomesticExchangeList, DomesticTicker } from './types';
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const TableTickerBody = ({ quotation }: Props) => {
+  const [symbolMap, setSymbolMap] = useState<Map<string, string>>(new Map());
+
   const tickerList = useTickerList();
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
@@ -20,6 +23,7 @@ const TableTickerBody = ({ quotation }: Props) => {
   const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
 
   const { data: bithumbMarketList } = useBithumbMarketListQuery();
+  const { data: upbitMarketList } = useUpbitMarketListQuery();
 
   useEffect(() => {
     if (!bithumbMarketList || domesticExchange !== DomesticExchangeList.BITHUMB) return;
@@ -44,6 +48,17 @@ const TableTickerBody = ({ quotation }: Props) => {
     initializeTickerList(map);
   }, [domesticExchange, bithumbMarketList, initializeTickerList]);
 
+  useEffect(() => {
+    const map = new Map();
+    upbitMarketList
+      .filter((marketData) => marketData.market.startsWith('KRW'))
+      .forEach((marketData) => {
+        map.set(marketData.market.replace('KRW-', ''), marketData.korean_name);
+      });
+
+    setSymbolMap(map);
+  }, [upbitMarketList]);
+
   useBithumbTickers(domesticExchange);
   useUpbitTickers(domesticExchange);
   useBinanceTickers();
@@ -57,11 +72,15 @@ const TableTickerBody = ({ quotation }: Props) => {
       </tbody>
     );
   }
-
   return (
     <tbody>
       {tickerList.map((ticker) => (
-        <TickerItem key={ticker.symbol} ticker={ticker} quotation={quotation} />
+        <TickerItem
+          key={ticker.symbol}
+          koreanSymbolName={symbolMap.get(ticker.symbol)}
+          ticker={ticker}
+          quotation={quotation}
+        />
       ))}
     </tbody>
   );
