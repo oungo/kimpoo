@@ -51,7 +51,7 @@ const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 const WEBSOCKET_REQUEST_PARAMS = {
   type: 'ticker',
   symbols: TICKER_LIST.map((ticker) => `${ticker}_KRW`),
-  tickTypes: ['24H', 'MID'],
+  tickTypes: ['24H'],
 };
 
 export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
