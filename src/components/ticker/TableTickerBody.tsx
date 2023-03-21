@@ -22,7 +22,7 @@ const TableTickerBody = ({ quotation }: Props) => {
     return (
       <tbody>
         <tr>
-          <td>123</td>
+          <td>loading</td>
         </tr>
       </tbody>
     );
