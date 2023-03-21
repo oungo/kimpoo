@@ -56,7 +56,7 @@ const WEBSOCKET_REQUEST_PARAMS = {
 
 export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
-  const resetTickerList = useTickerStore((state) => state.resetTickerList);
+  const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
@@ -88,8 +88,8 @@ export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
 
     return () => {
       setLoadingSocketChange(true);
-      resetTickerList();
+      initializeTickerList();
       socket.close();
     };
-  }, [setTicker, domesticExchange, setLoadingSocketChange, resetTickerList]);
+  }, [setTicker, domesticExchange, setLoadingSocketChange, initializeTickerList]);
 };

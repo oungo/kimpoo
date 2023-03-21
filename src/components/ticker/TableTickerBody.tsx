@@ -17,7 +17,7 @@ const TableTickerBody = ({ quotation }: Props) => {
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const loadingSocketChange = useTickerStore((state) => state.loadingSocketChange);
-  const resetTickerList = useTickerStore((state) => state.resetTickerList);
+  const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
 
   const { data: bithumbMarketList } = useBithumbMarketListQuery();
 
@@ -41,8 +41,8 @@ const TableTickerBody = ({ quotation }: Props) => {
       map.set(symbol, newValue);
     }
 
-    resetTickerList(map);
-  }, [domesticExchange, bithumbMarketList, resetTickerList]);
+    initializeTickerList(map);
+  }, [domesticExchange, bithumbMarketList, initializeTickerList]);
 
   useBithumbTickers(domesticExchange);
   useUpbitTickers(domesticExchange);
