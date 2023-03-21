@@ -1,4 +1,3 @@
-import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
 import { OverseasTicker } from '../types';
@@ -21,19 +20,21 @@ export interface BinanceTicker {
 }
 
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
-const WEBSOCKET_REQUEST_PARAMS = {
-  method: 'SUBSCRIBE',
-  params: TICKER_LIST.map((ticker) => `${ticker.toLowerCase()}usdt@miniTicker`),
-  id: 1,
-};
 
-export const useBinanceTickers = () => {
+export const useBinanceTickers = (symbolList: string[]) => {
   const setTickerList = useTickerStore((state) => state.setTickerList);
 
   useEffect(() => {
+    if (!symbolList) return;
+
     const socket = new WebSocket(WEBSOCKET_URL);
 
     socket.onopen = () => {
+      const WEBSOCKET_REQUEST_PARAMS = {
+        method: 'SUBSCRIBE',
+        params: symbolList.map((symbol) => `${symbol.toLowerCase()}usdt@miniTicker`),
+        id: 1,
+      };
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
@@ -54,5 +55,5 @@ export const useBinanceTickers = () => {
     return () => {
       socket.close();
     };
-  }, [setTickerList]);
+  }, [setTickerList, symbolList]);
 };

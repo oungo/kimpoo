@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from './hooks/useBinanceTickers';
 import { useBithumbMarketListQuery } from './hooks/useBithumbMarketListQuery';
@@ -59,9 +59,11 @@ const TableTickerBody = ({ quotation }: Props) => {
     setSymbolMap(map);
   }, [upbitMarketList]);
 
+  const memoizedSymbolKeys = useMemo(() => Array.from(symbolMap.keys()), [symbolMap]);
+
   useBithumbTickers(domesticExchange);
   useUpbitTickers(domesticExchange);
-  useBinanceTickers();
+  useBinanceTickers(memoizedSymbolKeys);
 
   if (loadingSocketChange) {
     return (
@@ -72,6 +74,7 @@ const TableTickerBody = ({ quotation }: Props) => {
       </tbody>
     );
   }
+
   return (
     <tbody>
       {tickerList.map((ticker) => (
