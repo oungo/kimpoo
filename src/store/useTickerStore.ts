@@ -1,4 +1,5 @@
 import {
+  Coins,
   DomesticExchangeList,
   DomesticTicker,
   OverseasTicker,
@@ -16,6 +17,8 @@ interface TickerState {
   setDomesticExchange: (exchange: DomesticExchangeList) => void;
   loadingSocketChange: boolean;
   setLoadingSocketChange: (loading: boolean) => void;
+  coinList: Map<string, Coins>;
+  setCoinList: (coinList: Map<string, Coins>) => void;
 }
 
 export const useTickerStore = create<TickerState>()((set) => ({
@@ -30,4 +33,6 @@ export const useTickerStore = create<TickerState>()((set) => ({
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   loadingSocketChange: false,
   setLoadingSocketChange: (loading: boolean) => set({ loadingSocketChange: loading }),
+  coinList: new Map(),
+  setCoinList: (coinList: Map<string, Coins>) => set({ coinList }),
 }));

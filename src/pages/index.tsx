@@ -7,14 +7,19 @@ import { dehydrate, QueryClient } from 'react-query';
 import { PageProps } from './_app';
 import coinsData from '../../public/json/coins.json';
 import { Coins } from '@/components/ticker/types';
+import { useEffect } from 'react';
+import { useTickerStore } from 'store/useTickerStore';
 
 interface Props {
   coins: [string, Coins][];
 }
 
 const Index = ({ coins }: Props) => {
-  const coinList = new Map(coins);
-  console.log(coinList);
+  const setCoinList = useTickerStore((state) => state.setCoinList);
+
+  useEffect(() => {
+    setCoinList(new Map(coins));
+  }, [coins, setCoinList]);
 
   return (
     <div className="p-3">

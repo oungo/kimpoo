@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { memo } from 'react';
 import { formatPrice } from 'utils/common';
 import { Ticker } from './types';
@@ -6,13 +7,14 @@ interface Props {
   ticker: Ticker;
   quotation?: number;
   koreanSymbolName: string;
+  thumb: string;
 }
 
 const convertUSDtoKRW = (price: number, quotation: number) => {
   return price * quotation;
 };
 
-const TickerItem = ({ ticker, quotation, koreanSymbolName }: Props) => {
+const TickerItem = ({ ticker, quotation, koreanSymbolName, thumb }: Props) => {
   const kimp = formatPrice(
     ticker.currentPrice / convertUSDtoKRW(ticker.oCurrentPrice, quotation) - 1,
     {
@@ -25,8 +27,18 @@ const TickerItem = ({ ticker, quotation, koreanSymbolName }: Props) => {
   return (
     <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
-        <p>{koreanSymbolName}</p>
+        <div className="flex items-center gap-1">
+          <Image
+            src={thumb}
+            alt={`${ticker.symbol} 아이콘`}
+            width={15}
+            height={15}
+            className="w-auto"
+          />
+          <p>{koreanSymbolName}</p>
+        </div>
         <p className="inline-block text-gray-500">{ticker.symbol}</p>
+
         {ticker.caution && <span>유</span>}
       </td>
 

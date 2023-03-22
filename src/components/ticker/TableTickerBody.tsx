@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from './hooks/useBinanceTickers';
 import { useTickerList } from './hooks/useTickerList';
-import { useUpbitMarketListQuery } from './hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from './hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
@@ -11,27 +10,13 @@ interface Props {
 }
 
 const TableTickerBody = ({ quotation }: Props) => {
-  const [symbolMap, setSymbolMap] = useState<Map<string, string>>(new Map());
-
   const tickerList = useTickerList();
 
+  const coinList = useTickerStore((state) => state.coinList);
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const loadingSocketChange = useTickerStore((state) => state.loadingSocketChange);
 
-  const { data: upbitMarketList } = useUpbitMarketListQuery();
-
-  useEffect(() => {
-    const map = new Map();
-    upbitMarketList
-      .filter((marketData) => marketData.market.startsWith('KRW'))
-      .forEach((marketData) => {
-        map.set(marketData.market.replace('KRW-', ''), marketData.korean_name);
-      });
-
-    setSymbolMap(map);
-  }, [upbitMarketList]);
-
-  const memoizedSymbolKeys = useMemo(() => Array.from(symbolMap.keys()), [symbolMap]);
+  const memoizedSymbolKeys = useMemo(() => Array.from(coinList.keys()), [coinList]);
 
   useUpbitTickers(domesticExchange);
   useBinanceTickers(memoizedSymbolKeys);
@@ -51,7 +36,8 @@ const TableTickerBody = ({ quotation }: Props) => {
       {tickerList.map((ticker) => (
         <TickerItem
           key={ticker.symbol}
-          koreanSymbolName={symbolMap.get(ticker.symbol)}
+          koreanSymbolName={coinList.get(ticker.symbol).name}
+          thumb={coinList.get(ticker.symbol).thumb}
           ticker={ticker}
           quotation={quotation}
         />
