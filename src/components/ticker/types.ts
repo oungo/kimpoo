@@ -18,3 +18,10 @@ export enum DomesticExchangeList {
   BITHUMB = 'bithumb',
   COINONE = 'coinone',
 }
+
+export interface Coins {
+  id: string;
+  name: string;
+  symbol: string;
+  thumb: string;
+}
