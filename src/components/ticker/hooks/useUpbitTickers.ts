@@ -35,6 +35,21 @@ const WEBSOCKET_REQUEST_PARAMS = [
   },
 ];
 
+const convertTicker = async (event: MessageEvent<Blob>) => {
+  const socketData = await event.data.text();
+  const upbitTicker: UpbitTicker = JSON.parse(socketData);
+
+  const ticker: DomesticTicker = {
+    symbol: upbitTicker.cd.replace('KRW-', ''),
+    currentPrice: upbitTicker.tp,
+    changeRate: upbitTicker.scr * 100,
+    transactionAmount: upbitTicker.atp24h,
+    caution: upbitTicker.mw === 'CAUTION',
+  };
+
+  return ticker;
+};
+
 export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
   const setTicker = useTickerStore((state) => state.setTickerList);
   const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
@@ -51,24 +66,17 @@ export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
     };
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
-      const stringData = await event.data.text();
-      const ticker: UpbitTicker = JSON.parse(stringData);
+      const ticker = await convertTicker(event);
 
-      const symbol = ticker.cd.replace('KRW-', '');
-      const newData: DomesticTicker = {
-        symbol,
-        currentPrice: ticker.tp,
-        changeRate: ticker.scr * 100,
-        transactionAmount: ticker.atp24h,
-        caution: ticker.mw === 'CAUTION',
-      };
+      setTicker(ticker.symbol, ticker);
+    };
 
-      setTicker(symbol, newData);
+    socket.onclose = () => {
+      initializeTickerList();
+      setLoadingSocketChange(true);
     };
 
     return () => {
-      setLoadingSocketChange(true);
-      initializeTickerList();
       socket.close();
     };
   }, [setTicker, domesticExchange, setLoadingSocketChange, initializeTickerList]);
