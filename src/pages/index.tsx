@@ -14,6 +14,7 @@ interface Props {
 
 const Index = ({ coins }: Props) => {
   const coinList = new Map(coins);
+  console.log(coinList);
 
   return (
     <div className="p-3">
@@ -23,17 +24,9 @@ const Index = ({ coins }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(['bithumbMarket'], fetchBithumbMarket);
-  const upbitMarket = await queryClient.fetchQuery(['upbitMarket'], fetchUpbitMarket);
-  const symbols = upbitMarket
-    .filter((data) => data.market.startsWith('KRW'))
-    .map((data) => data.market.replace('KRW-', ''));
-
+const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: string[]) => {
   const map = new Map();
-  coinsData.coins.forEach((coin) => {
+  coins.forEach((coin) => {
     if (coin.symbol === 'MIOTA') {
       map.set('IOTA', coin);
     }
@@ -43,11 +36,22 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
     if (!symbols.includes(coin.symbol) || map.get(coin.symbol)) return;
     map.set(coin.symbol, coin);
   });
+  return map;
+};
+
+export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['bithumbMarket'], fetchBithumbMarket);
+  const upbitMarket = await queryClient.fetchQuery(['upbitMarket'], fetchUpbitMarket);
+  const symbols = upbitMarket
+    .filter(({ market }) => market.startsWith('KRW'))
+    .map(({ market }) => market.replace('KRW-', ''));
+  const coinsMap = convertCoinsDataToMap(coinsData.coins, symbols);
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      coins: Array.from(map.entries()),
+      coins: Array.from(coinsMap.entries()),
     },
   };
 };
