@@ -8,7 +8,8 @@
     "lint": "next lint",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
-    "postpack": "pinst --enable"
+    "postpack": "pinst --enable",
+    "coin": "curl -X GET 'https://api.coingecko.com/api/v3/search?locale=ko' -o public/json/coins.json"
   },
   "dependencies": {
     "next": "^13.1.6",
