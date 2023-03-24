@@ -47,11 +47,12 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(['bithumbMarket'], fetchBithumbMarket);
-  const upbitMarket = await queryClient.fetchQuery(['upbitMarket'], fetchUpbitMarket);
-  const symbols = upbitMarket
-    .filter(({ market }) => market.startsWith('KRW'))
-    .map(({ market }) => market.replace('KRW-', ''));
-  const coinsMap = convertCoinsDataToMap(coinsData.coins, symbols);
+  const upbitMarket = await queryClient.fetchQuery(['upbitMarket'], () => fetchUpbitMarket('KRW'));
+
+  const coinsMap = convertCoinsDataToMap(
+    coinsData.coins,
+    upbitMarket.map(({ market }) => market)
+  );
 
   return {
     props: {
