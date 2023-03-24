@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { OverseasTicker } from '../types';
+import { OverseasTicker } from '../components/ticker/types';
 
 export interface BinanceTicker {
   /** Symbol */

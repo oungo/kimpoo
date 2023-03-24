@@ -1,7 +1,7 @@
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { DomesticExchangeList, DomesticTicker } from '../types';
+import { DomesticExchangeList, DomesticTicker } from '../components/ticker/types';
 
 interface UpbitTicker {
   /** 마켓 코드  */
