@@ -1,12 +1,6 @@
-import { fetchQuotation } from 'api/fetchQuotation';
-import { useQuery } from 'react-query';
 import TableTickerBody from './TableTickerBody';
 
 const TableTicker = () => {
-  const { data: quotation } = useQuery('quotation', fetchQuotation, {
-    cacheTime: 0,
-  });
-
   return (
     <table className="w-full max-w-screen-lg text-sm table-fixed">
       <thead>
@@ -18,7 +12,7 @@ const TableTicker = () => {
           <th className="w-16">거래액(일)</th>
         </tr>
       </thead>
-      <TableTickerBody quotation={quotation?.[0].basePrice} />
+      <TableTickerBody />
     </table>
   );
 };

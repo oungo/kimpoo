@@ -1,3 +1,4 @@
+import { useQuotationQuery } from 'hooks/useQuotationQuery';
 import { useMemo } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
 import { useBinanceTickers } from '../../hooks/useBinanceTickers';
@@ -5,11 +6,8 @@ import { useTickerList } from '../../hooks/useTickerList';
 import { useUpbitTickers } from '../../hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
-interface Props {
-  quotation?: number;
-}
-
-const TableTickerBody = ({ quotation }: Props) => {
+const TableTickerBody = () => {
+  const { data: quotation } = useQuotationQuery();
   const tickerList = useTickerList();
 
   const coinList = useTickerStore((state) => state.coinList);
@@ -39,7 +37,7 @@ const TableTickerBody = ({ quotation }: Props) => {
           koreanSymbolName={coinList.get(ticker.symbol).name}
           thumb={coinList.get(ticker.symbol).thumb}
           ticker={ticker}
-          quotation={quotation}
+          quotation={quotation[0].basePrice}
         />
       ))}
     </tbody>
