@@ -25,11 +25,11 @@ const TickerItem = ({ ticker, quotation, koreanSymbolName, thumb }: Props) => {
   );
 
   return (
-    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
+    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1 text-xs">
       <td className="text-left">
         <div className="flex items-center gap-1">
           <Image src={thumb} alt={`${ticker.symbol} 아이콘`} width={15} height={15} />
-          <p>{koreanSymbolName}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">{koreanSymbolName}</p>
         </div>
         <p className="inline-block text-gray-500">{ticker.symbol}</p>
 
