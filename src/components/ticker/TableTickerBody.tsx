@@ -1,9 +1,9 @@
-import { useQuotationQuery } from 'hooks/useQuotationQuery';
+import { useBinanceTickers } from '@/hooks/useBinanceTickers';
+import { useQuotationQuery } from '@/hooks/useQuotationQuery';
+import { useTickerList } from '@/hooks/useTickerList';
+import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useMemo } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
-import { useBinanceTickers } from '../../hooks/useBinanceTickers';
-import { useTickerList } from '../../hooks/useTickerList';
-import { useUpbitTickers } from '../../hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
