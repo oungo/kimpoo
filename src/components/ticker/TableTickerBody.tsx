@@ -1,6 +1,7 @@
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 import { useTickerList } from '@/hooks/useTickerList';
+import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useMemo } from 'react';
 import { useTickerStore } from 'store/useTickerStore';
@@ -8,6 +9,7 @@ import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
   const { data: quotation } = useQuotationQuery();
+  const { data: upbitMarketList } = useUpbitMarketListQuery();
   const tickerList = useTickerList();
 
   const coinList = useTickerStore((state) => state.coinList);
@@ -34,7 +36,8 @@ const TableTickerBody = () => {
       {tickerList.map((ticker) => (
         <TickerItem
           key={ticker.symbol}
-          koreanSymbolName={coinList.get(ticker.symbol).name}
+          koreanSymbol={upbitMarketList.find(({ market }) => market === ticker.symbol).korean_name}
+          // koreanSymbolName={coinList.get(ticker.symbol).name}
           thumb={coinList.get(ticker.symbol).thumb}
           ticker={ticker}
           quotation={quotation[0].basePrice}

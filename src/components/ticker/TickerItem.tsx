@@ -6,7 +6,7 @@ import { Ticker } from './types';
 interface Props {
   ticker: Ticker;
   quotation?: number;
-  koreanSymbolName: string;
+  koreanSymbol: string;
   thumb: string;
 }
 
@@ -14,7 +14,7 @@ const convertUSDtoKRW = (price: number, quotation: number) => {
   return price * quotation;
 };
 
-const TickerItem = ({ ticker, quotation, koreanSymbolName, thumb }: Props) => {
+const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
   const kimp = formatPrice(
     ticker.currentPrice / convertUSDtoKRW(ticker.oCurrentPrice, quotation) - 1,
     {
@@ -29,7 +29,7 @@ const TickerItem = ({ ticker, quotation, koreanSymbolName, thumb }: Props) => {
       <td className="text-left">
         <div className="flex items-center gap-1">
           <Image src={thumb} alt={`${ticker.symbol} 아이콘`} width={15} height={15} />
-          <p className="overflow-hidden whitespace-nowrap text-ellipsis">{koreanSymbolName}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">{koreanSymbol}</p>
         </div>
         <p className="inline-block text-gray-500">{ticker.symbol}</p>
 
