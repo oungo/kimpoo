@@ -22,10 +22,10 @@ const Index = ({ coins }: Props) => {
   }, [coins, setCoinList]);
 
   return (
-    <div className="p-3">
+    <main className="p-2">
       <ExchangeSelectGroup />
       <TableTicker />
-    </div>
+    </main>
   );
 };
 
