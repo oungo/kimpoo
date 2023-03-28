@@ -25,7 +25,7 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
   );
 
   return (
-    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1 text-xs">
+    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
       <td className="text-left">
         <div className="flex items-center gap-1">
           <Image src={thumb} alt={`${ticker.symbol} 아이콘`} width={15} height={15} />
