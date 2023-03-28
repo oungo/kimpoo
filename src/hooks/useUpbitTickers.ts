@@ -51,8 +51,8 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
 };
 
 export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
-  const setTicker = useTickerStore((state) => state.setTickerList);
-  const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
+  const setTicker = useTickerStore((state) => state.setTicker);
+  const initializeTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import TableTickerBody from './TableTickerBody';
 
 const TableTicker = () => {
   return (
-    <table className="w-full max-w-screen-lg text-sm table-fixed">
+    <table className="w-full max-w-screen-lg text-xs table-fixed sm:text-sm">
       <thead>
         <tr className="text-right border-b border-b-gray-500">
           <th className="w-20 text-left">이름</th>

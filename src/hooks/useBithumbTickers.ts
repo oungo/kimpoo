@@ -55,8 +55,8 @@ const WEBSOCKET_REQUEST_PARAMS = {
 };
 
 export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
-  const setTicker = useTickerStore((state) => state.setTickerList);
-  const initializeTickerList = useTickerStore((state) => state.initializeTickerList);
+  const setTicker = useTickerStore((state) => state.setTicker);
+  const initializeTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {

@@ -22,7 +22,7 @@ export interface BinanceTicker {
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 
 export const useBinanceTickers = (symbolList: string[]) => {
-  const setTickerList = useTickerStore((state) => state.setTickerList);
+  const setTickerList = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
     if (!symbolList) return;

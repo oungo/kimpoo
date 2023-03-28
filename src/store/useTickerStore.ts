@@ -9,10 +9,8 @@ import { create } from 'zustand';
 
 interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
-  setTickerList: (symbol: string, tickerList: DomesticTicker | OverseasTicker) => void;
-  initializeTickerList: (
-    tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>
-  ) => void;
+  setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
+  setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
   domesticExchange: DomesticExchangeList;
   setDomesticExchange: (exchange: DomesticExchangeList) => void;
   loadingSocketChange: boolean;
@@ -23,12 +21,12 @@ interface TickerState {
 
 export const useTickerStore = create<TickerState>()((set) => ({
   tickerList: new Map(),
-  setTickerList: (symbol, ticker) => {
+  setTicker: (symbol, ticker) => {
     set(({ tickerList }) => ({
       tickerList: new Map(tickerList).set(symbol, { ...tickerList.get(symbol), ...ticker }),
     }));
   },
-  initializeTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
+  setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
   domesticExchange: DomesticExchangeList.UPBIT,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   loadingSocketChange: false,
