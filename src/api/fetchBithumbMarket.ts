@@ -31,6 +31,7 @@ export const fetchBithumbMarket = async (): Promise<BithumbMarket> => {
 
     const newMarket: BithumbMarket['data'] = [];
     for (const symbol in data) {
+      if (symbol === 'date') continue;
       newMarket.push({ symbol, ...data[symbol] });
     }
 
