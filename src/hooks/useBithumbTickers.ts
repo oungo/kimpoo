@@ -1,6 +1,5 @@
 import { DomesticExchangeList } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 
 interface SocketStatusResponse {
@@ -48,15 +47,9 @@ interface BithumbTicker {
 
 const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 
-const WEBSOCKET_REQUEST_PARAMS = {
-  type: 'ticker',
-  symbols: TICKER_LIST.map((ticker) => `${ticker}_KRW`),
-  tickTypes: ['24H'],
-};
-
-export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
+export const useBithumbTickers = (domesticExchange: DomesticExchangeList, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
-  const initializeTickerList = useTickerStore((state) => state.setTickerList);
+  const setTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
@@ -65,8 +58,14 @@ export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
     const socket = new WebSocket(WEBSOCKET_URL);
 
     socket.onopen = () => {
-      setLoadingSocketChange(false);
+      const WEBSOCKET_REQUEST_PARAMS = {
+        type: 'ticker',
+        symbols: symbolList.map((ticker) => `${ticker}_KRW`),
+        tickTypes: ['24H'],
+      };
+
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
+      setLoadingSocketChange(false);
     };
 
     socket.onmessage = async (event: MessageEvent<string>) => {
@@ -86,10 +85,12 @@ export const useBithumbTickers = (domesticExchange: DomesticExchangeList) => {
       setTicker(newSymbol, newData);
     };
 
-    return () => {
+    socket.onclose = () => {
       setLoadingSocketChange(true);
-      initializeTickerList();
+    };
+
+    return () => {
       socket.close();
     };
-  }, [setTicker, domesticExchange, setLoadingSocketChange, initializeTickerList]);
+  }, [setTicker, symbolList, domesticExchange, setLoadingSocketChange, setTickerList]);
 };
