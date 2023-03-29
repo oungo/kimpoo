@@ -7,6 +7,6 @@ export const useUpbitMarketListQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
 
   return useQuery(['upbitMarket'], () => fetchUpbitMarket('KRW'), {
-    enabled: domesticExchange === DomesticExchange.UPBIT,
+    enabled: domesticExchange === DomesticExchange.UPBIT_KRW,
   });
 };

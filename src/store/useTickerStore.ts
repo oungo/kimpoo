@@ -22,7 +22,7 @@ export const useTickerStore = create<TickerState>()((set) => ({
     }));
   },
   setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
-  domesticExchange: DomesticExchange.UPBIT,
+  domesticExchange: DomesticExchange.UPBIT_KRW,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   loadingSocketChange: false,
   setLoadingSocketChange: (loading: boolean) => set({ loadingSocketChange: loading }),

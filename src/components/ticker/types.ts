@@ -14,9 +14,9 @@ export type OverseasTicker = {
 };
 
 export enum DomesticExchange {
-  UPBIT = 'upbit',
-  BITHUMB = 'bithumb',
-  COINONE = 'coinone',
+  UPBIT_KRW = 'UPBIT_KRW',
+  UPBIT_BTC = 'UPBIT_BTC',
+  BITHUMB = 'BITHUMB',
 }
 
 export interface Coin {

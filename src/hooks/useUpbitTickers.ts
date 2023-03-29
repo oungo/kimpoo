@@ -46,7 +46,7 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.UPBIT) return;
+    if (domesticExchange !== DomesticExchange.UPBIT_KRW) return;
 
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 

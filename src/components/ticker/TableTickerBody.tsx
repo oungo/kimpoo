@@ -45,7 +45,7 @@ const TableTickerBody = () => {
 
   useEffect(() => {
     switch (domesticExchange) {
-      case DomesticExchange.UPBIT:
+      case DomesticExchange.UPBIT_KRW:
         setSymbolList(upbitMarketList.map(({ market }) => market));
         break;
       case DomesticExchange.BITHUMB:

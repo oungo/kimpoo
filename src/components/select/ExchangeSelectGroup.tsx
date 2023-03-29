@@ -10,10 +10,10 @@ const ExchangeSelectGroup = () => {
   };
 
   return (
-    <Select defaultValue={DomesticExchange.UPBIT} onSelect={handleSelect}>
-      <Option value={DomesticExchange.UPBIT}>업비트</Option>
+    <Select defaultValue={DomesticExchange.UPBIT_KRW} onSelect={handleSelect}>
+      <Option value={DomesticExchange.UPBIT_KRW}>업비트 KRW</Option>
+      <Option value={DomesticExchange.UPBIT_BTC}>업비트 BTC</Option>
       <Option value={DomesticExchange.BITHUMB}>빗썸</Option>
-      <Option value={DomesticExchange.COINONE}>코인원</Option>
     </Select>
   );
 };
