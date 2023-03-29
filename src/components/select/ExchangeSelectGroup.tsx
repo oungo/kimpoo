@@ -1,6 +1,6 @@
-import { useTickerStore } from 'store/useTickerStore';
+import { DomesticExchangeList } from '@/components/ticker/types';
 import { Select, Option } from '.';
-import { DomesticExchangeList } from '../ticker/types';
+import { useTickerStore } from 'store/useTickerStore';
 
 const ExchangeSelectGroup = () => {
   const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);

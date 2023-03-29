@@ -1,5 +1,6 @@
-import { ReactElement, useRef, useState } from 'react';
 import { SelectContext } from './selectContext';
+import type { ReactElement } from 'react';
+import { useRef, useState } from 'react';
 
 interface ChildrenProps {
   children: string;

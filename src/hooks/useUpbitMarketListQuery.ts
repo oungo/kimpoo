@@ -1,7 +1,7 @@
-import { fetchUpbitMarket } from 'api/fetchUpbitMarket';
+import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
+import { DomesticExchangeList } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/useTickerStore';
 import { useQuery } from 'react-query';
-import { useTickerStore } from 'store/useTickerStore';
-import { DomesticExchangeList } from '../components/ticker/types';
 
 export const useUpbitMarketListQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);

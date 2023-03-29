@@ -1,5 +1,5 @@
-import { useContext } from 'react';
 import { SelectContext } from './selectContext';
+import { useContext } from 'react';
 
 interface Props {
   children: string;

@@ -1,7 +1,7 @@
-import { fetchBithumbMarket } from 'api/fetchBithumbMarket';
+import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
+import { DomesticExchangeList } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/useTickerStore';
 import { useQuery } from 'react-query';
-import { useTickerStore } from 'store/useTickerStore';
-import { DomesticExchangeList } from '../components/ticker/types';
 
 export const useBithumbMarketListQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);

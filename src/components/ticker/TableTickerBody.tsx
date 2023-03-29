@@ -3,9 +3,9 @@ import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 import { useTickerList } from '@/hooks/useTickerList';
 import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
-import { useMemo } from 'react';
-import { useTickerStore } from 'store/useTickerStore';
+import { useTickerStore } from '@/store/useTickerStore';
 import TickerItem from './TickerItem';
+import { useMemo } from 'react';
 
 const TableTickerBody = () => {
   const { data: quotation } = useQuotationQuery();

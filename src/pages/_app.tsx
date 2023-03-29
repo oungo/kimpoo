@@ -1,7 +1,8 @@
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
+import type { DehydratedState } from 'react-query';
 import { useState } from 'react';
-import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import '../styles/globals.css';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import '@/styles/globals.css';
 
 export interface PageProps {
   dehydratedState?: DehydratedState;

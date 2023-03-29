@@ -1,14 +1,14 @@
+import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
+import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import ExchangeSelectGroup from '@/components/select/ExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
-import { fetchBithumbMarket } from 'api/fetchBithumbMarket';
-import { fetchUpbitMarket } from 'api/fetchUpbitMarket';
-import { GetServerSideProps } from 'next';
-import { dehydrate, QueryClient } from 'react-query';
-import { PageProps } from './_app';
-import coinsData from '../../public/json/coins.json';
-import { Coins } from '@/components/ticker/types';
+import type { Coins } from '@/components/ticker/types';
+import coinsData from '@/public/json/coins.json';
+import { useTickerStore } from '@/store/useTickerStore';
+import type { PageProps } from './_app';
+import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
-import { useTickerStore } from 'store/useTickerStore';
+import { dehydrate, QueryClient } from 'react-query';
 
 interface Props {
   coins: [string, Coins][];

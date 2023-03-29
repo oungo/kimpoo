@@ -1,4 +1,4 @@
-import { useTickerStore } from 'store/useTickerStore';
+import { useTickerStore } from '@/store/useTickerStore';
 
 export const useTickerList = () => {
   const ticker = useTickerStore((state) => state.tickerList);

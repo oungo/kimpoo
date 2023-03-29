@@ -1,7 +1,7 @@
+import { formatPrice } from '@/utils/common';
+import type { Ticker } from './types';
 import Image from 'next/image';
 import { memo } from 'react';
-import { formatPrice } from 'utils/common';
-import { Ticker } from './types';
 
 interface Props {
   ticker: Ticker;
@@ -10,9 +10,7 @@ interface Props {
   thumb: string;
 }
 
-const convertUSDtoKRW = (price: number, quotation: number) => {
-  return price * quotation;
-};
+const convertUSDtoKRW = (price: number, quotation: number) => price * quotation;
 
 const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
   const kimp = formatPrice(

@@ -1,7 +1,7 @@
+import { DomesticExchangeList } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/useTickerStore';
 import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
-import { useTickerStore } from 'store/useTickerStore';
-import { DomesticExchangeList } from '../components/ticker/types';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';

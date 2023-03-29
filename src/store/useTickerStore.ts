@@ -1,10 +1,5 @@
-import {
-  Coins,
-  DomesticExchangeList,
-  DomesticTicker,
-  OverseasTicker,
-  Ticker,
-} from '@/components/ticker/types';
+import type { Coins, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
+import { DomesticExchangeList } from '@/components/ticker/types';
 import { create } from 'zustand';
 
 interface TickerState {
