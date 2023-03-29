@@ -1,6 +1,6 @@
 import TableTickerBody from './TableTickerBody';
 
-const tableTicker = () => (
+const TableTicker = () => (
   <table className="w-full max-w-screen-lg text-xs table-fixed sm:text-sm">
     <colgroup>
       <col width="30%" />
@@ -22,4 +22,4 @@ const tableTicker = () => (
   </table>
 );
 
-export default tableTicker;
+export default TableTicker;
