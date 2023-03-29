@@ -1,7 +1,6 @@
 import { DomesticExchangeList } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { TICKER_LIST } from 'constants/constants';
 import { useEffect } from 'react';
 
 interface UpbitTicker {
@@ -25,16 +24,6 @@ interface UpbitTicker {
 }
 
 const UPBIT_WEBSOCKET_URL = 'wss://api.upbit.com/websocket/v1';
-const WEBSOCKET_REQUEST_PARAMS = [
-  { ticket: 'test' },
-  {
-    type: 'ticker',
-    codes: TICKER_LIST.map((ticker) => `KRW-${ticker}`),
-  },
-  {
-    format: 'SIMPLE',
-  },
-];
 
 const convertTicker = async (event: MessageEvent<Blob>) => {
   const socketData = await event.data.text();
@@ -51,9 +40,9 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   return ticker;
 };
 
-export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
+export const useUpbitTickers = (domesticExchange: DomesticExchangeList, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
-  const initializeTickerList = useTickerStore((state) => state.setTickerList);
+  const setTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
@@ -62,23 +51,33 @@ export const useUpbitTickers = (domesticExchange: DomesticExchangeList) => {
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 
     socket.onopen = () => {
-      setLoadingSocketChange(false);
+      const WEBSOCKET_REQUEST_PARAMS = [
+        { ticket: 'test' },
+        {
+          type: 'ticker',
+          codes: symbolList.map((symbol) => `KRW-${symbol}`),
+        },
+        {
+          format: 'SIMPLE',
+        },
+      ];
+
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
+      setLoadingSocketChange(false);
     };
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const ticker = await convertTicker(event);
-
       setTicker(ticker.symbol, ticker);
     };
 
     socket.onclose = () => {
-      initializeTickerList();
+      setTickerList();
       setLoadingSocketChange(true);
     };
 
     return () => {
       socket.close();
     };
-  }, [setTicker, domesticExchange, setLoadingSocketChange, initializeTickerList]);
+  }, [setTicker, symbolList, domesticExchange, setLoadingSocketChange, setTickerList]);
 };

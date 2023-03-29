@@ -10,16 +10,16 @@ import { useMemo } from 'react';
 const TableTickerBody = () => {
   const { data: quotation } = useQuotationQuery();
   const { data: upbitMarketList } = useUpbitMarketListQuery();
-  const tickerList = useTickerList();
 
+  const tickerList = useTickerList();
   const coinList = useTickerStore((state) => state.coinList);
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const loadingSocketChange = useTickerStore((state) => state.loadingSocketChange);
 
-  const memoizedSymbolKeys = useMemo(() => Array.from(coinList.keys()), [coinList]);
+  const symbolList = useMemo(() => upbitMarketList.map(({ market }) => market), [upbitMarketList]);
 
-  useUpbitTickers(domesticExchange);
-  useBinanceTickers(memoizedSymbolKeys);
+  useUpbitTickers(domesticExchange, symbolList);
+  useBinanceTickers(symbolList);
 
   if (loadingSocketChange) {
     return (
