@@ -19,7 +19,7 @@ export enum DomesticExchange {
   COINONE = 'coinone',
 }
 
-export interface Coins {
+export interface Coin {
   id: string;
   name: string;
   symbol: string;

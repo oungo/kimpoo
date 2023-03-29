@@ -2,7 +2,7 @@ import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import ExchangeSelectGroup from '@/components/select/ExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
-import type { Coins } from '@/components/ticker/types';
+import type { Coin } from '@/components/ticker/types';
 import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import type { PageProps } from './_app';
@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 
 interface Props {
-  coins: [string, Coins][];
+  coins: [string, Coin][];
 }
 
 const Index = ({ coins }: Props) => {
@@ -30,7 +30,7 @@ const Index = ({ coins }: Props) => {
 };
 
 const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: string[]) => {
-  const map = new Map<string, Coins>();
+  const map = new Map<string, Coin>();
 
   coins.forEach((coin) => {
     if (coin.symbol === 'MIOTA') {
