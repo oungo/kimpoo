@@ -7,7 +7,7 @@ import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
 import TickerItem from './TickerItem';
-import { DomesticExchangeList } from './types';
+import { DomesticExchange } from './types';
 import type { DomesticTicker } from './types';
 import { useEffect, useState } from 'react';
 
@@ -26,7 +26,7 @@ const TableTickerBody = () => {
   const loadingSocketChange = useTickerStore((state) => state.loadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchangeList.BITHUMB) return;
+    if (domesticExchange !== DomesticExchange.BITHUMB) return;
 
     const bithumbTickerList: Map<string, DomesticTicker> = new Map();
 
@@ -45,10 +45,10 @@ const TableTickerBody = () => {
 
   useEffect(() => {
     switch (domesticExchange) {
-      case DomesticExchangeList.UPBIT:
+      case DomesticExchange.UPBIT:
         setSymbolList(upbitMarketList.map(({ market }) => market));
         break;
-      case DomesticExchangeList.BITHUMB:
+      case DomesticExchange.BITHUMB:
         setSymbolList(bithumbMarketList.data.map(({ symbol }) => symbol));
         break;
     }

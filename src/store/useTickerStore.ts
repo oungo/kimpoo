@@ -1,13 +1,13 @@
 import type { Coins, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
-import { DomesticExchangeList } from '@/components/ticker/types';
+import { DomesticExchange } from '@/components/ticker/types';
 import { create } from 'zustand';
 
 interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
   setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
-  domesticExchange: DomesticExchangeList;
-  setDomesticExchange: (exchange: DomesticExchangeList) => void;
+  domesticExchange: DomesticExchange;
+  setDomesticExchange: (exchange: DomesticExchange) => void;
   loadingSocketChange: boolean;
   setLoadingSocketChange: (loading: boolean) => void;
   coinList: Map<string, Coins>;
@@ -22,7 +22,7 @@ export const useTickerStore = create<TickerState>()((set) => ({
     }));
   },
   setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
-  domesticExchange: DomesticExchangeList.UPBIT,
+  domesticExchange: DomesticExchange.UPBIT,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   loadingSocketChange: false,
   setLoadingSocketChange: (loading: boolean) => set({ loadingSocketChange: loading }),

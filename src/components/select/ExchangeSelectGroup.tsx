@@ -1,19 +1,19 @@
-import { DomesticExchangeList } from '@/components/ticker/types';
+import { DomesticExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
 import { useTickerStore } from 'store/useTickerStore';
 
 const ExchangeSelectGroup = () => {
   const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);
 
-  const handleSelect = (option: DomesticExchangeList) => {
+  const handleSelect = (option: DomesticExchange) => {
     setDomesticExchange(option);
   };
 
   return (
-    <Select defaultValue={DomesticExchangeList.UPBIT} onSelect={handleSelect}>
-      <Option value={DomesticExchangeList.UPBIT}>업비트</Option>
-      <Option value={DomesticExchangeList.BITHUMB}>빗썸</Option>
-      <Option value={DomesticExchangeList.COINONE}>코인원</Option>
+    <Select defaultValue={DomesticExchange.UPBIT} onSelect={handleSelect}>
+      <Option value={DomesticExchange.UPBIT}>업비트</Option>
+      <Option value={DomesticExchange.BITHUMB}>빗썸</Option>
+      <Option value={DomesticExchange.COINONE}>코인원</Option>
     </Select>
   );
 };

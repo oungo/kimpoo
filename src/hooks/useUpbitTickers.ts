@@ -1,4 +1,4 @@
-import { DomesticExchangeList } from '@/components/ticker/types';
+import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect } from 'react';
@@ -40,13 +40,13 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   return ticker;
 };
 
-export const useUpbitTickers = (domesticExchange: DomesticExchangeList, symbolList: string[]) => {
+export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchangeList.UPBIT) return;
+    if (domesticExchange !== DomesticExchange.UPBIT) return;
 
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 

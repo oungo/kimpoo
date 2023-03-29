@@ -1,4 +1,4 @@
-import { DomesticExchangeList } from '@/components/ticker/types';
+import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect } from 'react';
 
@@ -47,13 +47,13 @@ interface BithumbTicker {
 
 const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 
-export const useBithumbTickers = (domesticExchange: DomesticExchangeList, symbolList: string[]) => {
+export const useBithumbTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchangeList.BITHUMB) return;
+    if (domesticExchange !== DomesticExchange.BITHUMB) return;
 
     const socket = new WebSocket(WEBSOCKET_URL);
 

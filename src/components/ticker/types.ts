@@ -13,7 +13,7 @@ export type OverseasTicker = {
   [Property in keyof PickedOverseasTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
 };
 
-export enum DomesticExchangeList {
+export enum DomesticExchange {
   UPBIT = 'upbit',
   BITHUMB = 'bithumb',
   COINONE = 'coinone',
