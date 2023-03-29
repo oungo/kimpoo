@@ -12,7 +12,7 @@ import type { DomesticTicker } from './types';
 import { useEffect, useState } from 'react';
 
 const TableTickerBody = () => {
-  const [symbolList, setSymbolList] = useState([]);
+  const [symbolList, setSymbolList] = useState<string[]>([]);
 
   const { data: quotation } = useQuotationQuery();
   const { data: upbitMarketList } = useUpbitMarketListQuery();
