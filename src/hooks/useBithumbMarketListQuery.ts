@@ -11,5 +11,6 @@ export const useBithumbMarketListQuery = () => {
     queryKey: [queryKeys.BITHUMB_MARKET],
     queryFn: fetchBithumbMarket,
     enabled: domesticExchange === DomesticExchange.BITHUMB,
+    refetchOnWindowFocus: false,
   });
 };
