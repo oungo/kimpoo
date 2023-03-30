@@ -8,8 +8,6 @@ interface TickerState {
   setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
   domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
-  loadingSocketChange: boolean;
-  setLoadingSocketChange: (loading: boolean) => void;
   coinList: Map<string, Coin>;
   setCoinList: (coinList: Map<string, Coin>) => void;
 }
@@ -24,8 +22,6 @@ export const useTickerStore = create<TickerState>()((set) => ({
   setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
   domesticExchange: DomesticExchange.UPBIT_KRW,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
-  loadingSocketChange: false,
-  setLoadingSocketChange: (loading: boolean) => set({ loadingSocketChange: loading }),
   coinList: new Map(),
   setCoinList: (coinList: Map<string, Coin>) => set({ coinList }),
 }));

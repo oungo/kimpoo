@@ -13,5 +13,6 @@ export const useUpbitMarketListQuery = () => {
     enabled:
       domesticExchange === DomesticExchange.UPBIT_KRW ||
       domesticExchange === DomesticExchange.UPBIT_BTC,
+    suspense: true,
   });
 };

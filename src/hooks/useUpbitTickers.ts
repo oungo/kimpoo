@@ -43,7 +43,6 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
 export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
-  const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
     if (
@@ -71,7 +70,6 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
       ];
 
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
-      setLoadingSocketChange(false);
     };
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
@@ -81,11 +79,10 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
 
     socket.onclose = () => {
       setTickerList();
-      setLoadingSocketChange(true);
     };
 
     return () => {
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setLoadingSocketChange, setTickerList]);
+  }, [setTicker, symbolList, domesticExchange, setTickerList]);
 };
