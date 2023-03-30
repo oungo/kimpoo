@@ -1,5 +1,6 @@
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
+import Layout from '@/components/layout';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
@@ -25,14 +26,15 @@ const Index = ({ coins }: Props) => {
   }, [coins, setCoinList]);
 
   return (
-    <main className="max-w-screen-lg p-2 m-auto">
-      <div className="flex justify-center gap-10">
+    <Layout>
+      <div className="flex items-center justify-center gap-5">
         <DomesticExchangeSelectGroup />
+        <span>&#8644;</span>
         <OverseasExchangeSelectGroup />
       </div>
 
       <TableTicker />
-    </main>
+    </Layout>
   );
 };
 
