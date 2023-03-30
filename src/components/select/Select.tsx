@@ -32,15 +32,15 @@ const Select = ({ children, defaultValue, placeholder, onSelect }: Props) => {
 
   return (
     <SelectContext.Provider value={{ selectedOption, changeSelectedOption }}>
-      <div className="relative w-60" ref={selectContainerRef}>
+      <div className="relative w-40 text-sm" ref={selectContainerRef}>
         <button
-          className="w-full p-2 border border-gray-200 rounded-md"
+          className="w-full px-1 py-3 border border-gray-200 rounded-md"
           onClick={() => setShowDropdown(!showDropdown)}
         >
           {selectedOptionText || selectedPlaceholder}
         </button>
         <ul
-          className={`border border-gray-200 rounded-md mt-1 p-2 absolute bg-white w-full ${
+          className={`flex flex-col gap-1 border border-gray-200 rounded-md mt-1 p-1 absolute bg-white w-full ${
             showDropdown ? 'block' : 'hidden'
           }`}
         >

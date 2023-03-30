@@ -5,5 +5,5 @@
 .selected::before {
   content: '\2713';
   position: absolute;
-  left: 1rem;
+  left: 0.5rem;
 }
