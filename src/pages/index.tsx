@@ -6,6 +6,7 @@ import type { Coin } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
+import * as queryKeys from '@/utils/queryKeys';
 import type { PageProps } from './_app';
 import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
@@ -50,15 +51,15 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
   const bithumbMarket = await queryClient.fetchQuery({
-    queryKey: ['bithumbMarket'],
+    queryKey: [queryKeys.BITHUMB_MARKET],
     queryFn: fetchBithumbMarket,
   });
   const upbitKRWMarket = await queryClient.fetchQuery({
-    queryKey: ['upbitMarket', DomesticExchange.UPBIT_KRW],
+    queryKey: [queryKeys.UPBIT_MARKET, DomesticExchange.UPBIT_KRW],
     queryFn: () => fetchUpbitMarket('KRW'),
   });
   const upbitBTCMarket = await queryClient.fetchQuery({
-    queryKey: ['upbitMarket', DomesticExchange.UPBIT_BTC],
+    queryKey: [queryKeys.UPBIT_MARKET, DomesticExchange.UPBIT_BTC],
     queryFn: () => fetchUpbitMarket('BTC'),
   });
 
