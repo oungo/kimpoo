@@ -1,6 +1,7 @@
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
+import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Coin } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
@@ -25,7 +26,11 @@ const Index = ({ coins }: Props) => {
 
   return (
     <main className="p-2">
-      <DomesticExchangeSelectGroup />
+      <div className="flex justify-between">
+        <DomesticExchangeSelectGroup />
+        <OverseasExchangeSelectGroup />
+      </div>
+
       <TableTicker />
     </main>
   );
