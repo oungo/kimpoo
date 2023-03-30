@@ -1,7 +1,7 @@
 import TableTickerBody from './TableTickerBody';
 
 const TableTicker = () => (
-  <table className="w-full max-w-screen-lg text-xs table-fixed sm:text-sm">
+  <table className="w-full max-w-screen-lg mt-4 text-xs table-fixed sm:text-sm">
     <colgroup>
       <col width="30%" />
       <col />
