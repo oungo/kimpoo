@@ -35,6 +35,7 @@ export const useBinanceTickers = (symbolList: string[]) => {
         params: symbolList.map((symbol) => `${symbol.toLowerCase()}usdt@miniTicker`),
         id: 1,
       };
+
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 

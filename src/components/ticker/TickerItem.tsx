@@ -35,7 +35,13 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
       </td>
 
       <td className="flex flex-col">
-        <p>{ticker.currentPrice > 1 ? formatPrice(ticker.currentPrice) : ticker.currentPrice}</p>
+        <p>
+          {ticker.currentPrice < 1
+            ? ticker.currentPrice
+            : formatPrice(ticker.currentPrice, {
+                maximumFractionDigits: ticker.currentPrice < 100 ? 2 : 0,
+              })}
+        </p>
         <p
           className={`text-gray-500 transition-opacity ${
             ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '

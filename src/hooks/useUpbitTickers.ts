@@ -1,7 +1,7 @@
 import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface UpbitTicker {
   /** 마켓 코드  */
@@ -41,8 +41,12 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
 };
 
 export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
+  const btcPriceRef = useRef(0);
+
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
+
+  const isKRWMarket = domesticExchange === DomesticExchange.UPBIT_KRW;
 
   useEffect(() => {
     if (
@@ -54,15 +58,14 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 
     socket.onopen = () => {
+      const prefixedSymbolList = symbolList.map((symbol) =>
+        isKRWMarket ? `KRW-${symbol}` : `BTC-${symbol}`
+      );
       const WEBSOCKET_REQUEST_PARAMS = [
         { ticket: 'test' },
         {
           type: 'ticker',
-          codes: [
-            ...symbolList.map((symbol) =>
-              domesticExchange === DomesticExchange.UPBIT_KRW ? `KRW-${symbol}` : `BTC-${symbol}`
-            ),
-          ],
+          codes: isKRWMarket ? prefixedSymbolList : prefixedSymbolList.concat('KRW-BTC'),
         },
         {
           format: 'SIMPLE',
@@ -74,7 +77,22 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const ticker = await convertTicker(event);
-      setTicker(ticker.symbol, ticker);
+      if (ticker.symbol === 'BTC') {
+        btcPriceRef.current = ticker.currentPrice;
+      }
+
+      if (isKRWMarket) {
+        setTicker(ticker.symbol, ticker);
+        return;
+      }
+
+      if (ticker.symbol !== 'BTC') {
+        setTicker(ticker.symbol, {
+          ...ticker,
+          currentPrice: ticker.currentPrice * btcPriceRef.current,
+          transactionAmount: ticker.transactionAmount * btcPriceRef.current,
+        });
+      }
     };
 
     socket.onclose = () => {
@@ -84,5 +102,5 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
     return () => {
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setTickerList]);
+  }, [setTicker, symbolList, domesticExchange, setTickerList, isKRWMarket]);
 };
