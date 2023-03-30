@@ -19,6 +19,11 @@ export enum DomesticExchange {
   BITHUMB = 'BITHUMB',
 }
 
+export enum OverseasExchange {
+  BINANCE_USDT = 'BINANCE_USDT',
+  BINANCE_BUSD = 'BINANCE_BUSD',
+}
+
 export interface Coin {
   id: string;
   name: string;
