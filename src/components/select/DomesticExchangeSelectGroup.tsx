@@ -2,7 +2,7 @@ import { DomesticExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
 import { useTickerStore } from 'store/useTickerStore';
 
-const ExchangeSelectGroup = () => {
+const DomesticExchangeSelectGroup = () => {
   const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);
 
   const handleSelect = (option: DomesticExchange) => {
@@ -18,4 +18,4 @@ const ExchangeSelectGroup = () => {
   );
 };
 
-export default ExchangeSelectGroup;
+export default DomesticExchangeSelectGroup;
