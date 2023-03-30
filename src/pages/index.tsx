@@ -49,17 +49,18 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
-  const bithumbMarket = await queryClient.fetchQuery(['bithumbMarket'], fetchBithumbMarket);
-  const upbitKRWMarket = await queryClient.fetchQuery(
-    ['upbitMarket', DomesticExchange.UPBIT_KRW],
-    () => fetchUpbitMarket('KRW'),
-    { cacheTime: 1000 }
-  );
-  const upbitBTCMarket = await queryClient.fetchQuery(
-    ['upbitMarket', DomesticExchange.UPBIT_BTC],
-    () => fetchUpbitMarket('BTC'),
-    { cacheTime: 1000 }
-  );
+  const bithumbMarket = await queryClient.fetchQuery({
+    queryKey: ['bithumbMarket'],
+    queryFn: fetchBithumbMarket,
+  });
+  const upbitKRWMarket = await queryClient.fetchQuery({
+    queryKey: ['upbitMarket', DomesticExchange.UPBIT_KRW],
+    queryFn: () => fetchUpbitMarket('KRW'),
+  });
+  const upbitBTCMarket = await queryClient.fetchQuery({
+    queryKey: ['upbitMarket', DomesticExchange.UPBIT_BTC],
+    queryFn: () => fetchUpbitMarket('BTC'),
+  });
 
   const coinsMap = convertCoinsDataToMap(coinsData.coins, [
     ...upbitKRWMarket.map(({ market }) => market),

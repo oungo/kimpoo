@@ -6,7 +6,9 @@ import { useQuery } from 'react-query';
 export const useBithumbMarketListQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
 
-  return useQuery(['bithumbMarket'], fetchBithumbMarket, {
+  return useQuery({
+    queryKey: ['bithumbMarket'],
+    queryFn: fetchBithumbMarket,
     enabled: domesticExchange === DomesticExchange.BITHUMB,
   });
 };
