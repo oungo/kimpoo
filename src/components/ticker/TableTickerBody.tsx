@@ -22,6 +22,7 @@ const TableTickerBody = () => {
   const coinList = useTickerStore((state) => state.coinList);
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
+  const overseasExchange = useTickerStore((state) => state.overseasExchange);
 
   useEffect(() => {
     if (domesticExchange !== DomesticExchange.BITHUMB) return;
@@ -55,7 +56,7 @@ const TableTickerBody = () => {
 
   useUpbitTickers(domesticExchange, symbolList);
   useBithumbTickers(domesticExchange, symbolList);
-  useBinanceTickers(symbolList);
+  useBinanceTickers(overseasExchange, symbolList);
 
   return (
     <tbody>

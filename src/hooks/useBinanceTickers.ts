@@ -1,4 +1,4 @@
-import type { OverseasTicker } from '@/components/ticker/types';
+import type { OverseasExchange, OverseasTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect } from 'react';
 
@@ -21,7 +21,10 @@ export interface BinanceTicker {
 
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 
-export const useBinanceTickers = (symbolList: string[]) => {
+const makeTickerName = (symbol: string, overseasExchange: OverseasExchange) =>
+  `${symbol.toLowerCase()}${overseasExchange.toLowerCase().split('_')[1]}@miniTicker`;
+
+export const useBinanceTickers = (overseasExchange: OverseasExchange, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export const useBinanceTickers = (symbolList: string[]) => {
     socket.onopen = () => {
       const WEBSOCKET_REQUEST_PARAMS = {
         method: 'SUBSCRIBE',
-        params: symbolList.map((symbol) => `${symbol.toLowerCase()}usdt@miniTicker`),
+        params: symbolList.map((symbol) => makeTickerName(symbol, overseasExchange)),
         id: 1,
       };
 
@@ -43,7 +46,7 @@ export const useBinanceTickers = (symbolList: string[]) => {
       const ticker: BinanceTicker = JSON.parse(event.data);
       if (!ticker.s) return;
 
-      const symbol = ticker.s.replace('USDT', '');
+      const symbol = ticker.s.replace(overseasExchange.split('_')[1], '');
       const newData: OverseasTicker = {
         oSymbol: symbol,
         oCurrentPrice: Number(ticker.c),
@@ -56,5 +59,5 @@ export const useBinanceTickers = (symbolList: string[]) => {
     return () => {
       socket.close();
     };
-  }, [setTicker, symbolList]);
+  }, [setTicker, symbolList, overseasExchange]);
 };
