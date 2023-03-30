@@ -49,7 +49,9 @@ const Layout = ({ children }: Props) => {
 
       <nav className="h-20 p-2 border-b dark:border-neutral-700">
         <div className="flex items-center justify-between h-full max-w-screen-lg m-auto">
-          <Link href="/">kimpoo</Link>
+          <Link className="text-2xl font-extrabold sm:text-4xl" href="/">
+            KIMPOO
+          </Link>
           <button
             className={`${effect && 'animate-wiggle'} text-2xl`}
             onAnimationEnd={() => setEffect(false)}
