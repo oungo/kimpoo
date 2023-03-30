@@ -25,8 +25,8 @@ const Index = ({ coins }: Props) => {
   }, [coins, setCoinList]);
 
   return (
-    <main className="p-2">
-      <div className="flex justify-between">
+    <main className="max-w-screen-lg p-2 m-auto">
+      <div className="flex justify-center gap-10">
         <DomesticExchangeSelectGroup />
         <OverseasExchangeSelectGroup />
       </div>
