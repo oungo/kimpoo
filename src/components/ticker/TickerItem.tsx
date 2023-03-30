@@ -23,7 +23,7 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
   );
 
   return (
-    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1">
+    <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1 dark:border-b-neutral-700">
       <td className="text-left">
         <div className="flex items-center gap-1">
           <Image src={thumb} alt={`${ticker.symbol} 아이콘`} width={15} height={15} />
@@ -58,13 +58,13 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
         className={
           ticker.currentPrice / convertUSDtoKRW(ticker.currentPrice, quotation) > 1
             ? 'text-teal-600'
-            : 'text-red-600'
+            : 'text-red-600 dark:text-red-500'
         }
       >
         {ticker.currentPrice && ticker.oCurrentPrice ? `${kimp}` : ''}
       </td>
 
-      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600'}>
+      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'}>
         {formatPrice(ticker.changeRate, {
           signDisplay: 'exceptZero',
           maximumFractionDigits: 2,

@@ -30,7 +30,7 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <header className="p-2 dark:bg-red-400">header</header>
+      <header className="p-2">header</header>
 
       <nav className="flex justify-between p-2">
         <p>home</p>
