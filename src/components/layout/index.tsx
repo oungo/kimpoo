@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
 interface Props {
@@ -38,12 +39,13 @@ const Layout = ({ children }: Props) => {
 
       <nav className="p-2 border-b dark:border-neutral-700">
         <div className="flex justify-between max-w-screen-lg m-auto">
-          <p>home</p>
+          <Link href="/">kimpoo</Link>
           <button onClick={handleClickButton}>다크모드</button>
         </div>
       </nav>
 
-      <main className="max-w-screen-lg min-h-screen p-2 m-auto sm:p-0">{children}</main>
+      <main className="max-w-screen-lg min-h-screen px-2 py-4 m-auto sm:px-0">{children}</main>
+
       <footer className="relative bottom-0 w-full h-40 mt-10 bg-gray-200 dark:bg-neutral-800">
         footer
       </footer>
