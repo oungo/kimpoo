@@ -22,7 +22,7 @@ export interface BinanceTicker {
 const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 
 export const useBinanceTickers = (symbolList: string[]) => {
-  const setTickerList = useTickerStore((state) => state.setTicker);
+  const setTicker = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
     if (!symbolList) return;
@@ -49,11 +49,11 @@ export const useBinanceTickers = (symbolList: string[]) => {
         oTransactionAmount: Number(ticker.q),
       };
 
-      setTickerList(symbol, newData);
+      setTicker(symbol, newData);
     };
 
     return () => {
       socket.close();
     };
-  }, [setTickerList, symbolList]);
+  }, [setTicker, symbolList]);
 };

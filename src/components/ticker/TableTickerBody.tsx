@@ -2,7 +2,6 @@ import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useBithumbMarketListQuery } from '@/hooks/useBithumbMarketListQuery';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useQuotationQuery } from '@/hooks/useQuotationQuery';
-import { useTickerList } from '@/hooks/useTickerList';
 import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
@@ -18,7 +17,7 @@ const TableTickerBody = () => {
   const { data: upbitMarketList } = useUpbitMarketListQuery();
   const { data: bithumbMarketList } = useBithumbMarketListQuery();
 
-  const tickerList = useTickerList();
+  const tickerList = useTickerStore((state) => state.tickerList);
   const setTickerList = useTickerStore((state) => state.setTickerList);
   const coinList = useTickerStore((state) => state.coinList);
 
@@ -46,6 +45,7 @@ const TableTickerBody = () => {
   useEffect(() => {
     switch (domesticExchange) {
       case DomesticExchange.UPBIT_KRW:
+      case DomesticExchange.UPBIT_BTC:
         setSymbolList(upbitMarketList.map(({ market }) => market));
         break;
       case DomesticExchange.BITHUMB:
@@ -56,7 +56,6 @@ const TableTickerBody = () => {
 
   useUpbitTickers(domesticExchange, symbolList);
   useBithumbTickers(domesticExchange, symbolList);
-
   useBinanceTickers(symbolList);
 
   if (loadingSocketChange) {
@@ -71,11 +70,11 @@ const TableTickerBody = () => {
 
   return (
     <tbody>
-      {tickerList.map((ticker) => (
+      {[...tickerList.values()].map((ticker) => (
         <TickerItem
           key={ticker.symbol}
           koreanSymbol={
-            upbitMarketList.find(({ market }) => market === ticker.symbol)?.korean_name ||
+            upbitMarketList?.find(({ market }) => market === ticker.symbol)?.korean_name ||
             coinList.get(ticker.symbol)?.name
           }
           thumb={coinList.get(ticker.symbol)?.thumb}

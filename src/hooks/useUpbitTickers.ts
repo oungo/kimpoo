@@ -30,7 +30,7 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   const upbitTicker: UpbitTicker = JSON.parse(socketData);
 
   const ticker: DomesticTicker = {
-    symbol: upbitTicker.cd.replace('KRW-', ''),
+    symbol: upbitTicker.cd.split('-')[1],
     currentPrice: upbitTicker.tp,
     changeRate: upbitTicker.scr * 100,
     transactionAmount: upbitTicker.atp24h,
@@ -46,7 +46,11 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
   const setLoadingSocketChange = useTickerStore((state) => state.setLoadingSocketChange);
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.UPBIT_KRW) return;
+    if (
+      domesticExchange !== DomesticExchange.UPBIT_KRW &&
+      domesticExchange !== DomesticExchange.UPBIT_BTC
+    )
+      return;
 
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 
@@ -55,7 +59,11 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
         { ticket: 'test' },
         {
           type: 'ticker',
-          codes: symbolList.map((symbol) => `KRW-${symbol}`),
+          codes: [
+            ...symbolList.map((symbol) =>
+              domesticExchange === DomesticExchange.UPBIT_KRW ? `KRW-${symbol}` : `BTC-${symbol}`
+            ),
+          ],
         },
         {
           format: 'SIMPLE',

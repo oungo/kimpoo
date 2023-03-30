@@ -3,6 +3,7 @@ import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import ExchangeSelectGroup from '@/components/select/ExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Coin } from '@/components/ticker/types';
+import { DomesticExchange } from '@/components/ticker/types';
 import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import type { PageProps } from './_app';
@@ -49,10 +50,20 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
   const bithumbMarket = await queryClient.fetchQuery(['bithumbMarket'], fetchBithumbMarket);
-  const upbitMarket = await queryClient.fetchQuery(['upbitMarket'], () => fetchUpbitMarket('KRW'));
+  const upbitKRWMarket = await queryClient.fetchQuery(
+    ['upbitMarket', DomesticExchange.UPBIT_KRW],
+    () => fetchUpbitMarket('KRW'),
+    { cacheTime: 1000 }
+  );
+  const upbitBTCMarket = await queryClient.fetchQuery(
+    ['upbitMarket', DomesticExchange.UPBIT_BTC],
+    () => fetchUpbitMarket('BTC'),
+    { cacheTime: 1000 }
+  );
 
   const coinsMap = convertCoinsDataToMap(coinsData.coins, [
-    ...upbitMarket.map(({ market }) => market),
+    ...upbitKRWMarket.map(({ market }) => market),
+    ...upbitBTCMarket.map(({ market }) => market),
     ...bithumbMarket.data.map(({ symbol }) => symbol),
   ]);
 
