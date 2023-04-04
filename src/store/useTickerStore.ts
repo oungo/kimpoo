@@ -1,6 +1,7 @@
 import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
 import { OverseasExchange } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
+import { formatPrice } from '@/utils/common';
 import { create } from 'zustand';
 
 interface TickerState {
@@ -18,9 +19,24 @@ interface TickerState {
 export const useTickerStore = create<TickerState>()((set) => ({
   tickerList: new Map(),
   setTicker: (symbol, ticker) => {
-    set(({ tickerList }) => ({
-      tickerList: new Map(tickerList).set(symbol, { ...tickerList.get(symbol), ...ticker }),
-    }));
+    set(({ tickerList }) => {
+      const tickerData = tickerList.get(symbol);
+      const premium = formatPrice(
+        (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
+        {
+          signDisplay: 'exceptZero',
+          maximumFractionDigits: 2,
+        }
+      );
+
+      return {
+        tickerList: new Map(tickerList).set(symbol, {
+          ...tickerList.get(symbol),
+          ...ticker,
+          premium,
+        }),
+      };
+    });
   },
   setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
   domesticExchange: DomesticExchange.UPBIT_KRW,

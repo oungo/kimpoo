@@ -1,4 +1,5 @@
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
+import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import Layout from '@/components/layout';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
@@ -68,6 +69,10 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
   const upbitBTCMarket = await queryClient.fetchQuery({
     queryKey: [queryKeys.UPBIT_MARKET, DomesticExchange.UPBIT_BTC],
     queryFn: () => fetchUpbitMarket('BTC'),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: [queryKeys.QUOTATION],
+    queryFn: fetchQuotation,
   });
 
   const coinsMap = convertCoinsDataToMap(coinsData.coins, [

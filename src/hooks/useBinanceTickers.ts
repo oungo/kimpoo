@@ -1,5 +1,7 @@
 import type { OverseasExchange, OverseasTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
+import { formatCurrentPrice, formatPrice } from '@/utils/common';
+import { useQuotationQuery } from './useQuotationQuery';
 import { useEffect } from 'react';
 
 export interface BinanceTicker {
@@ -25,6 +27,8 @@ const makeTickerName = (symbol: string, overseasExchange: OverseasExchange) =>
   `${symbol.toLowerCase()}${overseasExchange.toLowerCase().split('_')[1]}@miniTicker`;
 
 export const useBinanceTickers = (overseasExchange: OverseasExchange, symbolList: string[]) => {
+  const { data: quotation } = useQuotationQuery();
+
   const setTicker = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
@@ -47,10 +51,15 @@ export const useBinanceTickers = (overseasExchange: OverseasExchange, symbolList
       if (!ticker.s) return;
 
       const symbol = ticker.s.replace(overseasExchange.split('_')[1], '');
+
       const newData: OverseasTicker = {
         oSymbol: symbol,
-        oCurrentPrice: Number(ticker.c),
-        oTransactionAmount: Number(ticker.q),
+        oCurrentPrice: parseFloat(ticker.c) * quotation.basePrice,
+        oFormattedCurrentPrice: formatCurrentPrice(parseFloat(ticker.c) * quotation.basePrice),
+        oTransactionAmount: parseFloat(ticker.q),
+        oFormattedTransactionAmount: formatPrice(parseFloat(ticker.q) * quotation.basePrice, {
+          notation: 'compact',
+        }),
       };
 
       setTicker(symbol, newData);
@@ -59,5 +68,5 @@ export const useBinanceTickers = (overseasExchange: OverseasExchange, symbolList
     return () => {
       socket.close();
     };
-  }, [setTicker, symbolList, overseasExchange]);
+  }, [setTicker, symbolList, overseasExchange, quotation.basePrice]);
 };

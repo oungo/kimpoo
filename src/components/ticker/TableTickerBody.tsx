@@ -1,7 +1,6 @@
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useBithumbMarketListQuery } from '@/hooks/useBithumbMarketListQuery';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
-import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
@@ -14,7 +13,6 @@ import { useEffect, useState } from 'react';
 const TableTickerBody = () => {
   const [symbolList, setSymbolList] = useState<string[]>([]);
 
-  const { data: quotation } = useQuotationQuery();
   const { data: upbitMarketList } = useUpbitMarketListQuery();
   const { data: bithumbMarketList } = useBithumbMarketListQuery();
 
@@ -85,7 +83,6 @@ const TableTickerBody = () => {
           }
           thumb={coinList.get(ticker.symbol)?.thumb}
           ticker={ticker}
-          quotation={quotation[0].basePrice}
         />
       ))}
     </tbody>
