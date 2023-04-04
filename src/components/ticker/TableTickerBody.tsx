@@ -5,6 +5,7 @@ import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
+import { formatPrice } from '@/utils/common';
 import TickerItem from './TickerItem';
 import { DomesticExchange } from './types';
 import type { DomesticTicker } from './types';
@@ -30,11 +31,26 @@ const TableTickerBody = () => {
     const bithumbTickerList: Map<string, DomesticTicker> = new Map();
 
     for (const market of bithumbMarketList.data) {
-      const ticker = {
+      const ticker: DomesticTicker = {
         symbol: market.symbol,
-        currentPrice: Number(market.closing_price),
-        changeRate: (Number(market.closing_price) / Number(market.prev_closing_price)) * 100 - 100,
-        transactionAmount: Number(market.acc_trade_value_24H),
+        currentPrice: parseFloat(market.closing_price),
+        formattedCurrentPrice:
+          parseFloat(market.closing_price) < 1
+            ? market.closing_price
+            : formatPrice(market.closing_price, {
+                maximumFractionDigits: parseFloat(market.closing_price) < 100 ? 2 : 0,
+              }),
+        changeRate: formatPrice(
+          (
+            (parseFloat(market.closing_price) / parseFloat(market.prev_closing_price) - 1) *
+            100
+          ).toFixed(2),
+          { signDisplay: 'exceptZero' }
+        ),
+        transactionAmount: parseFloat(market.acc_trade_value_24H),
+        formattedTransactionAmount: formatPrice(market.acc_trade_value_24H, {
+          notation: 'compact',
+        }),
       };
       bithumbTickerList.set(market.symbol, ticker);
     }
