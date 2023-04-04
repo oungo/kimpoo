@@ -39,7 +39,7 @@ const TickerItem = ({ ticker, koreanSymbol, thumb }: Props) => (
 
     <td
       className={
-        parseFloat(ticker.premium) > 1 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'
+        parseFloat(ticker.premium) > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'
       }
     >
       {!isNaN(parseFloat(ticker.premium)) ? `${ticker.premium}%` : ''}

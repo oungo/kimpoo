@@ -1,7 +1,7 @@
 import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatPrice } from '@/utils/common';
 import { useEffect, useRef } from 'react';
 
 interface UpbitTicker {
@@ -99,12 +99,7 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
         setTicker(ticker.symbol, {
           ...ticker,
           currentPrice,
-          formattedCurrentPrice:
-            currentPrice < 1
-              ? currentPrice
-              : formatPrice(currentPrice, {
-                  maximumFractionDigits: currentPrice < 100 ? 2 : 0,
-                }),
+          formattedCurrentPrice: formatCurrentPrice(currentPrice),
           transactionAmount: ticker.transactionAmount * btcPriceRef.current,
           formattedTransactionAmount: formatPrice(ticker.transactionAmount * btcPriceRef.current, {
             notation: 'compact',

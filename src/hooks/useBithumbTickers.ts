@@ -1,7 +1,7 @@
 import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatPrice } from '@/utils/common';
 import { useEffect } from 'react';
 
 interface SocketStatusResponse {
@@ -78,12 +78,7 @@ export const useBithumbTickers = (domesticExchange: DomesticExchange, symbolList
       const newData: DomesticTicker = {
         symbol: newSymbol,
         currentPrice: parseFloat(closePrice),
-        formattedCurrentPrice:
-          parseFloat(closePrice) < 1
-            ? closePrice
-            : formatPrice(closePrice, {
-                maximumFractionDigits: parseFloat(closePrice) < 100 ? 2 : 0,
-              }),
+        formattedCurrentPrice: formatCurrentPrice(parseFloat(closePrice)),
         changeRate: formatPrice(
           ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2),
           { signDisplay: 'exceptZero' }
