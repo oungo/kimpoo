@@ -95,10 +95,20 @@ export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: 
       }
 
       if (ticker.symbol !== 'BTC') {
+        const currentPrice = ticker.currentPrice * btcPriceRef.current;
         setTicker(ticker.symbol, {
           ...ticker,
-          currentPrice: ticker.currentPrice * btcPriceRef.current,
+          currentPrice,
+          formattedCurrentPrice:
+            currentPrice < 1
+              ? currentPrice
+              : formatPrice(currentPrice, {
+                  maximumFractionDigits: currentPrice < 100 ? 2 : 0,
+                }),
           transactionAmount: ticker.transactionAmount * btcPriceRef.current,
+          formattedTransactionAmount: formatPrice(ticker.transactionAmount * btcPriceRef.current, {
+            notation: 'compact',
+          }),
         });
       }
     };
