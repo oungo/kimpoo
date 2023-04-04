@@ -41,13 +41,7 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
       </td>
 
       <td className="flex flex-col">
-        <p>
-          {ticker.currentPrice < 1
-            ? ticker.currentPrice
-            : formatPrice(ticker.currentPrice, {
-                maximumFractionDigits: ticker.currentPrice < 100 ? 2 : 0,
-              })}
-        </p>
+        <p>{ticker.formattedCurrentPrice}</p>
         <p
           className={`text-gray-500 transition-opacity ${
             ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '
@@ -70,16 +64,16 @@ const TickerItem = ({ ticker, quotation, koreanSymbol, thumb }: Props) => {
         {ticker.currentPrice && ticker.oCurrentPrice ? `${kimp}` : ''}
       </td>
 
-      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'}>
-        {formatPrice(ticker.changeRate, {
-          signDisplay: 'exceptZero',
-          maximumFractionDigits: 2,
-        })}
-        %
+      <td
+        className={
+          parseFloat(ticker.changeRate) > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'
+        }
+      >
+        {ticker.changeRate}%
       </td>
 
       <td className="flex flex-col">
-        <p>{formatPrice(ticker.transactionAmount, { notation: 'compact' })}</p>
+        <p>{ticker.formattedTransactionAmount}</p>
         {ticker.oTransactionAmount && (
           <p className="text-gray-500">
             {formatPrice(convertUSDtoKRW(ticker.oTransactionAmount, quotation), {

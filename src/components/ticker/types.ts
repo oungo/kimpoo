@@ -1,10 +1,12 @@
-export type Ticker = DomesticTicker & OverseasTicker;
+export type Ticker = DomesticTicker & OverseasTicker & { premium: number };
 
 export interface DomesticTicker {
   symbol: string;
   currentPrice: number;
-  changeRate: number;
+  formattedCurrentPrice: number | string;
+  changeRate: string;
   transactionAmount: number;
+  formattedTransactionAmount: string;
   caution?: boolean;
 }
 

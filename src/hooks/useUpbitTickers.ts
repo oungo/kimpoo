@@ -1,6 +1,7 @@
 import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
+import { formatPrice } from '@/utils/common';
 import { useEffect, useRef } from 'react';
 
 interface UpbitTicker {
@@ -32,8 +33,15 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   const ticker: DomesticTicker = {
     symbol: upbitTicker.cd.split('-')[1],
     currentPrice: upbitTicker.tp,
-    changeRate: upbitTicker.scr * 100,
+    formattedCurrentPrice:
+      upbitTicker.tp < 1
+        ? upbitTicker.tp
+        : formatPrice(upbitTicker.tp, {
+            maximumFractionDigits: upbitTicker.tp < 100 ? 2 : 0,
+          }),
+    changeRate: formatPrice((upbitTicker.scr * 100).toFixed(2), { signDisplay: 'exceptZero' }),
     transactionAmount: upbitTicker.atp24h,
+    formattedTransactionAmount: formatPrice(upbitTicker.atp24h, { notation: 'compact' }),
     caution: upbitTicker.mw === 'CAUTION',
   };
 
