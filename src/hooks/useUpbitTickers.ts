@@ -33,12 +33,7 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   const ticker: DomesticTicker = {
     symbol: upbitTicker.cd.split('-')[1],
     currentPrice: upbitTicker.tp,
-    formattedCurrentPrice:
-      upbitTicker.tp < 1
-        ? upbitTicker.tp
-        : formatPrice(upbitTicker.tp, {
-            maximumFractionDigits: upbitTicker.tp < 100 ? 2 : 0,
-          }),
+    formattedCurrentPrice: formatCurrentPrice(upbitTicker.tp),
     changeRate: formatPrice((upbitTicker.scr * 100).toFixed(2), { signDisplay: 'exceptZero' }),
     transactionAmount: upbitTicker.atp24h,
     formattedTransactionAmount: formatPrice(upbitTicker.atp24h, { notation: 'compact' }),
