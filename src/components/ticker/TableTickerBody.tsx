@@ -77,12 +77,11 @@ const TableTickerBody = () => {
       {[...tickerList.values()].map((ticker) => (
         <TickerItem
           key={ticker.symbol}
+          ticker={ticker}
           koreanSymbol={
             upbitMarketList?.find(({ market }) => market === ticker.symbol)?.korean_name ||
             coinList.get(ticker.symbol)?.name
           }
-          thumb={coinList.get(ticker.symbol)?.thumb}
-          ticker={ticker}
         />
       ))}
     </tbody>
