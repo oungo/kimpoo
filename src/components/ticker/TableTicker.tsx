@@ -1,12 +1,16 @@
 import type { SortType } from '@/store/useTickerStore';
 import { useTickerStore } from '@/store/useTickerStore';
 import TableTickerBody from './TableTickerBody';
+import { shallow } from 'zustand/shallow';
 
 const TableTicker = () => {
-  const { sortOption, setSortOption } = useTickerStore((state) => ({
-    sortOption: state.sortOption,
-    setSortOption: state.setSortOption,
-  }));
+  const { sortOption, setSortOption } = useTickerStore(
+    (state) => ({
+      sortOption: state.sortOption,
+      setSortOption: state.setSortOption,
+    }),
+    shallow
+  );
 
   const handleSortClick = (type: SortType) => {
     setSortOption({ type, desc: type === sortOption.type ? !sortOption.desc : sortOption.desc });
