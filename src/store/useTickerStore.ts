@@ -3,6 +3,7 @@ import { OverseasExchange } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { formatPrice } from '@/utils/common';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 export type SortType = keyof Pick<
   Ticker,
@@ -28,57 +29,59 @@ interface TickerState {
   setSortOption: (option: SortOption) => void;
 }
 
-export const useTickerStore = create<TickerState>()((set, get) => ({
-  tickerList: new Map(),
-  setTicker: (symbol, ticker) => {
-    set(({ tickerList }) => {
-      const tickerData = tickerList.get(symbol);
-      const premium = formatPrice(
-        (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
-        {
-          signDisplay: 'exceptZero',
-          maximumFractionDigits: 2,
-        }
-      );
-
-      return {
-        tickerList: new Map(tickerList).set(symbol, {
-          ...tickerList.get(symbol),
-          ...ticker,
-          premium,
-        }),
-      };
-    });
-  },
-  setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
-  sortTickerList: (sortType, desc) => {
-    const tickerList = [...get().tickerList.entries()];
-
-    switch (sortType) {
-      case 'symbol':
-        tickerList.sort((a, b) => {
-          if (desc) {
-            return a[1][sortType] > b[1][sortType] ? -1 : b[1][sortType] < a[1][sortType] ? 1 : 0;
+export const useTickerStore = create<TickerState>()(
+  devtools((set, get) => ({
+    tickerList: new Map(),
+    setTicker: (symbol, ticker) => {
+      set(({ tickerList }) => {
+        const tickerData = tickerList.get(symbol);
+        const premium = formatPrice(
+          (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
+          {
+            signDisplay: 'exceptZero',
+            maximumFractionDigits: 2,
           }
-          return a[1][sortType] < b[1][sortType] ? -1 : b[1][sortType] > a[1][sortType] ? 1 : 0;
-        });
-        break;
-      case 'currentPrice':
-        tickerList.sort((a, b) => {
-          if (desc) return b[1][sortType] - a[1][sortType];
-          return a[1][sortType] - b[1][sortType];
-        });
-        break;
-    }
+        );
 
-    set({ tickerList: new Map(tickerList) });
-  },
-  domesticExchange: DomesticExchange.UPBIT_KRW,
-  setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
-  overseasExchange: OverseasExchange.BINANCE_USDT,
-  setOverseasExchange: (exchange) => set({ overseasExchange: exchange }),
-  coinList: new Map(),
-  setCoinList: (coinList: Map<string, Coin>) => set({ coinList }),
-  sortOption: { type: 'premium', desc: true },
-  setSortOption: (sortOption: SortOption) => set({ sortOption }),
-}));
+        return {
+          tickerList: new Map(tickerList).set(symbol, {
+            ...tickerList.get(symbol),
+            ...ticker,
+            premium,
+          }),
+        };
+      });
+    },
+    setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
+    sortTickerList: (sortType, desc) => {
+      const tickerList = [...get().tickerList.entries()];
+
+      switch (sortType) {
+        case 'symbol':
+          tickerList.sort((a, b) => {
+            if (desc) {
+              return a[1][sortType] > b[1][sortType] ? -1 : b[1][sortType] < a[1][sortType] ? 1 : 0;
+            }
+            return a[1][sortType] < b[1][sortType] ? -1 : b[1][sortType] > a[1][sortType] ? 1 : 0;
+          });
+          break;
+        case 'currentPrice':
+          tickerList.sort((a, b) => {
+            if (desc) return b[1][sortType] - a[1][sortType];
+            return a[1][sortType] - b[1][sortType];
+          });
+          break;
+      }
+
+      set({ tickerList: new Map(tickerList) });
+    },
+    domesticExchange: DomesticExchange.UPBIT_KRW,
+    setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
+    overseasExchange: OverseasExchange.BINANCE_USDT,
+    setOverseasExchange: (exchange) => set({ overseasExchange: exchange }),
+    coinList: new Map(),
+    setCoinList: (coinList: Map<string, Coin>) => set({ coinList }),
+    sortOption: { type: 'premium', desc: true },
+    setSortOption: (sortOption: SortOption) => set({ sortOption }),
+  }))
+);
