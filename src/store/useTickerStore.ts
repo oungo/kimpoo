@@ -33,26 +33,31 @@ export const useTickerStore = create<TickerState>()(
   devtools((set, get) => ({
     tickerList: new Map(),
     setTicker: (symbol, ticker) => {
-      set(({ tickerList }) => {
-        const tickerData = tickerList.get(symbol);
-        const premium = formatPrice(
-          (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
-          {
-            signDisplay: 'exceptZero',
-            maximumFractionDigits: 2,
-          }
-        );
+      set(
+        ({ tickerList }) => {
+          const tickerData = tickerList.get(symbol);
+          const premium = formatPrice(
+            (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
+            {
+              signDisplay: 'exceptZero',
+              maximumFractionDigits: 2,
+            }
+          );
 
-        return {
-          tickerList: new Map(tickerList).set(symbol, {
-            ...tickerList.get(symbol),
-            ...ticker,
-            premium,
-          }),
-        };
-      });
+          return {
+            tickerList: new Map(tickerList).set(symbol, {
+              ...tickerList.get(symbol),
+              ...ticker,
+              premium,
+            }),
+          };
+        },
+        false,
+        'setTicker'
+      );
     },
-    setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
+    setTickerList: (tickerList) =>
+      set({ tickerList: new Map(tickerList) || new Map() }, false, 'setTickerList'),
     sortTickerList: (sortType, desc) => {
       const tickerList = [...get().tickerList.entries()];
 
@@ -73,15 +78,17 @@ export const useTickerStore = create<TickerState>()(
           break;
       }
 
-      set({ tickerList: new Map(tickerList) });
+      set({ tickerList: new Map(tickerList) }, false, 'sortTickerList');
     },
     domesticExchange: DomesticExchange.UPBIT_KRW,
-    setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
+    setDomesticExchange: (exchange) =>
+      set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
     overseasExchange: OverseasExchange.BINANCE_USDT,
-    setOverseasExchange: (exchange) => set({ overseasExchange: exchange }),
+    setOverseasExchange: (exchange) =>
+      set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
     coinList: new Map(),
-    setCoinList: (coinList: Map<string, Coin>) => set({ coinList }),
+    setCoinList: (coinList: Map<string, Coin>) => set({ coinList }, false, 'setCoinList'),
     sortOption: { type: 'premium', desc: true },
-    setSortOption: (sortOption: SortOption) => set({ sortOption }),
+    setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
   }))
 );
