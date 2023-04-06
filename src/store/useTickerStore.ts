@@ -4,19 +4,31 @@ import { DomesticExchange } from '@/components/ticker/types';
 import { formatPrice } from '@/utils/common';
 import { create } from 'zustand';
 
+export type SortType = keyof Pick<
+  Ticker,
+  'symbol' | 'currentPrice' | 'premium' | 'changeRate' | 'transactionAmount'
+>;
+
+interface SortOption {
+  type: SortType;
+  desc: boolean;
+}
 interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
   setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
+  sortTickerList: (sortType: SortType, desc: boolean) => void;
   domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
   overseasExchange: OverseasExchange;
   setOverseasExchange: (exchange: OverseasExchange) => void;
   coinList: Map<string, Coin>;
   setCoinList: (coinList: Map<string, Coin>) => void;
+  sortOption: SortOption;
+  setSortOption: (option: SortOption) => void;
 }
 
-export const useTickerStore = create<TickerState>()((set) => ({
+export const useTickerStore = create<TickerState>()((set, get) => ({
   tickerList: new Map(),
   setTicker: (symbol, ticker) => {
     set(({ tickerList }) => {
@@ -39,10 +51,34 @@ export const useTickerStore = create<TickerState>()((set) => ({
     });
   },
   setTickerList: (tickerList) => set({ tickerList: new Map(tickerList) || new Map() }),
+  sortTickerList: (sortType, desc) => {
+    const tickerList = [...get().tickerList.entries()];
+
+    switch (sortType) {
+      case 'symbol':
+        tickerList.sort((a, b) => {
+          if (desc) {
+            return a[1][sortType] > b[1][sortType] ? -1 : b[1][sortType] < a[1][sortType] ? 1 : 0;
+          }
+          return a[1][sortType] < b[1][sortType] ? -1 : b[1][sortType] > a[1][sortType] ? 1 : 0;
+        });
+        break;
+      case 'currentPrice':
+        tickerList.sort((a, b) => {
+          if (desc) return b[1][sortType] - a[1][sortType];
+          return a[1][sortType] - b[1][sortType];
+        });
+        break;
+    }
+
+    set({ tickerList: new Map(tickerList) });
+  },
   domesticExchange: DomesticExchange.UPBIT_KRW,
   setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
   overseasExchange: OverseasExchange.BINANCE_USDT,
   setOverseasExchange: (exchange) => set({ overseasExchange: exchange }),
   coinList: new Map(),
   setCoinList: (coinList: Map<string, Coin>) => set({ coinList }),
+  sortOption: { type: 'premium', desc: true },
+  setSortOption: (sortOption: SortOption) => set({ sortOption }),
 }));
