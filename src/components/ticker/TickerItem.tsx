@@ -22,7 +22,9 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             height={15}
             className="rounded-full"
           />
-          <p className="overflow-hidden whitespace-nowrap text-ellipsis">{koreanSymbol}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {koreanSymbol || coinList.get(ticker.symbol)?.name}
+          </p>
         </div>
         <p className="inline-block text-gray-500">{ticker.symbol}</p>
 

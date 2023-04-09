@@ -18,7 +18,6 @@ const TableTickerBody = () => {
 
   const tickerList = useTickerStore((state) => state.tickerList);
   const setTickerList = useTickerStore((state) => state.setTickerList);
-  const coinList = useTickerStore((state) => state.coinList);
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const overseasExchange = useTickerStore((state) => state.overseasExchange);
@@ -74,8 +73,7 @@ const TableTickerBody = () => {
           key={ticker.symbol}
           ticker={ticker}
           koreanSymbol={
-            upbitMarketList?.find(({ market }) => market === ticker.symbol)?.korean_name ||
-            coinList.get(ticker.symbol)?.name
+            upbitMarketList?.find(({ market }) => market === ticker.symbol)?.korean_name
           }
         />
       ))}
