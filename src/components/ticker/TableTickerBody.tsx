@@ -4,7 +4,7 @@ import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatPrice } from '@/utils/common';
 import TickerItem from './TickerItem';
 import { DomesticExchange } from './types';
 import type { DomesticTicker } from './types';
@@ -32,12 +32,7 @@ const TableTickerBody = () => {
       const ticker: DomesticTicker = {
         symbol: market.symbol,
         currentPrice: parseFloat(market.closing_price),
-        formattedCurrentPrice:
-          parseFloat(market.closing_price) < 1
-            ? market.closing_price
-            : formatPrice(market.closing_price, {
-                maximumFractionDigits: parseFloat(market.closing_price) < 100 ? 2 : 0,
-              }),
+        formattedCurrentPrice: formatCurrentPrice(parseFloat(market.closing_price)),
         changeRate: formatPrice(
           (
             (parseFloat(market.closing_price) / parseFloat(market.prev_closing_price) - 1) *
