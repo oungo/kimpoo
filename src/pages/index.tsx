@@ -50,7 +50,7 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
       map.set('FCT2', coin);
     }
     if (!symbols.includes(coin.symbol) || map.get(coin.symbol)) return;
-    map.set(coin.symbol, { id: coin.id, name: coin.name, symbol: coin.symbol, thumb: coin.thumb });
+    map.set(coin.symbol, { name: coin.name, symbol: coin.symbol, thumb: coin.thumb });
   });
 
   return map;

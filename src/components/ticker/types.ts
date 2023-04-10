@@ -34,7 +34,6 @@ export enum OverseasExchange {
 }
 
 export interface Coin {
-  id: string;
   name: string;
   symbol: string;
   thumb: string;
