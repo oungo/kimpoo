@@ -43,9 +43,10 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   return ticker;
 };
 
-export const useUpbitTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
+export const useUpbitTickers = (symbolList: string[]) => {
   const btcPriceRef = useRef(0);
 
+  const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
 

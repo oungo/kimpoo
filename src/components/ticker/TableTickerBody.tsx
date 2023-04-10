@@ -14,17 +14,14 @@ const TableTickerBody = () => {
     onSuccess: (upbitMarket) => setSymbolList(upbitMarket.map(({ market }) => market)),
   });
   useBithumbMarketListQuery({
-    onSuccess: (bithumbMarket) => setSymbolList(bithumbMarket.data.map(({ symbol }) => symbol)),
+    onSuccess: ({ data }) => setSymbolList(data.map(({ symbol }) => symbol)),
   });
 
   const tickerList = useTickerStore((state) => state.tickerList);
 
-  const domesticExchange = useTickerStore((state) => state.domesticExchange);
-  const overseasExchange = useTickerStore((state) => state.overseasExchange);
-
-  useUpbitTickers(domesticExchange, symbolList);
-  useBithumbTickers(domesticExchange, symbolList);
-  useBinanceTickers(overseasExchange, symbolList);
+  useUpbitTickers(symbolList);
+  useBithumbTickers(symbolList);
+  useBinanceTickers(symbolList);
 
   return (
     <tbody>
