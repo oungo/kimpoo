@@ -1,4 +1,4 @@
-interface BithumbMarket {
+export interface BithumbMarket {
   status: string;
   data: BithumbTicker[];
 }

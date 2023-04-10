@@ -5,31 +5,22 @@ import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
 import TickerItem from './TickerItem';
-import { DomesticExchange } from './types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const TableTickerBody = () => {
   const [symbolList, setSymbolList] = useState<string[]>([]);
 
-  const { data: upbitMarketList } = useUpbitMarketListQuery();
-  const { data: bithumbMarketList } = useBithumbMarketListQuery();
+  const { data: upbitMarketList } = useUpbitMarketListQuery({
+    onSuccess: (upbitMarket) => setSymbolList(upbitMarket.map(({ market }) => market)),
+  });
+  useBithumbMarketListQuery({
+    onSuccess: (bithumbMarket) => setSymbolList(bithumbMarket.data.map(({ symbol }) => symbol)),
+  });
 
   const tickerList = useTickerStore((state) => state.tickerList);
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const overseasExchange = useTickerStore((state) => state.overseasExchange);
-
-  useEffect(() => {
-    switch (domesticExchange) {
-      case DomesticExchange.UPBIT_KRW:
-      case DomesticExchange.UPBIT_BTC:
-        setSymbolList(upbitMarketList.map(({ market }) => market));
-        break;
-      case DomesticExchange.BITHUMB:
-        setSymbolList(bithumbMarketList.data.map(({ symbol }) => symbol));
-        break;
-    }
-  }, [domesticExchange, upbitMarketList, bithumbMarketList]);
 
   useUpbitTickers(domesticExchange, symbolList);
   useBithumbTickers(domesticExchange, symbolList);
