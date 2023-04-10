@@ -14,7 +14,7 @@ const TableHeader = ({ sortType, onSort, children }: Props) => {
   return (
     <th
       onClick={onSort}
-      className={`py-2 ${sortType === 'symbol' ? 'text-left' : 'text-right'} ${
+      className={`py-2 cursor-pointer ${sortType === 'symbol' ? 'text-left' : 'text-right'} ${
         sortOption.type === sortType ? '!text-white' : 'text-neutral-500'
       }`}
     >
