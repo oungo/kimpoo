@@ -43,7 +43,7 @@ const Select = ({ children, defaultValue, placeholder, onSelect }: Props) => {
           {selectedOptionText || selectedPlaceholder}
         </button>
         <ul
-          className={`dark:bg-neutral-800 dark:border-neutral-700 flex flex-col gap-1 border border-gray-200 rounded-md mt-1 p-1 absolute bg-white w-full ${
+          className={`dark:bg-neutral-800 dark:border-neutral-700 flex flex-col gap-1 border border-gray-200 rounded-md mt-1 p-1 absolute bg-white w-full z-10 ${
             showDropdown ? 'block' : 'hidden'
           }`}
         >
