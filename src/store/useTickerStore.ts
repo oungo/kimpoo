@@ -18,7 +18,6 @@ interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
   setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
-  sortTickerList: (sortType: SortType, desc: boolean) => void;
   domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
   overseasExchange: OverseasExchange;
@@ -30,7 +29,7 @@ interface TickerState {
 }
 
 export const useTickerStore = create<TickerState>()(
-  devtools((set, get) => ({
+  devtools((set) => ({
     tickerList: new Map(),
     setTicker: (symbol, ticker) => {
       set(
@@ -58,28 +57,6 @@ export const useTickerStore = create<TickerState>()(
     },
     setTickerList: (tickerList) =>
       set({ tickerList: new Map(tickerList) || new Map() }, false, 'setTickerList'),
-    sortTickerList: (sortType, desc) => {
-      const tickerList = [...get().tickerList.entries()];
-
-      switch (sortType) {
-        case 'symbol':
-          tickerList.sort((a, b) => {
-            if (desc) {
-              return a[1][sortType] > b[1][sortType] ? -1 : b[1][sortType] < a[1][sortType] ? 1 : 0;
-            }
-            return a[1][sortType] < b[1][sortType] ? -1 : b[1][sortType] > a[1][sortType] ? 1 : 0;
-          });
-          break;
-        case 'currentPrice':
-          tickerList.sort((a, b) => {
-            if (desc) return b[1][sortType] - a[1][sortType];
-            return a[1][sortType] - b[1][sortType];
-          });
-          break;
-      }
-
-      set({ tickerList: new Map(tickerList) }, false, 'sortTickerList');
-    },
     domesticExchange: DomesticExchange.UPBIT_KRW,
     setDomesticExchange: (exchange) =>
       set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
