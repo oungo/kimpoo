@@ -15,5 +15,5 @@ export const useSortTicker = () => {
     setSortOption({ type, desc: type === sortOption.type ? !sortOption.desc : sortOption.desc });
   };
 
-  return { sortTicker };
+  return { sortOption, sortTicker };
 };
