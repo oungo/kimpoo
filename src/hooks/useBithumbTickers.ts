@@ -100,6 +100,17 @@ export const useBithumbTickers = (symbolList: string[]) => {
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
+    const map = new Map<string, DomesticTicker>();
+
+    const updateTicker = () => {
+      [...map.entries()].forEach(([symbol, ticker]) => {
+        setTicker(symbol, ticker);
+        map.clear();
+      });
+    };
+
+    const intervalId = setInterval(updateTicker, 500);
+
     socket.onmessage = async (event: MessageEvent<string>) => {
       const data: SocketStatusResponse | BithumbTicker = JSON.parse(event.data);
 
@@ -119,10 +130,11 @@ export const useBithumbTickers = (symbolList: string[]) => {
         formattedTransactionAmount: formatPrice(value, { notation: 'compact' }),
       };
 
-      setTicker(newSymbol, newData);
+      map.set(newSymbol, newData);
     };
 
     return () => {
+      clearInterval(intervalId);
       socket.close();
     };
   }, [setTicker, symbolList, domesticExchange, setTickerList]);

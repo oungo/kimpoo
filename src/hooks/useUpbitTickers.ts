@@ -79,6 +79,17 @@ export const useUpbitTickers = (symbolList: string[]) => {
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
+    const map = new Map<string, DomesticTicker>();
+
+    const updateTicker = () => {
+      [...map.entries()].forEach(([symbol, ticker]) => {
+        setTicker(symbol, ticker);
+        map.clear();
+      });
+    };
+
+    const intervalId = setInterval(updateTicker, 500);
+
     socket.onmessage = async (event: MessageEvent<Blob>) => {
       const ticker = await convertTicker(event);
       if (ticker.symbol === 'BTC') {
@@ -86,13 +97,13 @@ export const useUpbitTickers = (symbolList: string[]) => {
       }
 
       if (isKRWMarket) {
-        setTicker(ticker.symbol, ticker);
+        map.set(ticker.symbol, ticker);
         return;
       }
 
       if (ticker.symbol !== 'BTC') {
         const currentPrice = ticker.currentPrice * btcPriceRef.current;
-        setTicker(ticker.symbol, {
+        map.set(ticker.symbol, {
           ...ticker,
           currentPrice,
           formattedCurrentPrice: formatCurrentPrice(currentPrice),
@@ -109,6 +120,7 @@ export const useUpbitTickers = (symbolList: string[]) => {
     };
 
     return () => {
+      clearInterval(intervalId);
       socket.close();
     };
   }, [setTicker, symbolList, domesticExchange, setTickerList, isKRWMarket]);

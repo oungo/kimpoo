@@ -47,6 +47,17 @@ export const useBinanceTickers = (symbolList: string[]) => {
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
     };
 
+    const map = new Map<string, OverseasTicker>();
+
+    const updateTicker = () => {
+      [...map.entries()].forEach(([symbol, ticker]) => {
+        setTicker(symbol, ticker);
+        map.clear();
+      });
+    };
+
+    const intervalId = setInterval(updateTicker, 500);
+
     socket.onmessage = async (event: MessageEvent<string>) => {
       const ticker: BinanceTicker = JSON.parse(event.data);
       if (!ticker.s) return;
@@ -63,10 +74,11 @@ export const useBinanceTickers = (symbolList: string[]) => {
         }),
       };
 
-      setTicker(symbol, newData);
+      map.set(symbol, newData);
     };
 
     return () => {
+      clearInterval(intervalId);
       socket.close();
     };
   }, [setTicker, symbolList, overseasExchange, quotation.basePrice]);
