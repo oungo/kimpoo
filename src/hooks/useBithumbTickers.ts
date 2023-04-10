@@ -2,6 +2,7 @@ import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { formatCurrentPrice, formatPrice } from '@/utils/common';
+import { useBithumbMarketListQuery } from './useBithumbMarketListQuery';
 import { useEffect } from 'react';
 
 interface SocketStatusResponse {
@@ -52,6 +53,36 @@ const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 export const useBithumbTickers = (domesticExchange: DomesticExchange, symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
+
+  const { data: bithumbMarketList } = useBithumbMarketListQuery();
+
+  useEffect(() => {
+    if (domesticExchange !== DomesticExchange.BITHUMB) return;
+
+    const bithumbTickerList: Map<string, DomesticTicker> = new Map();
+
+    for (const market of bithumbMarketList.data) {
+      const ticker: DomesticTicker = {
+        symbol: market.symbol,
+        currentPrice: parseFloat(market.closing_price),
+        formattedCurrentPrice: formatCurrentPrice(parseFloat(market.closing_price)),
+        changeRate: formatPrice(
+          (
+            (parseFloat(market.closing_price) / parseFloat(market.prev_closing_price) - 1) *
+            100
+          ).toFixed(2),
+          { signDisplay: 'exceptZero' }
+        ),
+        transactionAmount: parseFloat(market.acc_trade_value_24H),
+        formattedTransactionAmount: formatPrice(market.acc_trade_value_24H, {
+          notation: 'compact',
+        }),
+      };
+      bithumbTickerList.set(market.symbol, ticker);
+    }
+
+    setTickerList(bithumbTickerList);
+  }, [bithumbMarketList, domesticExchange, setTickerList]);
 
   useEffect(() => {
     if (domesticExchange !== DomesticExchange.BITHUMB) return;

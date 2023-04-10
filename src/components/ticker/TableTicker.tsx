@@ -19,6 +19,7 @@ const TableTicker = () => {
         <col />
         <col width="20%" />
       </colgroup>
+
       <thead className="text-xs">
         <tr className="text-right border-b border-b-gray-500 dark:border-b-neutral-700 [&>th]:text-neutral-500">
           <TableHeader onSort={() => handleSortClick('symbol')} sortType="symbol">
@@ -41,6 +42,7 @@ const TableTicker = () => {
           </TableHeader>
         </tr>
       </thead>
+
       <TableTickerBody />
     </table>
   );
