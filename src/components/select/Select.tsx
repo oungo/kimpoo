@@ -1,5 +1,6 @@
 import { SelectContext } from './selectContext';
 import type { ReactElement } from 'react';
+import { useEffect } from 'react';
 import { useRef, useState } from 'react';
 
 interface ChildrenProps {
@@ -22,13 +23,27 @@ const Select = ({ children, defaultValue, placeholder, onSelect }: Props) => {
   const selectedOptionText = children.find(({ props: { value } }) => value === selectedOption).props
     .children;
 
-  const selectContainerRef = useRef(null);
+  const selectContainerRef = useRef<HTMLDivElement>(null);
 
   const changeSelectedOption = (option: string) => {
     onSelect(option);
     setSelectedOption(option);
     setShowDropdown(false);
   };
+
+  useEffect(() => {
+    const clickOutsideSelect = (e: Event) => {
+      if (!selectContainerRef.current.contains(e.target as HTMLDivElement)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', clickOutsideSelect);
+
+    return () => {
+      document.removeEventListener('mousedown', clickOutsideSelect);
+    };
+  }, []);
 
   return (
     <SelectContext.Provider value={{ selectedOption, changeSelectedOption }}>
