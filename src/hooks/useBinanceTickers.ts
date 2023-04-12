@@ -1,6 +1,6 @@
 import type { OverseasExchange, OverseasTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatNumber } from '@/utils/common';
 import { useQuotationQuery } from './useQuotationQuery';
 import { useEffect } from 'react';
 
@@ -69,7 +69,7 @@ export const useBinanceTickers = (symbolList: string[]) => {
         oCurrentPrice: parseFloat(ticker.c) * quotation.basePrice,
         oFormattedCurrentPrice: formatCurrentPrice(parseFloat(ticker.c) * quotation.basePrice),
         oTransactionAmount: parseFloat(ticker.q),
-        oFormattedTransactionAmount: formatPrice(parseFloat(ticker.q) * quotation.basePrice, {
+        oFormattedTransactionAmount: formatNumber(parseFloat(ticker.q) * quotation.basePrice, {
           notation: 'compact',
         }),
       };

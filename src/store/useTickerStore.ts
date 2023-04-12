@@ -1,7 +1,7 @@
 import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
 import { OverseasExchange } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
-import { formatPrice } from '@/utils/common';
+import { formatNumber } from '@/utils/common';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -35,7 +35,7 @@ export const useTickerStore = create<TickerState>()(
       set(
         ({ tickerList }) => {
           const tickerData = tickerList.get(symbol);
-          const premium = formatPrice(
+          const premium = formatNumber(
             (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
             {
               signDisplay: 'exceptZero',

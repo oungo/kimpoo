@@ -1,7 +1,7 @@
 import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatNumber } from '@/utils/common';
 import { useBithumbMarketListQuery } from './useBithumbMarketListQuery';
 import { useEffect } from 'react';
 
@@ -74,7 +74,7 @@ export const useBithumbTickers = (symbolList: string[]) => {
           ).toFixed(2)
         ),
         transactionAmount: parseFloat(market.acc_trade_value_24H),
-        formattedTransactionAmount: formatPrice(parseFloat(market.acc_trade_value_24H), {
+        formattedTransactionAmount: formatNumber(parseFloat(market.acc_trade_value_24H), {
           notation: 'compact',
         }),
       };
@@ -125,7 +125,7 @@ export const useBithumbTickers = (symbolList: string[]) => {
           ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2)
         ),
         transactionAmount: parseFloat(value),
-        formattedTransactionAmount: formatPrice(parseFloat(value), { notation: 'compact' }),
+        formattedTransactionAmount: formatNumber(parseFloat(value), { notation: 'compact' }),
       };
 
       map.set(newSymbol, newData);

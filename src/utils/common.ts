@@ -1,5 +1,5 @@
-export const formatPrice = (price: number, options?: Intl.NumberFormatOptions) =>
-  new Intl.NumberFormat('ko-KR', options).format(price);
+export const formatNumber = (number: number, options?: Intl.NumberFormatOptions) =>
+  new Intl.NumberFormat('ko-KR', options).format(number);
 
 export const formatCurrentPrice = (price: number) =>
-  formatPrice(price, { maximumFractionDigits: price < 1 ? 4 : price < 100 ? 2 : 0 });
+  formatNumber(price, { maximumFractionDigits: price < 1 ? 4 : price < 100 ? 2 : 0 });

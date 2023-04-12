@@ -1,7 +1,7 @@
 import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatPrice } from '@/utils/common';
+import { formatCurrentPrice, formatNumber } from '@/utils/common';
 import { useEffect, useRef } from 'react';
 
 interface UpbitTicker {
@@ -36,7 +36,7 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
     formattedCurrentPrice: formatCurrentPrice(upbitTicker.tp),
     changeRate: parseFloat((upbitTicker.scr * 100).toFixed(2)),
     transactionAmount: upbitTicker.atp24h,
-    formattedTransactionAmount: formatPrice(upbitTicker.atp24h, { notation: 'compact' }),
+    formattedTransactionAmount: formatNumber(upbitTicker.atp24h, { notation: 'compact' }),
     caution: upbitTicker.mw === 'CAUTION',
   };
 
@@ -108,7 +108,7 @@ export const useUpbitTickers = (symbolList: string[]) => {
           currentPrice,
           formattedCurrentPrice: formatCurrentPrice(currentPrice),
           transactionAmount: ticker.transactionAmount * btcPriceRef.current,
-          formattedTransactionAmount: formatPrice(ticker.transactionAmount * btcPriceRef.current, {
+          formattedTransactionAmount: formatNumber(ticker.transactionAmount * btcPriceRef.current, {
             notation: 'compact',
           }),
         });
