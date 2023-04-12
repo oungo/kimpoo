@@ -3,7 +3,7 @@ export type Ticker = DomesticTicker & OverseasTicker & { premium?: string };
 export interface DomesticTicker {
   symbol: string;
   currentPrice: number;
-  formattedCurrentPrice: number | string;
+  formattedCurrentPrice: string;
   changeRate: number;
   transactionAmount: number;
   formattedTransactionAmount: string;
