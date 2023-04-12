@@ -4,7 +4,7 @@ export interface DomesticTicker {
   symbol: string;
   currentPrice: number;
   formattedCurrentPrice: number | string;
-  changeRate: string;
+  changeRate: number;
   transactionAmount: number;
   formattedTransactionAmount: string;
   caution?: boolean;

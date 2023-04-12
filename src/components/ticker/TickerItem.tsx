@@ -1,4 +1,5 @@
 import { useTickerStore } from '@/store/useTickerStore';
+import { formatPrice } from '@/utils/common';
 import type { Ticker } from './types';
 import Image from 'next/image';
 import { memo } from 'react';
@@ -50,12 +51,8 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
         {!isNaN(parseFloat(ticker.premium)) ? `${ticker.premium}%` : ''}
       </td>
 
-      <td
-        className={
-          parseFloat(ticker.changeRate) > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'
-        }
-      >
-        {ticker.changeRate}%
+      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'}>
+        {formatPrice(ticker.changeRate, { signDisplay: 'exceptZero' })}%
       </td>
 
       <td className="flex flex-col">

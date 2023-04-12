@@ -67,12 +67,11 @@ export const useBithumbTickers = (symbolList: string[]) => {
         symbol: market.symbol,
         currentPrice: parseFloat(market.closing_price),
         formattedCurrentPrice: formatCurrentPrice(parseFloat(market.closing_price)),
-        changeRate: formatPrice(
+        changeRate: parseFloat(
           (
             (parseFloat(market.closing_price) / parseFloat(market.prev_closing_price) - 1) *
             100
-          ).toFixed(2),
-          { signDisplay: 'exceptZero' }
+          ).toFixed(2)
         ),
         transactionAmount: parseFloat(market.acc_trade_value_24H),
         formattedTransactionAmount: formatPrice(market.acc_trade_value_24H, {
@@ -122,9 +121,8 @@ export const useBithumbTickers = (symbolList: string[]) => {
         symbol: newSymbol,
         currentPrice: parseFloat(closePrice),
         formattedCurrentPrice: formatCurrentPrice(parseFloat(closePrice)),
-        changeRate: formatPrice(
-          ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2),
-          { signDisplay: 'exceptZero' }
+        changeRate: parseFloat(
+          ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2)
         ),
         transactionAmount: parseFloat(value),
         formattedTransactionAmount: formatPrice(value, { notation: 'compact' }),

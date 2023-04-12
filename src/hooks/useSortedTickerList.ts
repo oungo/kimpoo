@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 export const useSortedTickerList = () => {
   const [sortedTickerList, setSortedTickerList] = useState<Ticker[]>([]);
+
   const tickerList = useTickerStore((state) => state.tickerList);
   const { type, desc } = useTickerStore((state) => state.sortOption);
 
@@ -25,11 +26,6 @@ export const useSortedTickerList = () => {
         });
         break;
       case 'changeRate':
-        newTickerList.sort((a, b) => {
-          if (desc) return parseFloat(b[type]) - parseFloat(a[type]);
-          return parseFloat(a[type]) - parseFloat(b[type]);
-        });
-        break;
       case 'currentPrice':
       case 'transactionAmount':
         newTickerList.sort((a, b) => {
