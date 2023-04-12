@@ -5,14 +5,10 @@ export interface DomesticTicker {
   currentPrice: number;
   changeRate: number;
   transactionAmount: number;
-  formattedTransactionAmount: string;
   caution?: boolean;
 }
 
-type PickedOverseasTicker = Pick<
-  DomesticTicker,
-  'symbol' | 'currentPrice' | 'transactionAmount' | 'formattedTransactionAmount'
->;
+type PickedOverseasTicker = Pick<DomesticTicker, 'symbol' | 'currentPrice' | 'transactionAmount'>;
 export type OverseasTicker = {
   [Property in keyof PickedOverseasTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
 };
