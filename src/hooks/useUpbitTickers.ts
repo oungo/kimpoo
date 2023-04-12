@@ -1,7 +1,7 @@
 import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatNumber } from '@/utils/common';
+import { formatNumber } from '@/utils/common';
 import { useEffect, useRef } from 'react';
 
 interface UpbitTicker {
@@ -33,7 +33,6 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   const ticker: DomesticTicker = {
     symbol: upbitTicker.cd.split('-')[1],
     currentPrice: upbitTicker.tp,
-    formattedCurrentPrice: formatCurrentPrice(upbitTicker.tp),
     changeRate: parseFloat((upbitTicker.scr * 100).toFixed(2)),
     transactionAmount: upbitTicker.atp24h,
     formattedTransactionAmount: formatNumber(upbitTicker.atp24h, { notation: 'compact' }),
@@ -106,7 +105,6 @@ export const useUpbitTickers = (symbolList: string[]) => {
         map.set(ticker.symbol, {
           ...ticker,
           currentPrice,
-          formattedCurrentPrice: formatCurrentPrice(currentPrice),
           transactionAmount: ticker.transactionAmount * btcPriceRef.current,
           formattedTransactionAmount: formatNumber(ticker.transactionAmount * btcPriceRef.current, {
             notation: 'compact',

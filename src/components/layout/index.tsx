@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 interface Props {
   children: ReactNode;
 }
+
 const Layout = ({ children }: Props) => {
   const [theme, setTheme] = useState('');
 
@@ -62,7 +63,7 @@ const Layout = ({ children }: Props) => {
         </div>
       </nav>
 
-      <main className="max-w-screen-lg min-h-screen px-2 py-4 m-auto sm:px-0">{children}</main>
+      <main className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">{children}</main>
 
       <footer className="relative bottom-0 w-full h-40 mt-10 bg-gray-200 dark:bg-neutral-800">
         footer

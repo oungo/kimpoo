@@ -1,7 +1,7 @@
 import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatNumber } from '@/utils/common';
+import { formatNumber } from '@/utils/common';
 import { useBithumbMarketListQuery } from './useBithumbMarketListQuery';
 import { useEffect } from 'react';
 
@@ -66,7 +66,6 @@ export const useBithumbTickers = (symbolList: string[]) => {
       const ticker: DomesticTicker = {
         symbol: market.symbol,
         currentPrice: parseFloat(market.closing_price),
-        formattedCurrentPrice: formatCurrentPrice(parseFloat(market.closing_price)),
         changeRate: parseFloat(
           (
             (parseFloat(market.closing_price) / parseFloat(market.prev_closing_price) - 1) *
@@ -120,7 +119,6 @@ export const useBithumbTickers = (symbolList: string[]) => {
       const newData: DomesticTicker = {
         symbol: newSymbol,
         currentPrice: parseFloat(closePrice),
-        formattedCurrentPrice: formatCurrentPrice(parseFloat(closePrice)),
         changeRate: parseFloat(
           ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2)
         ),

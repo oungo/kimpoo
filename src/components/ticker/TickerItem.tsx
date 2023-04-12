@@ -1,5 +1,5 @@
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatNumber } from '@/utils/common';
+import { formatCurrentPrice, formatNumber } from '@/utils/common';
 import type { Ticker } from './types';
 import Image from 'next/image';
 import { memo } from 'react';
@@ -33,13 +33,13 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
       </td>
 
       <td className="flex flex-col">
-        <p>{ticker.formattedCurrentPrice}</p>
+        <p>{formatCurrentPrice(ticker.currentPrice)}</p>
         <p
           className={`text-gray-500 transition-opacity ${
             ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '
           }`}
         >
-          {ticker.oFormattedCurrentPrice}
+          {formatCurrentPrice(ticker.oCurrentPrice)}
         </p>
       </td>
 
