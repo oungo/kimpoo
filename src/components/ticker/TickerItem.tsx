@@ -52,7 +52,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
       </td>
 
       <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'}>
-        {formatPrice(ticker.changeRate, { signDisplay: 'exceptZero' })}%
+        {formatPrice(ticker.changeRate, { signDisplay: 'exceptZero', minimumFractionDigits: 2 })}%
       </td>
 
       <td className="flex flex-col">
