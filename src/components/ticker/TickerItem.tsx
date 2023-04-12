@@ -27,7 +27,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             {koreanSymbol || coinList.get(ticker.symbol)?.name}
           </p>
         </div>
-        <p className="inline-block text-gray-500">{ticker.symbol}</p>
+        <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
 
         {ticker.caution && <span>유</span>}
       </td>
@@ -35,7 +35,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
       <td className="flex flex-col">
         <p>{formatCurrentPrice(ticker.currentPrice)}</p>
         <p
-          className={`text-gray-500 transition-opacity ${
+          className={`text-gray-500 dark:text-gray-400 transition-opacity ${
             ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '
           }`}
         >
@@ -45,20 +45,28 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
 
       <td
         className={
-          parseFloat(ticker.premium) > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'
+          parseFloat(ticker.premium) > 0
+            ? 'text-teal-700 dark:text-teal-600'
+            : 'text-red-600 dark:text-red-500'
         }
       >
         {!isNaN(parseFloat(ticker.premium)) ? `${ticker.premium}%` : ''}
       </td>
 
-      <td className={ticker.changeRate > 0 ? 'text-teal-600' : 'text-red-600 dark:text-red-500'}>
+      <td
+        className={
+          ticker.changeRate > 0
+            ? 'text-teal-700 dark:text-teal-600'
+            : 'text-red-600 dark:text-red-500'
+        }
+      >
         {formatNumber(ticker.changeRate, { signDisplay: 'exceptZero', minimumFractionDigits: 2 })}%
       </td>
 
       <td className="flex flex-col">
         <p>{formatNumber(ticker.transactionAmount, { notation: 'compact' })}</p>
         {ticker.oTransactionAmount && (
-          <p className="text-gray-500">
+          <p className="text-gray-500 dark:text-gray-400">
             {formatNumber(ticker.oTransactionAmount, { notation: 'compact' })}
           </p>
         )}
