@@ -3,7 +3,16 @@ export interface BithumbMarket {
   data: BithumbTicker[];
 }
 
-interface BithumbTicker {
+type BithumbTicker = Omit<
+  OriginBithumbTicker,
+  'acc_trade_value_24H' | 'closing_price' | 'prev_closing_price'
+> & {
+  acc_trade_value_24H: number;
+  closing_price: number;
+  prev_closing_price: number;
+};
+
+interface OriginBithumbTicker {
   symbol: string;
   acc_trade_value: string;
   acc_trade_value_24H: string;
@@ -20,7 +29,7 @@ interface BithumbTicker {
 
 type JSONResponse = {
   status: string;
-  data: Record<string, BithumbTicker>;
+  data: Record<string, OriginBithumbTicker>;
 };
 
 export const fetchBithumbMarket = async (): Promise<BithumbMarket> => {
@@ -32,7 +41,15 @@ export const fetchBithumbMarket = async (): Promise<BithumbMarket> => {
     const newMarket: BithumbMarket['data'] = [];
     for (const symbol in data) {
       if (symbol === 'date') continue;
-      newMarket.push({ symbol, ...data[symbol] });
+
+      const ticker = data[symbol];
+      newMarket.push({
+        symbol,
+        ...ticker,
+        acc_trade_value_24H: parseFloat(ticker.acc_trade_value_24H),
+        closing_price: parseFloat(ticker.closing_price),
+        prev_closing_price: parseFloat(ticker.prev_closing_price),
+      });
     }
 
     return { status, data: newMarket };
