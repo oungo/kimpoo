@@ -74,7 +74,7 @@ export const useBithumbTickers = (symbolList: string[]) => {
           ).toFixed(2)
         ),
         transactionAmount: parseFloat(market.acc_trade_value_24H),
-        formattedTransactionAmount: formatPrice(market.acc_trade_value_24H, {
+        formattedTransactionAmount: formatPrice(parseFloat(market.acc_trade_value_24H), {
           notation: 'compact',
         }),
       };
@@ -125,7 +125,7 @@ export const useBithumbTickers = (symbolList: string[]) => {
           ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2)
         ),
         transactionAmount: parseFloat(value),
-        formattedTransactionAmount: formatPrice(value, { notation: 'compact' }),
+        formattedTransactionAmount: formatPrice(parseFloat(value), { notation: 'compact' }),
       };
 
       map.set(newSymbol, newData);
