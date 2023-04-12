@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import type { DehydratedState } from 'react-query';
+import Head from 'next/head';
 import Script from 'next/script';
 import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
@@ -14,6 +15,9 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
 
   return (
     <>
+      <Head>
+        <meta charSet="utf-8" />
+      </Head>
       <Script
         src="https://kit.fontawesome.com/110e54d917.js"
         crossOrigin="anonymous"
