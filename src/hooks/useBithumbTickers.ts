@@ -57,11 +57,11 @@ export const useBithumbTickers = (symbolList: string[]) => {
   const { data: bithumbMarketList } = useBithumbMarketListQuery();
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.BITHUMB) return;
+    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarketList?.data) return;
 
     const bithumbTickerList: Map<string, DomesticTicker> = new Map();
 
-    for (const market of bithumbMarketList.data) {
+    for (const market of bithumbMarketList?.data) {
       const ticker: DomesticTicker = {
         symbol: market.symbol,
         currentPrice: market.closing_price,
