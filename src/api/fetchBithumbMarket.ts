@@ -7,13 +7,13 @@ type BithumbTicker = Omit<
   OriginBithumbTicker,
   'acc_trade_value_24H' | 'closing_price' | 'prev_closing_price'
 > & {
+  symbol: string;
   acc_trade_value_24H: number;
   closing_price: number;
   prev_closing_price: number;
 };
 
 interface OriginBithumbTicker {
-  symbol: string;
   acc_trade_value: string;
   acc_trade_value_24H: string;
   closing_price: string;
@@ -44,8 +44,8 @@ export const fetchBithumbMarket = async (): Promise<BithumbMarket> => {
 
       const ticker = data[symbol];
       newMarket.push({
-        symbol,
         ...ticker,
+        symbol,
         acc_trade_value_24H: parseFloat(ticker.acc_trade_value_24H),
         closing_price: parseFloat(ticker.closing_price),
         prev_closing_price: parseFloat(ticker.prev_closing_price),
