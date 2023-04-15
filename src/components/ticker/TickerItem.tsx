@@ -65,11 +65,12 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
 
       <td className="flex flex-col">
         <p>{formatNumber(ticker.transactionAmount, { notation: 'compact' })}</p>
-        {ticker.oTransactionAmount && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {formatNumber(ticker.oTransactionAmount, { notation: 'compact' })}
-          </p>
-        )}
+
+        <p className="text-gray-500 dark:text-gray-400">
+          {ticker.oTransactionAmount
+            ? formatNumber(ticker.oTransactionAmount, { notation: 'compact' })
+            : '-'}
+        </p>
       </td>
     </tr>
   );
