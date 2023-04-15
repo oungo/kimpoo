@@ -10,6 +10,7 @@ export const useBithumbMarketListQuery = (
   options: UseQueryOptions<BithumbMarket, unknown, BithumbMarket, string[]> = {}
 ) => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
+  const setSymbolList = useTickerStore((state) => state.setSymbolList);
 
   return useQuery({
     ...options,
@@ -17,5 +18,6 @@ export const useBithumbMarketListQuery = (
     queryFn: fetchBithumbMarket,
     enabled: domesticExchange === DomesticExchange.BITHUMB,
     refetchOnWindowFocus: false,
+    onSuccess: ({ data }) => setSymbolList(data.map(({ symbol }) => symbol)),
   });
 };

@@ -40,12 +40,13 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
   return ticker;
 };
 
-export const useUpbitTickers = (symbolList: string[]) => {
+export const useUpbitTickers = () => {
   const btcPriceRef = useRef(0);
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const setTicker = useTickerStore((state) => state.setTicker);
   const setTickerList = useTickerStore((state) => state.setTickerList);
+  const symbolList = useTickerStore((state) => state.symbolList);
 
   const isKRWMarket = domesticExchange === DomesticExchange.UPBIT_KRW;
 

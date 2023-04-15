@@ -10,6 +10,7 @@ export const useUpbitMarketListQuery = (
   options: UseQueryOptions<UpbitMarket[], unknown, UpbitMarket[], string[]> = {}
 ) => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
+  const setSymbolList = useTickerStore((state) => state.setSymbolList);
 
   return useQuery({
     ...options,
@@ -20,5 +21,6 @@ export const useUpbitMarketListQuery = (
       domesticExchange === DomesticExchange.UPBIT_KRW ||
       domesticExchange === DomesticExchange.UPBIT_BTC,
     refetchOnWindowFocus: false,
+    onSuccess: (upbitMarket) => setSymbolList(upbitMarket.map(({ market }) => market)),
   });
 };
