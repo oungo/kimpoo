@@ -1,5 +1,5 @@
 import { useTickerStore } from '@/store/useTickerStore';
-import { formatCurrentPrice, formatNumber } from '@/utils/common';
+import { formatCurrentPrice, formatNumber, formatPercent } from '@/utils/common';
 import type { Ticker } from './types';
 import Image from 'next/image';
 import { memo } from 'react';
@@ -48,13 +48,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             : 'text-red-600 dark:text-red-500'
         }
       >
-        {ticker.premium
-          ? `${formatNumber(ticker.premium, {
-              signDisplay: 'exceptZero',
-              minimumFractionDigits: 2,
-              style: 'percent',
-            })}`
-          : '-'}
+        {ticker.premium ? `${formatPercent(ticker.premium)}` : '-'}
       </td>
 
       <td
@@ -66,12 +60,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             : 'text-red-600 dark:text-red-500'
         }
       >
-        {ticker.changeRate &&
-          formatNumber(ticker.changeRate, {
-            signDisplay: 'exceptZero',
-            minimumFractionDigits: 2,
-            style: 'percent',
-          })}
+        {ticker.changeRate && formatPercent(ticker.changeRate)}
       </td>
 
       <td className="flex flex-col">
