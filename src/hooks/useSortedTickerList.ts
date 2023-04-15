@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 export const useSortedTickerList = () => {
   const [sortedTickerList, setSortedTickerList] = useState<Ticker[]>([]);
 
-  const tickerList = useTickerStore((state) => state.tickerList);
+  const tickerList = useTickerStore((state) => state.tickerMap);
   const { type, desc } = useTickerStore((state) => state.sortOption);
 
   useEffect(() => {

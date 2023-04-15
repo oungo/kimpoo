@@ -15,7 +15,7 @@ interface SortOption {
 }
 
 interface TickerState {
-  tickerList: Map<Ticker['symbol'], Ticker>;
+  tickerMap: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
   setTickerList: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
   domesticExchange: DomesticExchange;
@@ -30,13 +30,13 @@ interface TickerState {
 
 export const useTickerStore = create<TickerState>()(
   devtools((set) => ({
-    tickerList: new Map(),
+    tickerMap: new Map(),
     setTicker: (symbol, ticker) => {
       set(
-        ({ tickerList }) => {
-          const tickerItem = tickerList.get(symbol);
+        ({ tickerMap }) => {
+          const tickerItem = tickerMap.get(symbol);
           if (!tickerItem) {
-            return { tickerList: new Map(tickerList).set(symbol, ticker as DomesticTicker) };
+            return { tickerMap: new Map(tickerMap).set(symbol, ticker as DomesticTicker) };
           }
 
           let premium;
@@ -50,13 +50,13 @@ export const useTickerStore = create<TickerState>()(
             premium,
           };
 
-          return { tickerList: new Map(tickerList).set(symbol, newTickerData) };
+          return { tickerMap: new Map(tickerMap).set(symbol, newTickerData) };
         },
         false,
         'setTicker'
       );
     },
-    setTickerList: (tickerList) => set({ tickerList }, false, 'setTickerList'),
+    setTickerList: (tickerList) => set({ tickerMap: tickerList }, false, 'setTickerList'),
     domesticExchange: DomesticExchange.UPBIT_KRW,
     setDomesticExchange: (exchange) =>
       set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
