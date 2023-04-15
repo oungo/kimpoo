@@ -1,4 +1,4 @@
-export type Ticker = DomesticTicker & OverseasTicker & { premium?: string };
+export type Ticker = DomesticTicker & Partial<OverseasTicker> & { premium?: number };
 
 export interface DomesticTicker {
   symbol: string;
@@ -8,9 +8,9 @@ export interface DomesticTicker {
   caution?: boolean;
 }
 
-type PickedOverseasTicker = Pick<DomesticTicker, 'symbol' | 'currentPrice' | 'transactionAmount'>;
+type PickedDomesticTicker = Pick<DomesticTicker, 'currentPrice' | 'transactionAmount'>;
 export type OverseasTicker = {
-  [Property in keyof PickedOverseasTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
+  [Property in keyof PickedDomesticTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
 };
 
 export enum DomesticExchange {

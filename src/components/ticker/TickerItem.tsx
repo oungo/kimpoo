@@ -6,7 +6,7 @@ import { memo } from 'react';
 
 interface Props {
   ticker: Ticker;
-  koreanSymbol: string;
+  koreanSymbol?: string;
 }
 
 const TickerItem = ({ ticker, koreanSymbol }: Props) => {
@@ -17,7 +17,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
       <td className="text-left">
         <div className="flex items-center gap-1">
           <Image
-            src={coinList.get(ticker.symbol)?.thumb}
+            src={coinList.get(ticker.symbol)?.thumb || ''}
             alt={`${ticker.symbol} 아이콘`}
             width={15}
             height={15}
@@ -34,23 +34,26 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
 
       <td className="flex flex-col">
         <p>{formatCurrentPrice(ticker.currentPrice)}</p>
-        <p
-          className={`text-gray-500 dark:text-gray-400 transition-opacity ${
-            ticker.oCurrentPrice ? 'opacity-100' : 'opacity-0 '
-          }`}
-        >
-          {formatCurrentPrice(ticker.oCurrentPrice)}
+        <p className="text-gray-500 transition-opacity dark:text-gray-400">
+          {ticker.oCurrentPrice ? formatCurrentPrice(ticker.oCurrentPrice) : '-'}
         </p>
       </td>
 
       <td
         className={
-          parseFloat(ticker.premium) > 0
+          !ticker.premium
+            ? 'dark:text-gray-400'
+            : ticker.premium > 0
             ? 'text-teal-700 dark:text-teal-600'
             : 'text-red-600 dark:text-red-500'
         }
       >
-        {!isNaN(parseFloat(ticker.premium)) ? `${ticker.premium}%` : ''}
+        {ticker.premium
+          ? `${formatNumber(ticker.premium, {
+              signDisplay: 'exceptZero',
+              minimumFractionDigits: 2,
+            })}%`
+          : '-'}
       </td>
 
       <td

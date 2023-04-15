@@ -1,7 +1,6 @@
 import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
 import { OverseasExchange } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
-import { formatNumber } from '@/utils/common';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -14,10 +13,11 @@ interface SortOption {
   type: SortType;
   desc: boolean;
 }
+
 interface TickerState {
   tickerList: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
-  setTickerList: (tickerList?: Map<Ticker['symbol'], DomesticTicker | OverseasTicker>) => void;
+  setTickerList: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
   domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
   overseasExchange: OverseasExchange;
@@ -34,29 +34,31 @@ export const useTickerStore = create<TickerState>()(
     setTicker: (symbol, ticker) => {
       set(
         ({ tickerList }) => {
-          const tickerData = tickerList.get(symbol);
-          const premium = formatNumber(
-            (tickerData?.currentPrice / tickerData?.oCurrentPrice - 1) * 100,
-            {
-              signDisplay: 'exceptZero',
-              maximumFractionDigits: 2,
-            }
-          );
+          const tickerItem = tickerList.get(symbol);
+          if (!tickerItem) {
+            return { tickerList: new Map(tickerList).set(symbol, ticker as DomesticTicker) };
+          }
 
-          return {
-            tickerList: new Map(tickerList).set(symbol, {
-              ...tickerList.get(symbol),
-              ...ticker,
-              premium,
-            }),
+          let premium;
+          if (tickerItem?.oCurrentPrice && tickerItem.currentPrice) {
+            premium = parseFloat(
+              ((tickerItem.currentPrice / tickerItem.oCurrentPrice - 1) * 100).toFixed(2)
+            );
+          }
+
+          const newTickerData = {
+            ...tickerItem,
+            ...ticker,
+            premium,
           };
+
+          return { tickerList: new Map(tickerList).set(symbol, newTickerData) };
         },
         false,
         'setTicker'
       );
     },
-    setTickerList: (tickerList) =>
-      set({ tickerList: new Map(tickerList) || new Map() }, false, 'setTickerList'),
+    setTickerList: (tickerList) => set({ tickerList }, false, 'setTickerList'),
     domesticExchange: DomesticExchange.UPBIT_KRW,
     setDomesticExchange: (exchange) =>
       set({ domesticExchange: exchange }, false, 'setDomesticExchange'),

@@ -20,9 +20,10 @@ export const useSortedTickerList = () => {
         break;
       case 'premium':
         newTickerList.sort((a, b) => {
-          if (!b.oCurrentPrice || isNaN(parseFloat(b.premium))) return -1;
-          if (desc) return parseFloat(b.premium) - parseFloat(a.premium);
-          return parseFloat(a.premium) - parseFloat(b.premium);
+          if (!b.oCurrentPrice || !b.premium) return -1;
+          if (!a.premium) return 1;
+          if (desc) return b.premium - a.premium;
+          return a.premium - b.premium;
         });
         break;
       case 'changeRate':

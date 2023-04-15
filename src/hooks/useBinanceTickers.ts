@@ -32,7 +32,7 @@ export const useBinanceTickers = (symbolList: string[]) => {
   const setTicker = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
-    if (!symbolList) return;
+    if (!symbolList || !quotation) return;
 
     const socket = new WebSocket(WEBSOCKET_URL);
 
@@ -61,14 +61,12 @@ export const useBinanceTickers = (symbolList: string[]) => {
       const ticker: BinanceTicker = JSON.parse(event.data);
       if (!ticker.s) return;
 
-      const symbol = ticker.s.replace(overseasExchange.split('_')[1], '');
-
-      const newData: OverseasTicker = {
-        oSymbol: symbol,
+      const newData = {
         oCurrentPrice: parseFloat(ticker.c) * quotation.basePrice,
         oTransactionAmount: parseFloat(ticker.q) * quotation.basePrice,
       };
 
+      const symbol = ticker.s.replace(overseasExchange.split('_')[1], '');
       map.set(symbol, newData);
     };
 
@@ -76,5 +74,5 @@ export const useBinanceTickers = (symbolList: string[]) => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, overseasExchange, quotation.basePrice]);
+  }, [setTicker, symbolList, overseasExchange, quotation]);
 };

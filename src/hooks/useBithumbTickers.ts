@@ -73,7 +73,7 @@ export const useBithumbTickers = (symbolList: string[]) => {
       bithumbTickerList.set(market.symbol, ticker);
     }
 
-    setTickerList(bithumbTickerList);
+    setTickerList(new Map(bithumbTickerList));
   }, [bithumbMarketList, domesticExchange, setTickerList]);
 
   useEffect(() => {

@@ -109,7 +109,7 @@ export const useUpbitTickers = (symbolList: string[]) => {
     };
 
     socket.onclose = () => {
-      setTickerList();
+      setTickerList(new Map());
     };
 
     return () => {
