@@ -52,7 +52,8 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
           ? `${formatNumber(ticker.premium, {
               signDisplay: 'exceptZero',
               minimumFractionDigits: 2,
-            })}%`
+              style: 'percent',
+            })}`
           : '-'}
       </td>
 

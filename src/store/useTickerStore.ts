@@ -41,9 +41,7 @@ export const useTickerStore = create<TickerState>()(
 
           let premium;
           if (tickerItem?.oCurrentPrice && tickerItem.currentPrice) {
-            premium = parseFloat(
-              ((tickerItem.currentPrice / tickerItem.oCurrentPrice - 1) * 100).toFixed(2)
-            );
+            premium = tickerItem.currentPrice / tickerItem.oCurrentPrice - 1;
           }
 
           const newTickerData = {
