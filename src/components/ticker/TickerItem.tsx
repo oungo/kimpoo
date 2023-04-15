@@ -63,7 +63,11 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             : 'text-red-600 dark:text-red-500'
         }
       >
-        {formatNumber(ticker.changeRate, { signDisplay: 'exceptZero', minimumFractionDigits: 2 })}%
+        {formatNumber(ticker.changeRate, {
+          signDisplay: 'exceptZero',
+          minimumFractionDigits: 2,
+          style: 'percent',
+        })}
       </td>
 
       <td className="flex flex-col">
