@@ -17,7 +17,7 @@ interface SortOption {
 interface TickerState {
   tickerMap: Map<Ticker['symbol'], Ticker>;
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
-  setTickerList: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
+  setTickerMap: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
   domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
   overseasExchange: OverseasExchange;
@@ -58,7 +58,7 @@ export const useTickerStore = create<TickerState>()(
         'setTicker'
       );
     },
-    setTickerList: (tickerList) => set({ tickerMap: tickerList }, false, 'setTickerList'),
+    setTickerMap: (tickerMap) => set({ tickerMap }, false, 'setTickerMap'),
     domesticExchange: DomesticExchange.UPBIT_KRW,
     setDomesticExchange: (exchange) =>
       set({ domesticExchange: exchange }, false, 'setDomesticExchange'),

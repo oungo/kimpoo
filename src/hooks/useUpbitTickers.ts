@@ -46,10 +46,10 @@ export const useUpbitTickers = () => {
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const symbolList = useTickerStore((state) => state.symbolList);
-  const { setTicker, setTickerList } = useTickerStore(
+  const { setTicker, setTickerMap } = useTickerStore(
     (state) => ({
       setTicker: state.setTicker,
-      setTickerList: state.setTickerList,
+      setTickerMap: state.setTickerMap,
     }),
     shallow
   );
@@ -116,12 +116,12 @@ export const useUpbitTickers = () => {
     };
 
     socket.onclose = () => {
-      setTickerList(new Map());
+      setTickerMap(new Map());
     };
 
     return () => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setTickerList, isKRWMarket]);
+  }, [setTicker, symbolList, domesticExchange, setTickerMap, isKRWMarket]);
 };

@@ -52,7 +52,7 @@ const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 export const useBithumbTickers = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const setTicker = useTickerStore((state) => state.setTicker);
-  const setTickerList = useTickerStore((state) => state.setTickerList);
+  const setTickerMap = useTickerStore((state) => state.setTickerMap);
   const symbolList = useTickerStore((state) => state.symbolList);
 
   const { data: bithumbMarket } = useBithumbMarketQuery();
@@ -72,8 +72,8 @@ export const useBithumbTickers = () => {
       bithumbTickerList.set(market.symbol, ticker);
     }
 
-    setTickerList(new Map(bithumbTickerList));
-  }, [bithumbMarket, domesticExchange, setTickerList]);
+    setTickerMap(new Map(bithumbTickerList));
+  }, [bithumbMarket, domesticExchange, setTickerMap]);
 
   useEffect(() => {
     if (domesticExchange !== DomesticExchange.BITHUMB) return;
@@ -122,5 +122,5 @@ export const useBithumbTickers = () => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setTickerList]);
+  }, [setTicker, symbolList, domesticExchange, setTickerMap]);
 };
