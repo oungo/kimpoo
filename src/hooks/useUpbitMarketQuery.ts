@@ -6,7 +6,7 @@ import * as queryKeys from '@/utils/queryKeys';
 import type { UseQueryOptions } from 'react-query';
 import { useQuery } from 'react-query';
 
-export const useUpbitMarketListQuery = (
+export const useUpbitMarketQuery = (
   options: UseQueryOptions<UpbitMarket[], unknown, UpbitMarket[], string[]> = {}
 ) => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);

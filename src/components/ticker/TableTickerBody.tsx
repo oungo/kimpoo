@@ -1,14 +1,14 @@
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useSortedTickerList } from '@/hooks/useSortedTickerList';
-import { useUpbitMarketListQuery } from '@/hooks/useUpbitMarketListQuery';
+import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
   const tickerList = useSortedTickerList();
 
-  const { data: upbitMarketList } = useUpbitMarketListQuery();
+  const { data: upbitMarketList } = useUpbitMarketQuery();
 
   useUpbitTickers();
   useBithumbTickers();
