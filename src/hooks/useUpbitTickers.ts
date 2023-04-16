@@ -102,10 +102,8 @@ export const useUpbitTickers = () => {
 
       if (isKRWMarket) {
         map.set(ticker.symbol, ticker);
-        return;
-      }
-
-      if (ticker.symbol !== 'BTC') {
+      } else {
+        if (ticker.symbol === 'BTC') return;
         const currentPrice = ticker.currentPrice * btcPriceRef.current;
         map.set(ticker.symbol, {
           ...ticker,
