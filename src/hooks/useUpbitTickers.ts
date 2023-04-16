@@ -2,6 +2,7 @@ import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect, useRef } from 'react';
+import { shallow } from 'zustand/shallow';
 
 interface UpbitTicker {
   /** 마켓 코드  */
@@ -44,9 +45,14 @@ export const useUpbitTickers = () => {
   const btcPriceRef = useRef(0);
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
-  const setTicker = useTickerStore((state) => state.setTicker);
-  const setTickerList = useTickerStore((state) => state.setTickerList);
   const symbolList = useTickerStore((state) => state.symbolList);
+  const { setTicker, setTickerList } = useTickerStore(
+    (state) => ({
+      setTicker: state.setTicker,
+      setTickerList: state.setTickerList,
+    }),
+    shallow
+  );
 
   const isKRWMarket = domesticExchange === DomesticExchange.UPBIT_KRW;
 
