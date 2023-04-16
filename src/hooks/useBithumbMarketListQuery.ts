@@ -16,8 +16,9 @@ export const useBithumbMarketListQuery = (
     ...options,
     queryKey: [queryKeys.BITHUMB_MARKET],
     queryFn: fetchBithumbMarket,
+    onSuccess: ({ data }) => setSymbolList(data.map(({ symbol }) => symbol)),
     enabled: domesticExchange === DomesticExchange.BITHUMB,
     refetchOnWindowFocus: false,
-    onSuccess: ({ data }) => setSymbolList(data.map(({ symbol }) => symbol)),
+    retry: false,
   });
 };
