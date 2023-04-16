@@ -4,7 +4,7 @@ import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
 import { useQuery } from 'react-query';
 
-export const useBithumbMarketListQuery = () => {
+export const useBithumbMarketQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const setSymbolList = useTickerStore((state) => state.setSymbolList);
 

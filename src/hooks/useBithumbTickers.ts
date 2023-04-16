@@ -1,7 +1,7 @@
 import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { useBithumbMarketListQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
+import { useBithumbMarketQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
 import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 
