@@ -3,6 +3,7 @@ import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useBithumbMarketListQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
 import { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';
@@ -51,9 +52,14 @@ const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 
 export const useBithumbTickers = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
-  const setTicker = useTickerStore((state) => state.setTicker);
-  const setTickerMap = useTickerStore((state) => state.setTickerMap);
   const symbolList = useTickerStore((state) => state.symbolList);
+  const { setTicker, setTickerMap } = useTickerStore(
+    (state) => ({
+      setTicker: state.setTicker,
+      setTickerMap: state.setTickerMap,
+    }),
+    shallow
+  );
 
   const { data: bithumbMarket } = useBithumbMarketQuery();
 
