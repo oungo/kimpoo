@@ -1,7 +1,7 @@
 import type { DomesticTicker } from '@/components/ticker/types';
 import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { useBithumbMarketListQuery } from './useBithumbMarketListQuery';
+import { useBithumbMarketListQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
 import { useEffect } from 'react';
 
 interface SocketStatusResponse {
@@ -55,14 +55,14 @@ export const useBithumbTickers = () => {
   const setTickerList = useTickerStore((state) => state.setTickerList);
   const symbolList = useTickerStore((state) => state.symbolList);
 
-  const { data: bithumbMarketList } = useBithumbMarketListQuery();
+  const { data: bithumbMarket } = useBithumbMarketQuery();
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarketList?.data) return;
+    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarket?.data) return;
 
     const bithumbTickerList: Map<string, DomesticTicker> = new Map();
 
-    for (const market of bithumbMarketList?.data) {
+    for (const market of bithumbMarket?.data) {
       const ticker: DomesticTicker = {
         symbol: market.symbol,
         currentPrice: market.closing_price,
@@ -73,7 +73,7 @@ export const useBithumbTickers = () => {
     }
 
     setTickerList(new Map(bithumbTickerList));
-  }, [bithumbMarketList, domesticExchange, setTickerList]);
+  }, [bithumbMarket, domesticExchange, setTickerList]);
 
   useEffect(() => {
     if (domesticExchange !== DomesticExchange.BITHUMB) return;
