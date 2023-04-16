@@ -66,9 +66,7 @@ export const useBithumbTickers = () => {
       const ticker: DomesticTicker = {
         symbol: market.symbol,
         currentPrice: market.closing_price,
-        changeRate: parseFloat(
-          ((market.closing_price / market.prev_closing_price - 1) * 100).toFixed(2)
-        ),
+        changeRate: market.closing_price / market.prev_closing_price - 1,
         transactionAmount: market.acc_trade_value_24H,
       };
       bithumbTickerList.set(market.symbol, ticker);
@@ -113,9 +111,7 @@ export const useBithumbTickers = () => {
       const newData: DomesticTicker = {
         symbol: newSymbol,
         currentPrice: parseFloat(closePrice),
-        changeRate: parseFloat(
-          ((parseFloat(closePrice) / parseFloat(prevClosePrice) - 1) * 100).toFixed(2)
-        ),
+        changeRate: parseFloat(closePrice) / parseFloat(prevClosePrice) - 1,
         transactionAmount: parseFloat(value),
       };
 
