@@ -61,26 +61,6 @@ export const useBithumbTickers = () => {
     shallow
   );
 
-  const { data: bithumbMarket } = useBithumbMarketQuery();
-
-  useEffect(() => {
-    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarket?.data) return;
-
-    const bithumbTickerList: Map<string, DomesticTicker> = new Map();
-
-    for (const market of bithumbMarket?.data) {
-      const ticker: DomesticTicker = {
-        symbol: market.symbol,
-        currentPrice: market.closing_price,
-        changeRate: market.closing_price / market.prev_closing_price - 1,
-        transactionAmount: market.acc_trade_value_24H,
-      };
-      bithumbTickerList.set(market.symbol, ticker);
-    }
-
-    setTickerMap(new Map(bithumbTickerList));
-  }, [bithumbMarket, domesticExchange, setTickerMap]);
-
   useEffect(() => {
     if (domesticExchange !== DomesticExchange.BITHUMB) return;
 
@@ -124,9 +104,32 @@ export const useBithumbTickers = () => {
       map.set(newSymbol, newData);
     };
 
+    socket.close = () => {
+      setTickerMap(new Map());
+    };
+
     return () => {
       clearInterval(intervalId);
       socket.close();
     };
   }, [setTicker, symbolList, domesticExchange, setTickerMap]);
+
+  const { data: bithumbMarket } = useBithumbMarketQuery();
+  useEffect(() => {
+    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarket?.data) return;
+
+    const bithumbTickerMap: Map<string, DomesticTicker> = new Map();
+
+    for (const market of bithumbMarket?.data) {
+      const ticker: DomesticTicker = {
+        symbol: market.symbol,
+        currentPrice: market.closing_price,
+        changeRate: market.closing_price / market.prev_closing_price - 1,
+        transactionAmount: market.acc_trade_value_24H,
+      };
+      bithumbTickerMap.set(market.symbol, ticker);
+    }
+
+    setTickerMap(new Map(bithumbTickerMap));
+  }, [bithumbMarket, domesticExchange, setTickerMap]);
 };
