@@ -27,9 +27,10 @@ const TickerItem = ({ ticker, symbolName }: Props) => {
             {symbolName || coinList.get(ticker.symbol)?.name}
           </p>
         </div>
-        <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
-
-        {ticker.caution && <span>유</span>}
+        <div className="flex items-center gap-1">
+          <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
+          {ticker.caution && <i className="text-yellow-400 fa-solid fa-circle-exclamation" />}
+        </div>
       </td>
 
       <td className="flex flex-col">
