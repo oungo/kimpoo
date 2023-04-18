@@ -1,5 +1,4 @@
 import type { DomesticTicker } from '@/components/ticker/types';
-import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useBithumbMarketQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
 import { useEffect } from 'react';
@@ -62,7 +61,7 @@ export const useBithumbTickers = () => {
   );
 
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.BITHUMB) return;
+    if (domesticExchange !== 'BITHUMB') return;
 
     const socket = new WebSocket(WEBSOCKET_URL);
 
@@ -116,7 +115,7 @@ export const useBithumbTickers = () => {
 
   const { data: bithumbMarket } = useBithumbMarketQuery();
   useEffect(() => {
-    if (domesticExchange !== DomesticExchange.BITHUMB || !bithumbMarket?.data) return;
+    if (domesticExchange !== 'BITHUMB' || !bithumbMarket?.data) return;
 
     const bithumbTickerMap: Map<string, DomesticTicker> = new Map();
 

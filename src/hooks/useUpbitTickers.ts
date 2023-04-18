@@ -1,4 +1,3 @@
-import { DomesticExchange } from '@/components/ticker/types';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect, useRef } from 'react';
@@ -54,14 +53,10 @@ export const useUpbitTickers = () => {
     shallow
   );
 
-  const isKRWMarket = domesticExchange === DomesticExchange.UPBIT_KRW;
+  const isKRWMarket = domesticExchange === 'UPBIT_KRW';
 
   useEffect(() => {
-    if (
-      domesticExchange !== DomesticExchange.UPBIT_KRW &&
-      domesticExchange !== DomesticExchange.UPBIT_BTC
-    )
-      return;
+    if (domesticExchange !== 'UPBIT_KRW' && domesticExchange !== 'UPBIT_BTC') return;
 
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 

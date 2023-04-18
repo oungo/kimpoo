@@ -1,4 +1,4 @@
-import { DomesticExchange } from '@/components/ticker/types';
+import type { DomesticExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
 import { useTickerStore } from 'store/useTickerStore';
 
@@ -10,10 +10,10 @@ const DomesticExchangeSelectGroup = () => {
   };
 
   return (
-    <Select defaultValue={DomesticExchange.UPBIT_KRW} onSelect={handleSelect}>
-      <Option value={DomesticExchange.UPBIT_KRW}>업비트 KRW</Option>
-      <Option value={DomesticExchange.UPBIT_BTC}>업비트 BTC</Option>
-      <Option value={DomesticExchange.BITHUMB}>빗썸</Option>
+    <Select defaultValue="UPBIT_KRW" onSelect={handleSelect}>
+      <Option value="UPBIT_KRW">업비트 KRW</Option>
+      <Option value="UPBIT_BTC">업비트 BTC</Option>
+      <Option value="BITHUMB">빗썸</Option>
     </Select>
   );
 };

@@ -1,6 +1,6 @@
 import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
-import { OverseasExchange } from '@/components/ticker/types';
-import { DomesticExchange } from '@/components/ticker/types';
+import type { OverseasExchange } from '@/components/ticker/types';
+import type { DomesticExchange } from '@/components/ticker/types';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -59,10 +59,10 @@ export const useTickerStore = create<TickerState>()(
       );
     },
     setTickerMap: (tickerMap) => set({ tickerMap }, false, 'setTickerMap'),
-    domesticExchange: DomesticExchange.UPBIT_KRW,
+    domesticExchange: 'UPBIT_KRW',
     setDomesticExchange: (exchange) =>
       set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
-    overseasExchange: OverseasExchange.BINANCE_USDT,
+    overseasExchange: 'BINANCE_USDT',
     setOverseasExchange: (exchange) =>
       set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
     coinList: new Map(),

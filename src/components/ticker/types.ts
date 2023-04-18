@@ -13,16 +13,8 @@ export type OverseasTicker = {
   [Property in keyof PickedDomesticTicker as `o${Capitalize<Property>}`]: DomesticTicker[Property];
 };
 
-export enum DomesticExchange {
-  UPBIT_KRW = 'UPBIT_KRW',
-  UPBIT_BTC = 'UPBIT_BTC',
-  BITHUMB = 'BITHUMB',
-}
-
-export enum OverseasExchange {
-  BINANCE_USDT = 'BINANCE_USDT',
-  BINANCE_BUSD = 'BINANCE_BUSD',
-}
+export type DomesticExchange = 'UPBIT_KRW' | 'UPBIT_BTC' | 'BITHUMB';
+export type OverseasExchange = 'BINANCE_USDT' | 'BINANCE_BUSD';
 
 export interface Coin {
   name: string;

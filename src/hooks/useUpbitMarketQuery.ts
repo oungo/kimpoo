@@ -1,5 +1,4 @@
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
-import { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
 import { useQuery } from 'react-query';
@@ -10,12 +9,9 @@ export const useUpbitMarketQuery = () => {
 
   return useQuery({
     queryKey: [queryKeys.UPBIT_MARKET, domesticExchange],
-    queryFn: () =>
-      fetchUpbitMarket(domesticExchange === DomesticExchange.UPBIT_KRW ? 'KRW' : 'BTC'),
+    queryFn: () => fetchUpbitMarket(domesticExchange === 'UPBIT_KRW' ? 'KRW' : 'BTC'),
     onSuccess: (upbitMarket) => setSymbolList(upbitMarket.map(({ market }) => market)),
-    enabled:
-      domesticExchange === DomesticExchange.UPBIT_KRW ||
-      domesticExchange === DomesticExchange.UPBIT_BTC,
+    enabled: domesticExchange === 'UPBIT_KRW' || domesticExchange === 'UPBIT_BTC',
     refetchOnWindowFocus: false,
     retry: false,
   });
