@@ -6,10 +6,10 @@ import { memo } from 'react';
 
 interface Props {
   ticker: Ticker;
-  koreanSymbol?: string;
+  symbolName?: string;
 }
 
-const TickerItem = ({ ticker, koreanSymbol }: Props) => {
+const TickerItem = ({ ticker, symbolName }: Props) => {
   const coinList = useTickerStore((state) => state.coinList);
 
   return (
@@ -24,7 +24,7 @@ const TickerItem = ({ ticker, koreanSymbol }: Props) => {
             className="rounded-full"
           />
           <p className="overflow-hidden whitespace-nowrap text-ellipsis">
-            {koreanSymbol || coinList.get(ticker.symbol)?.name}
+            {symbolName || coinList.get(ticker.symbol)?.name}
           </p>
         </div>
         <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>

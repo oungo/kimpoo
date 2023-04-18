@@ -9,6 +9,7 @@ const TableTickerBody = () => {
   const tickerList = useSortedTickerList();
 
   const { data: upbitMarket } = useUpbitMarketQuery();
+
   useUpbitTickers();
   useBithumbTickers();
   useBinanceTickers();
@@ -19,7 +20,7 @@ const TableTickerBody = () => {
         <TickerItem
           key={ticker.symbol}
           ticker={ticker}
-          koreanSymbol={upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name}
+          symbolName={upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name}
         />
       ))}
     </tbody>

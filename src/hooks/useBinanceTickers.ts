@@ -29,8 +29,8 @@ export const useBinanceTickers = () => {
   const { data: quotation } = useQuotationQuery();
 
   const overseasExchange = useTickerStore((state) => state.overseasExchange);
-  const setTicker = useTickerStore((state) => state.setTicker);
   const symbolList = useTickerStore((state) => state.symbolList);
+  const setTicker = useTickerStore((state) => state.setTicker);
 
   useEffect(() => {
     if (!symbolList || !quotation) return;
@@ -39,9 +39,9 @@ export const useBinanceTickers = () => {
 
     socket.onopen = () => {
       const WEBSOCKET_REQUEST_PARAMS = {
+        id: 1,
         method: 'SUBSCRIBE',
         params: symbolList.map((symbol) => makeTickerName(symbol, overseasExchange)),
-        id: 1,
       };
 
       socket.send(JSON.stringify(WEBSOCKET_REQUEST_PARAMS));
