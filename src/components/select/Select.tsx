@@ -15,25 +15,25 @@ interface Props {
   onSelect?: (option: string) => void;
 }
 
-const Select = ({ children, defaultValue, placeholder, onSelect }: Props) => {
+const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) => {
   const [selectedOption, setSelectedOption] = useState(defaultValue);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const selectedPlaceholder = placeholder || '선택하세요';
-  const selectedOptionText = children.find(({ props: { value } }) => value === selectedOption).props
-    .children;
+  const selectedOptionText = children?.find(({ props: { value } }) => value === selectedOption)
+    ?.props.children;
 
   const selectContainerRef = useRef<HTMLDivElement>(null);
 
   const changeSelectedOption = (option: string) => {
-    onSelect(option);
+    onSelect?.(option);
     setSelectedOption(option);
     setShowDropdown(false);
   };
 
   useEffect(() => {
     const clickOutsideSelect = (e: Event) => {
-      if (!selectContainerRef.current.contains(e.target as HTMLDivElement)) {
+      if (!selectContainerRef.current?.contains(e.target as HTMLDivElement)) {
         setShowDropdown(false);
       }
     };

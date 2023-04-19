@@ -5,8 +5,8 @@ import { useTickerStore } from 'store/useTickerStore';
 const DomesticExchangeSelectGroup = () => {
   const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);
 
-  const handleSelect = (option: DomesticExchange) => {
-    setDomesticExchange(option);
+  const handleSelect = (option: string) => {
+    setDomesticExchange(option as DomesticExchange);
   };
 
   return (

@@ -5,8 +5,8 @@ import { useTickerStore } from 'store/useTickerStore';
 const OverseasExchangeSelectGroup = () => {
   const setOverseasExchange = useTickerStore((state) => state.setOverseasExchange);
 
-  const handleSelect = (option: OverseasExchange) => {
-    setOverseasExchange(option);
+  const handleSelect = (option: string) => {
+    setOverseasExchange(option as OverseasExchange);
   };
 
   return (
