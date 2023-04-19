@@ -52,7 +52,7 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
         ref={selectContainerRef}
       >
         <button
-          className="w-full px-1 py-3 border border-gray-200 rounded-md dark:border-neutral-700"
+          className="w-full px-1 py-3 border border-gray-200 rounded-md dark:border-neutral-700 [&>*]:justify-center"
           onClick={() => setShowDropdown(!showDropdown)}
         >
           {selectedOptionText || selectedPlaceholder}
