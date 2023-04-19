@@ -1,3 +1,4 @@
+import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -40,11 +41,15 @@ const Layout = ({ children }: Props) => {
     }
   };
 
+  const { data: quotation } = useQuotationQuery();
+
   return (
     <>
-      <header className="p-2 border-b sm:p-0 dark:border-neutral-700">
-        <div className="w-full max-w-screen-lg m-auto">
-          <h1>header</h1>
+      <header className="p-2 border-b dark:border-neutral-700">
+        <div className="w-full max-w-screen-lg m-auto text-xs">
+          <span>
+            환율 <b>{quotation?.basePrice}</b>
+          </span>
         </div>
       </header>
 
