@@ -1,5 +1,6 @@
 import type { OverseasExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
+import Image from 'next/image';
 import { useTickerStore } from 'store/useTickerStore';
 
 const OverseasExchangeSelectGroup = () => {
@@ -11,8 +12,18 @@ const OverseasExchangeSelectGroup = () => {
 
   return (
     <Select defaultValue="BINANCE_USDT" onSelect={handleSelect}>
-      <Option value="BINANCE_USDT">바이낸스 USDT</Option>
-      <Option value="BINANCE_BUSD">바이낸스 BUSD</Option>
+      <Option value="BINANCE_USDT">
+        <div className="flex items-center h-5 gap-2">
+          <Image width={20} height={20} src="/images/binance.webp" alt="upbit" />
+          <span className="text-xs">바이낸스 USDT</span>
+        </div>
+      </Option>
+      <Option value="BINANCE_BUSD">
+        <div className="flex items-center h-5 gap-2">
+          <Image width={20} height={20} src="/images/binance.webp" alt="upbit" />
+          <span className="text-xs">바이낸스 BUSD</span>
+        </div>
+      </Option>
     </Select>
   );
 };
