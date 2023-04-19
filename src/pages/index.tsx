@@ -6,7 +6,6 @@ import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSel
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Coin } from '@/components/ticker/types';
-import { DomesticExchange } from '@/components/ticker/types';
 import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
@@ -63,11 +62,11 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
     queryFn: fetchBithumbMarket,
   });
   const upbitKRWMarket = await queryClient.fetchQuery({
-    queryKey: [queryKeys.UPBIT_MARKET, DomesticExchange.UPBIT_KRW],
+    queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
     queryFn: () => fetchUpbitMarket('KRW'),
   });
   const upbitBTCMarket = await queryClient.fetchQuery({
-    queryKey: [queryKeys.UPBIT_MARKET, DomesticExchange.UPBIT_BTC],
+    queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_BTC'],
     queryFn: () => fetchUpbitMarket('BTC'),
   });
   await queryClient.prefetchQuery({
