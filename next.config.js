@@ -12,6 +12,12 @@ const nextConfig = {
         port: '',
         pathname: '/coins/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.upbit.com',
+        port: '',
+        pathname: '/logos/**',
+      },
     ],
   },
 };
