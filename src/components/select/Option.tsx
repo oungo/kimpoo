@@ -12,12 +12,13 @@ const Option = ({ children, value, ...props }: Props) => {
 
   return (
     <li
-      className={`px-1 py-3 pl-7 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-neutral-700 relative ${
-        selectedOption === value && 'bg-gray-200 selected dark:bg-neutral-700'
+      className={`px-1 py-3 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-neutral-700 relative flex items-center justify-center ${
+        selectedOption === value && 'bg-gray-200 dark:bg-neutral-700'
       }`}
       onClick={() => changeSelectedOption?.(value)}
       {...props}
     >
+      {selectedOption === value && <i className="absolute text-xs left-2 fa-solid fa-check" />}
       {children}
     </li>
   );
