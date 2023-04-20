@@ -59,11 +59,17 @@ const Layout = ({ children }: Props) => {
             KIMPOO
           </Link>
           <button
-            className={`${effect && 'animate-wiggle'} text-2xl`}
+            className={`${
+              effect && 'animate-rotate'
+            } text-2xl  w-10 h-10 justify-center flex items-center rounded-full hover:bg-gray-200 hover:dark:bg-neutral-700 p-2`}
             onAnimationEnd={() => setEffect(false)}
             onClick={handleClickButton}
           >
-            {theme === 'light' ? <>&#127765;</> : <>&#127769;</>}
+            {theme === 'light' ? (
+              <i className="fa-solid fa-sun" />
+            ) : (
+              <i className="fa-solid fa-moon" />
+            )}
           </button>
         </div>
       </nav>

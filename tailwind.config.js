@@ -5,13 +5,13 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(-10deg)' },
-          '50%': { transform: 'rotate(10deg)' },
+        rotate: {
+          '0%': { transform: 'rotate(-90deg) scale(0)' },
+          '100%': { transform: 'rotate(0) scale(1)' },
         },
       },
       animation: {
-        wiggle: 'wiggle 200ms ease-in-out',
+        rotate: 'rotate 200ms ease-in-out',
       },
     },
   },
