@@ -28,9 +28,12 @@ const makeTickerName = (symbol: string, overseasExchange: OverseasExchange) =>
 export const useBinanceTickers = () => {
   const { data: quotation } = useQuotationQuery();
 
-  const overseasExchange = useTickerStore((state) => state.overseasExchange);
   const symbolList = useTickerStore((state) => state.symbolList);
   const setTicker = useTickerStore((state) => state.setTicker);
+  const { domesticExchange, overseasExchange } = useTickerStore((state) => ({
+    domesticExchange: state.domesticExchange,
+    overseasExchange: state.overseasExchange,
+  }));
 
   useEffect(() => {
     if (!symbolList || !quotation) return;
@@ -75,5 +78,5 @@ export const useBinanceTickers = () => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, overseasExchange, quotation]);
+  }, [setTicker, symbolList, overseasExchange, quotation, domesticExchange]);
 };
