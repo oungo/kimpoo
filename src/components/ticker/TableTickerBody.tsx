@@ -4,6 +4,7 @@ import { useSortedTickerList } from '@/hooks/useSortedTickerList';
 import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
+import { createUpbitSymbolIconUrl } from '@/utils/common';
 import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
@@ -25,7 +26,7 @@ const TableTickerBody = () => {
           ticker={ticker}
           thumb={
             domesticExchange.startsWith('UPBIT')
-              ? `https://static.upbit.com/logos/${ticker.symbol}.png`
+              ? createUpbitSymbolIconUrl(ticker.symbol)
               : coinList.get(ticker.symbol)?.thumb
           }
           symbolName={

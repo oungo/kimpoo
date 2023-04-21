@@ -6,3 +6,6 @@ export const formatCurrentPrice = (price: number) =>
 
 export const formatPercent = (number: number) =>
   formatNumber(number, { signDisplay: 'exceptZero', minimumFractionDigits: 2, style: 'percent' });
+
+export const createUpbitSymbolIconUrl = (symbol: string) =>
+  `https://static.upbit.com/logos/${symbol}.png`;
