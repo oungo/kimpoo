@@ -6,10 +6,4 @@
   html.dark {
     @apply bg-neutral-900 text-neutral-200;
   }
-
-  .selected::before {
-    content: '\2713';
-    position: absolute;
-    left: 0.5rem;
-  }
 }
