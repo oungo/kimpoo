@@ -12,17 +12,10 @@ const Layout = ({ children }: Props) => {
   const [theme, setTheme] = useState('');
 
   useEffect(() => {
-    if (
-      localStorage.getItem('theme') === 'dark' ||
-      (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
+    if (localStorage.getItem('theme') === 'dark') {
       setTheme('dark');
-      localStorage.setItem('theme', 'dark');
-      document.documentElement.classList.add('dark');
     } else {
       setTheme('light');
-      localStorage.setItem('theme', 'light');
-      document.documentElement.classList.remove('dark');
     }
   }, []);
 
