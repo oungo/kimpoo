@@ -29,7 +29,7 @@ const Index = ({ coins }: Props) => {
     <Layout>
       <div className="flex items-center justify-center gap-2 text-center sm:w-1/2 sm:m-auto">
         <DomesticExchangeSelectGroup />
-        <span>&#8644;</span>
+        <i className="text-xs fa-solid fa-right-left" />
         <OverseasExchangeSelectGroup />
       </div>
 
