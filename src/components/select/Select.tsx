@@ -48,7 +48,7 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
   return (
     <SelectContext.Provider value={{ selectedOption, changeSelectedOption }}>
       <div
-        className="relative w-40 text-sm rounded-md dark:bg-neutral-800"
+        className="relative w-full text-sm rounded-md dark:bg-neutral-800"
         ref={selectContainerRef}
       >
         <button

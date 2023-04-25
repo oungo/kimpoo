@@ -27,7 +27,7 @@ const Index = ({ coins }: Props) => {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center gap-5">
+      <div className="flex items-center justify-center gap-2 text-center sm:w-1/2 sm:m-auto">
         <DomesticExchangeSelectGroup />
         <span>&#8644;</span>
         <OverseasExchangeSelectGroup />
