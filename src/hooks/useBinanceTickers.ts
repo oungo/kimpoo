@@ -25,10 +25,9 @@ const WEBSOCKET_URL = 'wss://stream.binance.com:9443/ws';
 const makeTickerName = (symbol: string, overseasExchange: OverseasExchange) =>
   `${symbol.toLowerCase()}${overseasExchange.toLowerCase().split('_')[1]}@miniTicker`;
 
-export const useBinanceTickers = () => {
+export const useBinanceTickers = (symbolList: string[] = []) => {
   const { data: quotation } = useQuotationQuery();
 
-  const symbolList = useTickerStore((state) => state.symbolList);
   const setTicker = useTickerStore((state) => state.setTicker);
   const { domesticExchange, overseasExchange } = useTickerStore((state) => ({
     domesticExchange: state.domesticExchange,

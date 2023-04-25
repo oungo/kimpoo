@@ -1,4 +1,5 @@
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
+import { useBithumbMarketQuery } from '@/hooks/useBithumbMarketQuery';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useSortedTickerList } from '@/hooks/useSortedTickerList';
 import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
@@ -6,17 +7,27 @@ import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
 import TickerItem from './TickerItem';
+import { useMemo } from 'react';
 
 const TableTickerBody = () => {
   const coinList = useTickerStore((state) => state.coinList);
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
-
   const tickerList = useSortedTickerList();
-  const { data: upbitMarket } = useUpbitMarketQuery();
 
-  useUpbitTickers();
-  useBithumbTickers();
-  useBinanceTickers();
+  const { data: upbitMarket } = useUpbitMarketQuery();
+  const { data: bithumbMarket } = useBithumbMarketQuery();
+
+  const memoizedSymbolList = useMemo(
+    () =>
+      domesticExchange === 'BITHUMB'
+        ? bithumbMarket?.data.map(({ symbol }) => symbol)
+        : upbitMarket?.map(({ market }) => market),
+    [upbitMarket, bithumbMarket, domesticExchange]
+  );
+
+  useUpbitTickers(memoizedSymbolList);
+  useBithumbTickers(memoizedSymbolList);
+  useBinanceTickers(memoizedSymbolList);
 
   return (
     <tbody>
@@ -30,8 +41,9 @@ const TableTickerBody = () => {
               : coinList.get(ticker.symbol)?.thumb
           }
           symbolName={
-            upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name ||
-            coinList.get(ticker.symbol)?.name
+            domesticExchange === 'BITHUMB'
+              ? coinList.get(ticker.symbol)?.name
+              : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
           }
         />
       ))}

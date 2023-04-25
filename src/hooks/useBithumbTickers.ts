@@ -49,9 +49,8 @@ interface BithumbTicker {
 
 const WEBSOCKET_URL = 'wss://pubwss.bithumb.com/pub/ws';
 
-export const useBithumbTickers = () => {
+export const useBithumbTickers = (symbolList: string[] = []) => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
-  const symbolList = useTickerStore((state) => state.symbolList);
   const { setTicker, setTickerMap } = useTickerStore(
     (state) => ({
       setTicker: state.setTicker,

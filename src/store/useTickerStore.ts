@@ -26,8 +26,6 @@ interface TickerState {
   setCoinList: (coinList: Map<string, Coin>) => void;
   sortOption: SortOption;
   setSortOption: (option: SortOption) => void;
-  symbolList: string[];
-  setSymbolList: (symbolList: string[]) => void;
 }
 
 export const useTickerStore = create<TickerState>()(
@@ -69,7 +67,5 @@ export const useTickerStore = create<TickerState>()(
     setCoinList: (coinList: Map<string, Coin>) => set({ coinList }, false, 'setCoinList'),
     sortOption: { type: 'premium', desc: true },
     setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
-    symbolList: [],
-    setSymbolList: (symbolList: string[]) => set({ symbolList }, false, 'setSymbolList'),
   }))
 );
