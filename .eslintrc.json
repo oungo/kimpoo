@@ -5,7 +5,6 @@
     "@typescript-eslint/no-empty-interface": "off",
     "no-console": "warn",
     "react/self-closing-comp": ["error", { "component": true, "html": true }],
-    "arrow-body-style": ["error", "as-needed"],
     "@typescript-eslint/consistent-type-imports": [
       "error",
       {
