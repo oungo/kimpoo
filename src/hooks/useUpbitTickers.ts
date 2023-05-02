@@ -60,9 +60,7 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
     const socket = new WebSocket(UPBIT_WEBSOCKET_URL);
 
     socket.onopen = () => {
-      const prefixedSymbolList = symbolList.map((symbol) =>
-        isKRWMarket ? `KRW-${symbol}` : `BTC-${symbol}`
-      );
+      const prefixedSymbolList = symbolList.map((symbol) => (isKRWMarket ? `KRW-${symbol}` : `BTC-${symbol}`));
       const WEBSOCKET_REQUEST_PARAMS = [
         { ticket: 'test' },
         {
@@ -105,10 +103,6 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
           transactionAmount: ticker.transactionAmount * btcPriceRef.current,
         });
       }
-    };
-
-    socket.onclose = () => {
-      setTickerMap(new Map());
     };
 
     return () => {

@@ -102,10 +102,6 @@ export const useBithumbTickers = (symbolList: string[] = []) => {
       map.set(newSymbol, newData);
     };
 
-    socket.close = () => {
-      setTickerMap(new Map());
-    };
-
     return () => {
       clearInterval(intervalId);
       socket.close();

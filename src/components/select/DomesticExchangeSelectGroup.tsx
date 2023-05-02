@@ -5,9 +5,11 @@ import { useTickerStore } from 'store/useTickerStore';
 
 const DomesticExchangeSelectGroup = () => {
   const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);
+  const setTickerMap = useTickerStore((state) => state.setTickerMap);
 
   const handleSelect = (option: string) => {
     setDomesticExchange(option as DomesticExchange);
+    setTickerMap(new Map());
   };
 
   return (
