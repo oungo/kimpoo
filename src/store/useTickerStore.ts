@@ -4,33 +4,43 @@ import type { DomesticExchange } from '@/components/ticker/types';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-export type SortType = keyof Pick<
-  Ticker,
-  'symbol' | 'currentPrice' | 'premium' | 'changeRate' | 'transactionAmount'
->;
+export type SortType = keyof Pick<Ticker, 'symbol' | 'currentPrice' | 'premium' | 'changeRate' | 'transactionAmount'>;
 
 interface SortOption {
   type: SortType;
   desc: boolean;
 }
 
-interface TickerState {
+interface State {
   tickerMap: Map<Ticker['symbol'], Ticker>;
+  domesticExchange: DomesticExchange;
+  overseasExchange: OverseasExchange;
+  coinList: Map<string, Coin>;
+  sortOption: SortOption;
+}
+
+interface Action {
   setTicker: (symbol: string, ticker: DomesticTicker | OverseasTicker) => void;
   setTickerMap: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
-  domesticExchange: DomesticExchange;
   setDomesticExchange: (exchange: DomesticExchange) => void;
-  overseasExchange: OverseasExchange;
   setOverseasExchange: (exchange: OverseasExchange) => void;
-  coinList: Map<string, Coin>;
   setCoinList: (coinList: Map<string, Coin>) => void;
-  sortOption: SortOption;
   setSortOption: (option: SortOption) => void;
 }
 
-export const useTickerStore = create<TickerState>()(
+type Store = State & Action;
+
+const initalState: State = {
+  tickerMap: new Map(),
+  domesticExchange: 'UPBIT_KRW',
+  overseasExchange: 'BINANCE_USDT',
+  coinList: new Map(),
+  sortOption: { type: 'premium', desc: true },
+};
+
+export const useTickerStore = create<Store>()(
   devtools((set) => ({
-    tickerMap: new Map(),
+    ...initalState,
     setTicker: (symbol, ticker) => {
       set(
         ({ tickerMap }) => {
@@ -53,19 +63,13 @@ export const useTickerStore = create<TickerState>()(
           return { tickerMap: new Map(tickerMap).set(symbol, newTickerData) };
         },
         false,
-        'setTicker'
+        { type: 'setTicker', symbol }
       );
     },
     setTickerMap: (tickerMap) => set({ tickerMap }, false, 'setTickerMap'),
-    domesticExchange: 'UPBIT_KRW',
-    setDomesticExchange: (exchange) =>
-      set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
-    overseasExchange: 'BINANCE_USDT',
-    setOverseasExchange: (exchange) =>
-      set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
-    coinList: new Map(),
+    setDomesticExchange: (exchange) => set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
+    setOverseasExchange: (exchange) => set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
     setCoinList: (coinList: Map<string, Coin>) => set({ coinList }, false, 'setCoinList'),
-    sortOption: { type: 'premium', desc: true },
     setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
   }))
 );
