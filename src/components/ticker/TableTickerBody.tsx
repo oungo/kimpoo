@@ -17,17 +17,15 @@ const TableTickerBody = () => {
   const { data: upbitMarket } = useUpbitMarketQuery();
   const { data: bithumbMarket } = useBithumbMarketQuery();
 
-  const memoizedSymbolList = useMemo(
-    () =>
-      domesticExchange === 'BITHUMB'
-        ? bithumbMarket?.data.map(({ symbol }) => symbol)
-        : upbitMarket?.map(({ market }) => market),
-    [upbitMarket, bithumbMarket, domesticExchange]
-  );
+  const symbolList = useMemo(() => {
+    return domesticExchange === 'BITHUMB'
+      ? bithumbMarket?.data.map(({ symbol }) => symbol)
+      : upbitMarket?.map(({ market }) => market);
+  }, [upbitMarket, bithumbMarket, domesticExchange]);
 
-  useUpbitTickers(memoizedSymbolList);
-  useBithumbTickers(memoizedSymbolList);
-  useBinanceTickers(memoizedSymbolList);
+  useUpbitTickers(symbolList);
+  useBithumbTickers(symbolList);
+  useBinanceTickers(symbolList);
 
   return (
     <tbody>
