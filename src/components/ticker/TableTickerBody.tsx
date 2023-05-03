@@ -29,24 +29,36 @@ const TableTickerBody = () => {
 
   return (
     <tbody>
-      {tickerList.map((ticker) => (
-        <TickerItem
-          key={ticker.symbol}
-          ticker={ticker}
-          thumb={
-            domesticExchange.startsWith('UPBIT')
-              ? createUpbitSymbolIconUrl(ticker.symbol)
-              : coinList.get(ticker.symbol)?.thumb
-          }
-          symbolName={
-            domesticExchange === 'BITHUMB'
-              ? coinList.get(ticker.symbol)?.name
-              : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
-          }
-        />
-      ))}
+      {tickerList.length < 1 ? (
+        <Loading />
+      ) : (
+        tickerList.map((ticker) => (
+          <TickerItem
+            key={ticker.symbol}
+            ticker={ticker}
+            thumb={
+              domesticExchange.startsWith('UPBIT')
+                ? createUpbitSymbolIconUrl(ticker.symbol)
+                : coinList.get(ticker.symbol)?.thumb
+            }
+            symbolName={
+              domesticExchange === 'BITHUMB'
+                ? coinList.get(ticker.symbol)?.name
+                : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
+            }
+          />
+        ))
+      )}
     </tbody>
   );
 };
+
+const Loading = () => (
+  <tr className="relative">
+    <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">
+      <i className="text-7xl fa-solid fa-spinner fa-spin" />
+    </td>
+  </tr>
+);
 
 export default TableTickerBody;
