@@ -1,7 +1,7 @@
+import { useQuery } from 'react-query';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
-import { useQuery } from 'react-query';
 
 export const useUpbitMarketQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { dehydrate, QueryClient } from 'react-query';
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
@@ -11,8 +13,6 @@ import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
 import type { PageProps } from './_app';
 import type { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
-import { dehydrate, QueryClient } from 'react-query';
 
 interface Props {
   coins: [string, Coin][];

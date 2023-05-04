@@ -1,7 +1,7 @@
-import { SelectContext } from './selectContext';
-import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useRef, useState } from 'react';
+import { SelectContext } from './selectContext';
+import type { ReactElement } from 'react';
 
 interface ChildrenProps {
   children: string;
@@ -20,8 +20,7 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
   const [showDropdown, setShowDropdown] = useState(false);
 
   const selectedPlaceholder = placeholder || '선택하세요';
-  const selectedOptionText = children?.find(({ props: { value } }) => value === selectedOption)
-    ?.props.children;
+  const selectedOptionText = children?.find(({ props: { value } }) => value === selectedOption)?.props.children;
 
   const selectContainerRef = useRef<HTMLDivElement>(null);
 
@@ -47,10 +46,7 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
 
   return (
     <SelectContext.Provider value={{ selectedOption, changeSelectedOption }}>
-      <div
-        className="relative w-full text-sm rounded-md dark:bg-neutral-800"
-        ref={selectContainerRef}
-      >
+      <div className="relative w-full text-sm rounded-md dark:bg-neutral-800" ref={selectContainerRef}>
         <button
           className="w-full px-1 py-3 border border-gray-200 rounded-md dark:border-neutral-700 [&>*]:justify-center"
           onClick={() => setShowDropdown(!showDropdown)}

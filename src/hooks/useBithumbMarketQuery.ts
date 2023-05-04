@@ -1,7 +1,7 @@
+import { useQuery } from 'react-query';
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
-import { useQuery } from 'react-query';
 
 export const useBithumbMarketQuery = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);

@@ -1,6 +1,6 @@
+import { shallow } from 'zustand/shallow';
 import type { SortType } from '@/store/useTickerStore';
 import { useTickerStore } from '@/store/useTickerStore';
-import { shallow } from 'zustand/shallow';
 
 export const useSortTicker = () => {
   const { sortOption, setSortOption } = useTickerStore(

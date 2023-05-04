@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useBithumbMarketQuery } from '@/hooks/useBithumbMarketQuery';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
@@ -7,7 +8,6 @@ import { useUpbitTickers } from '@/hooks/useUpbitTickers';
 import { useTickerStore } from '@/store/useTickerStore';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
 import TickerItem from './TickerItem';
-import { useMemo } from 'react';
 
 const TableTickerBody = () => {
   const coinList = useTickerStore((state) => state.coinList);

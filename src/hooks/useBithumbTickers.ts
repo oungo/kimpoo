@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useBithumbMarketQuery as useBithumbMarketQuery } from './useBithumbMarketQuery';
-import { useEffect } from 'react';
-import { shallow } from 'zustand/shallow';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';

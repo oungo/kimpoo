@@ -1,7 +1,7 @@
-import type { DomesticTicker } from '@/components/ticker/types';
-import { useTickerStore } from '@/store/useTickerStore';
 import { useEffect, useRef } from 'react';
 import { shallow } from 'zustand/shallow';
+import type { DomesticTicker } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/useTickerStore';
 
 interface UpbitTicker {
   /** 마켓 코드  */

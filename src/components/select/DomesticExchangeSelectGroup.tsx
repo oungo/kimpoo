@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import type { DomesticExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
-import Image from 'next/image';
 import { useTickerStore } from 'store/useTickerStore';
 
 const DomesticExchangeSelectGroup = () => {

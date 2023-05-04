@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { SelectContext } from './selectContext';
 import type { ReactNode } from 'react';
-import { useContext } from 'react';
 
 interface Props {
   children: ReactNode;

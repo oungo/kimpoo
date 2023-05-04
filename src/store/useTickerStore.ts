@@ -1,8 +1,8 @@
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
 import type { OverseasExchange } from '@/components/ticker/types';
 import type { DomesticExchange } from '@/components/ticker/types';
-import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
 
 export type SortType = keyof Pick<Ticker, 'symbol' | 'currentPrice' | 'premium' | 'changeRate' | 'transactionAmount'>;
 
