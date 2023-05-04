@@ -20,14 +20,14 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
   const [showDropdown, setShowDropdown] = useState(false);
 
   const selectedPlaceholder = placeholder || '선택하세요';
-  const selectedOptionText = children?.find(({ props: { value } }) => value === selectedOption)?.props.children;
+  const selectedOptionChild = children?.find(({ props: { value } }) => value === selectedOption)?.props.children;
 
   const selectContainerRef = useRef<HTMLDivElement>(null);
 
   const changeSelectedOption = (option: string) => {
+    setShowDropdown(false);
     onSelect?.(option);
     setSelectedOption(option);
-    setShowDropdown(false);
   };
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
     };
 
     document.addEventListener('mousedown', clickOutsideSelect);
-
     return () => {
       document.removeEventListener('mousedown', clickOutsideSelect);
     };
@@ -51,7 +50,7 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
           className="w-full px-1 py-3 border border-gray-200 rounded-md dark:border-neutral-700 [&>*]:justify-center"
           onClick={() => setShowDropdown(!showDropdown)}
         >
-          {selectedOptionText || selectedPlaceholder}
+          {selectedOptionChild || selectedPlaceholder}
         </button>
         <ul
           className={`dark:bg-neutral-800 dark:border-neutral-700 flex flex-col gap-1 border border-gray-200 rounded-md mt-1 p-1 absolute bg-white w-full z-10 ${
