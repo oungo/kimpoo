@@ -1,3 +1,4 @@
 export const UPBIT_MARKET = 'UPBIT_MARKET';
 export const BITHUMB_MARKET = 'BITHUMB_MARKET';
+export const BITHUMB_MARKET2 = 'BITHUMB_MARKET2';
 export const QUOTATION = 'QUOTATION';
