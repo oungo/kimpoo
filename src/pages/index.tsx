@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchBithumb } from '@/api/fetchBithumb';
-import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
+import { fetchBithumbMarketPrice } from '@/api/fetchBithumbMarket';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import Layout from '@/components/layout';
@@ -59,8 +59,8 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
   const bithumbMarket = await queryClient.fetchQuery({
-    queryKey: [queryKeys.BITHUMB_MARKET],
-    queryFn: fetchBithumbMarket,
+    queryKey: [queryKeys.BITHUMB_MARKET_PRICE],
+    queryFn: fetchBithumbMarketPrice,
   });
   const upbitKRWMarket = await queryClient.fetchQuery({
     queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
