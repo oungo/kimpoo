@@ -1,3 +1,4 @@
+import { Roboto_Flex } from 'next/font/google';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useState } from 'react';
@@ -9,6 +10,11 @@ import '@/styles/globals.css';
 export interface PageProps {
   dehydratedState?: DehydratedState;
 }
+
+const roboto = Roboto_Flex({
+  subsets: ['latin'],
+  variable: '--font-roboto',
+});
 
 const App = ({ Component, pageProps }: AppProps<PageProps>) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -31,7 +37,9 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
+          <div className={`${roboto.variable} font-roboto`}>
+            <Component {...pageProps} />
+          </div>
         </Hydrate>
       </QueryClientProvider>
     </>

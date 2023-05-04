@@ -4,6 +4,9 @@ module.exports = {
   content: ['./src/**/*.tsx'],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['var(--font-roboto)'],
+      },
       keyframes: {
         rotate: {
           '0%': { transform: 'rotate(-90deg) scale(0)' },
