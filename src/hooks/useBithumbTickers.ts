@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
-import { useBithumbMarketPriceQuery as useBithumbMarketPriceQuery } from './useBithumbMarketQuery';
+import { useBithumbMarketPriceQuery } from './useBithumbMarketPriceQuery';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';

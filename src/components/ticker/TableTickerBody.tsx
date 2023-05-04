@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
-import { useBithumbMarketPriceQuery } from '@/hooks/useBithumbMarketQuery';
+import { useBithumbMarketPriceQuery } from '@/hooks/useBithumbMarketPriceQuery';
 import { useBithumbMarketQuery2 } from '@/hooks/useBithumbMarketQuery2';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useSortedTickerList } from '@/hooks/useSortedTickerList';
