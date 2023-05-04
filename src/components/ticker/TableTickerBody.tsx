@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useBinanceTickers } from '@/hooks/useBinanceTickers';
 import { useBithumbMarketQuery } from '@/hooks/useBithumbMarketQuery';
+import { useBithumbMarketQuery2 } from '@/hooks/useBithumbMarketQuery2';
 import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useSortedTickerList } from '@/hooks/useSortedTickerList';
 import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
@@ -16,6 +17,7 @@ const TableTickerBody = () => {
 
   const { data: upbitMarket } = useUpbitMarketQuery();
   const { data: bithumbMarket } = useBithumbMarketQuery();
+  const { data: bithumbMarket2 } = useBithumbMarketQuery2();
 
   const symbolList = useMemo(() => {
     return domesticExchange === 'BITHUMB'
@@ -43,7 +45,7 @@ const TableTickerBody = () => {
             }
             symbolName={
               domesticExchange === 'BITHUMB'
-                ? coinList.get(ticker.symbol)?.name
+                ? bithumbMarket2?.find(({ coinSymbol }) => coinSymbol === ticker.symbol)?.coinName
                 : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
             }
           />

@@ -3,10 +3,7 @@ export interface BithumbMarket {
   data: BithumbTicker[];
 }
 
-type BithumbTicker = Omit<
-  OriginBithumbTicker,
-  'acc_trade_value_24H' | 'closing_price' | 'prev_closing_price'
-> & {
+type BithumbTicker = Omit<OriginBithumbTicker, 'acc_trade_value_24H' | 'closing_price' | 'prev_closing_price'> & {
   symbol: string;
   acc_trade_value_24H: number;
   closing_price: number;
