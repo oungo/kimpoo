@@ -17,7 +17,6 @@ export type DomesticExchange = 'UPBIT_KRW' | 'UPBIT_BTC' | 'BITHUMB';
 export type OverseasExchange = 'BINANCE_USDT' | 'BINANCE_BUSD';
 
 export interface Coin {
-  name: string;
   symbol: string;
   thumb: string;
 }

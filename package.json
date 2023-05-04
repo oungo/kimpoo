@@ -9,7 +9,7 @@
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "coin": "curl -X GET 'https://api.coingecko.com/api/v3/search?locale=ko' | jq -c '{ coins: [.coins[] | { name: .name, symbol: .symbol, thumb: .thumb } ] }' > public/json/coins.json"
+    "coin": "curl -X GET 'https://api.coingecko.com/api/v3/search?locale=ko' | jq -c '{ coins: [.coins[] | { symbol: .symbol, thumb: .thumb } ] }' > public/json/coins.json"
   },
   "dependencies": {
     "next": "^13.1.6",
