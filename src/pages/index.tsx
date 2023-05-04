@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchBithumb } from '@/api/fetchBithumb';
-import { fetchBithumbMarketPrice } from '@/api/fetchBithumbMarket';
+import { fetchBithumb } from '@/api/fetchBithumbMarket';
+import { fetchBithumbMarketPrice } from '@/api/fetchBithumbMarketPrice';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import Layout from '@/components/layout';
@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
     queryFn: fetchQuotation,
   });
   await queryClient.prefetchQuery({
-    queryKey: [queryKeys.BITHUMB_MARKET2],
+    queryKey: [queryKeys.BITHUMB_MARKET],
     queryFn: fetchBithumb,
   });
 
