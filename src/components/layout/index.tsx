@@ -10,11 +10,8 @@ interface Props {
 const Layout = ({ children }: Props) => (
   <>
     <Header />
-
     <Nav />
-
-    <main className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">{children}</main>
-
+    {children}
     <Footer />
   </>
 );

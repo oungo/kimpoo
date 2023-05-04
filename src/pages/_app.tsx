@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import Layout from '@/components/layout';
 import type { AppProps } from 'next/app';
 import type { DehydratedState } from 'react-query';
 import '@/styles/globals.css';
@@ -37,9 +38,11 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <div className={`${roboto.variable} font-roboto`}>
-            <Component {...pageProps} />
-          </div>
+          <Layout>
+            <main className={`max-w-screen-lg min-h-screen px-2 py-4 m-auto ${roboto.variable} font-roboto`}>
+              <Component {...pageProps} />
+            </main>
+          </Layout>
         </Hydrate>
       </QueryClientProvider>
     </>
