@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
+import { fetchBithumb } from '@/api/fetchBithumb';
 import { fetchBithumbMarket } from '@/api/fetchBithumbMarket';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
@@ -72,6 +73,10 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
   await queryClient.prefetchQuery({
     queryKey: [queryKeys.QUOTATION],
     queryFn: fetchQuotation,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: [queryKeys.BITHUMB_MARKET2],
+    queryFn: fetchBithumb,
   });
 
   const coinsMap = convertCoinsDataToMap(coinsData.coins, [
