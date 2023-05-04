@@ -16,13 +16,13 @@ const DomesticExchangeSelectGroup = () => {
     <Select defaultValue="UPBIT_KRW" onSelect={handleSelect}>
       <Option value="UPBIT_KRW">
         <div className="flex items-center h-5 gap-2">
-          <Image width={20} height={20} src="/images/upbit.webp" alt="upbit" />
+          <Image width={20} height={20} src="/images/upbit.webp" alt="upbit krw" priority />
           <span className="text-xs">업비트 KRW</span>
         </div>
       </Option>
       <Option value="UPBIT_BTC">
         <div className="flex items-center h-5 gap-2">
-          <Image width={20} height={20} src="/images/upbit.webp" alt="upbit" />
+          <Image width={20} height={20} src="/images/upbit.webp" alt="upbit btc" />
           <span className="text-xs">업비트 BTC</span>
         </div>
       </Option>
