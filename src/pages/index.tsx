@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 import { shallow } from 'zustand/shallow';
-import { fetchBithumb } from '@/api/fetchBithumbMarket';
-import { fetchBithumbMarketPrice } from '@/api/fetchBithumbMarketPrice';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
@@ -71,32 +69,16 @@ const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: stri
 
 export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
   const queryClient = new QueryClient();
-  const bithumbMarket = await queryClient.fetchQuery({
-    queryKey: [queryKeys.BITHUMB_MARKET_PRICE],
-    queryFn: fetchBithumbMarketPrice,
-  });
   const upbitKRWMarket = await queryClient.fetchQuery({
     queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
     queryFn: () => fetchUpbitMarket('KRW'),
-  });
-  const upbitBTCMarket = await queryClient.fetchQuery({
-    queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_BTC'],
-    queryFn: () => fetchUpbitMarket('BTC'),
   });
   await queryClient.prefetchQuery({
     queryKey: [queryKeys.QUOTATION],
     queryFn: fetchQuotation,
   });
-  await queryClient.prefetchQuery({
-    queryKey: [queryKeys.BITHUMB_MARKET],
-    queryFn: fetchBithumb,
-  });
 
-  const coinsMap = convertCoinsDataToMap(coinsData.coins, [
-    ...upbitKRWMarket.map(({ market }) => market),
-    ...upbitBTCMarket.map(({ market }) => market),
-    ...bithumbMarket.data.map(({ symbol }) => symbol),
-  ]);
+  const coinsMap = convertCoinsDataToMap(coinsData.coins, [...upbitKRWMarket.map(({ market }) => market)]);
 
   return {
     props: {
