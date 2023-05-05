@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
+import { shallow } from 'zustand/shallow';
 import { fetchBithumb } from '@/api/fetchBithumbMarket';
 import { fetchBithumbMarketPrice } from '@/api/fetchBithumbMarketPrice';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
+import SearchInput from '@/components/shared/SearchInput';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Coin } from '@/components/ticker/types';
 import coinsData from '@/public/json/coins.json';
@@ -20,6 +22,10 @@ interface Props {
 
 const Index = ({ coins }: Props) => {
   const setCoinList = useTickerStore((state) => state.setCoinList);
+  const { searchWord, setSearchWord } = useTickerStore(
+    (state) => ({ searchWord: state.searchWord, setSearchWord: state.setSearchWord }),
+    shallow
+  );
 
   useEffect(() => {
     setCoinList(new Map(coins));
@@ -31,6 +37,14 @@ const Index = ({ coins }: Props) => {
         <DomesticExchangeSelectGroup />
         <i className="text-xs fa-solid fa-right-left" />
         <OverseasExchangeSelectGroup />
+      </div>
+
+      <div className="mt-4 text-right">
+        <SearchInput
+          value={searchWord}
+          onChange={(e) => setSearchWord(e.target.value)}
+          onClear={() => setSearchWord('')}
+        />
       </div>
 
       <TableTicker />
