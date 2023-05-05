@@ -12,16 +12,15 @@ import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
+  const isBithumb = domesticExchange === 'BITHUMB';
   const tickerList = useSortedTickerList();
 
   const { data: upbitMarket } = useUpbitMarketQuery();
   const { data: bithumbMarket } = useBithumbMarketQuery();
 
   const symbolList = useMemo(() => {
-    return domesticExchange === 'BITHUMB'
-      ? bithumbMarket?.map(({ coinSymbol }) => coinSymbol)
-      : upbitMarket?.map(({ market }) => market);
-  }, [upbitMarket, bithumbMarket, domesticExchange]);
+    return isBithumb ? bithumbMarket?.map(({ coinSymbol }) => coinSymbol) : upbitMarket?.map(({ market }) => market);
+  }, [upbitMarket, bithumbMarket, isBithumb]);
 
   useUpbitTickers(symbolList);
   useBithumbTickers(symbolList);
@@ -37,12 +36,12 @@ const TableTickerBody = () => {
             key={ticker.symbol}
             ticker={ticker}
             thumb={
-              domesticExchange.startsWith('UPBIT')
-                ? createUpbitSymbolIconUrl(ticker.symbol)
-                : coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
+              isBithumb
+                ? coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
+                : createUpbitSymbolIconUrl(ticker.symbol)
             }
             symbolName={
-              domesticExchange === 'BITHUMB'
+              isBithumb
                 ? bithumbMarket?.find(({ coinSymbol }) => coinSymbol === ticker.symbol)?.coinName
                 : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
             }
