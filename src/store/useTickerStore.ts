@@ -17,6 +17,7 @@ interface State {
   overseasExchange: OverseasExchange;
   coinList: Map<string, Coin>;
   sortOption: SortOption;
+  searchWord: string;
 }
 
 interface Action {
@@ -26,6 +27,7 @@ interface Action {
   setOverseasExchange: (exchange: OverseasExchange) => void;
   setCoinList: (coinList: Map<string, Coin>) => void;
   setSortOption: (option: SortOption) => void;
+  setSearchWord: (searchKeyword: string) => void;
 }
 
 type Store = State & Action;
@@ -36,6 +38,7 @@ const initalState: State = {
   overseasExchange: 'BINANCE_USDT',
   coinList: new Map(),
   sortOption: { type: 'premium', desc: true },
+  searchWord: '',
 };
 
 export const useTickerStore = create<Store>()(
@@ -71,5 +74,6 @@ export const useTickerStore = create<Store>()(
     setOverseasExchange: (exchange) => set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
     setCoinList: (coinList: Map<string, Coin>) => set({ coinList }, false, 'setCoinList'),
     setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
+    setSearchWord: (searchKeyword) => set({ searchWord: searchKeyword }, false, 'setSearchKeyword'),
   }))
 );
