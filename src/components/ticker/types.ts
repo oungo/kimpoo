@@ -15,8 +15,3 @@ export type OverseasTicker = {
 
 export type DomesticExchange = 'UPBIT_KRW' | 'UPBIT_BTC' | 'BITHUMB';
 export type OverseasExchange = 'BINANCE_USDT' | 'BINANCE_BUSD';
-
-export interface Coin {
-  symbol: string;
-  thumb: string;
-}

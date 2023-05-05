@@ -5,12 +5,12 @@ import { useBithumbTickers } from '@/hooks/useBithumbTickers';
 import { useSortedTickerList } from '@/hooks/useSortedTickerList';
 import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
 import { useUpbitTickers } from '@/hooks/useUpbitTickers';
+import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
 import TickerItem from './TickerItem';
 
 const TableTickerBody = () => {
-  const coinList = useTickerStore((state) => state.coinList);
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const tickerList = useSortedTickerList();
 
@@ -39,7 +39,7 @@ const TableTickerBody = () => {
             thumb={
               domesticExchange.startsWith('UPBIT')
                 ? createUpbitSymbolIconUrl(ticker.symbol)
-                : coinList.get(ticker.symbol)?.thumb
+                : coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
             }
             symbolName={
               domesticExchange === 'BITHUMB'

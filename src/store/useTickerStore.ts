@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import type { Coin, DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
+import type { DomesticTicker, OverseasTicker, Ticker } from '@/components/ticker/types';
 import type { OverseasExchange } from '@/components/ticker/types';
 import type { DomesticExchange } from '@/components/ticker/types';
 
@@ -15,7 +15,6 @@ interface State {
   tickerMap: Map<Ticker['symbol'], Ticker>;
   domesticExchange: DomesticExchange;
   overseasExchange: OverseasExchange;
-  coinList: Map<string, Coin>;
   sortOption: SortOption;
   searchWord: string;
 }
@@ -25,7 +24,6 @@ interface Action {
   setTickerMap: (tickerList?: Map<Ticker['symbol'], Ticker>) => void;
   setDomesticExchange: (exchange: DomesticExchange) => void;
   setOverseasExchange: (exchange: OverseasExchange) => void;
-  setCoinList: (coinList: Map<string, Coin>) => void;
   setSortOption: (option: SortOption) => void;
   setSearchWord: (searchKeyword: string) => void;
 }
@@ -36,7 +34,6 @@ const initalState: State = {
   tickerMap: new Map(),
   domesticExchange: 'UPBIT_KRW',
   overseasExchange: 'BINANCE_USDT',
-  coinList: new Map(),
   sortOption: { type: 'premium', desc: true },
   searchWord: '',
 };
@@ -72,7 +69,6 @@ export const useTickerStore = create<Store>()(
     setTickerMap: (tickerMap) => set({ tickerMap }, false, 'setTickerMap'),
     setDomesticExchange: (exchange) => set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
     setOverseasExchange: (exchange) => set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
-    setCoinList: (coinList: Map<string, Coin>) => set({ coinList }, false, 'setCoinList'),
     setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
     setSearchWord: (searchKeyword) => set({ searchWord: searchKeyword }, false, 'setSearchKeyword'),
   }))

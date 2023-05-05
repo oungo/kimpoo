@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 import { shallow } from 'zustand/shallow';
 import { fetchQuotation } from '@/api/fetchQuotation';
@@ -7,27 +6,16 @@ import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSel
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
 import SearchInput from '@/components/shared/SearchInput';
 import TableTicker from '@/components/ticker/TableTicker';
-import type { Coin } from '@/components/ticker/types';
-import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
 import type { PageProps } from './_app';
 import type { GetServerSideProps } from 'next';
 
-interface Props {
-  coins: [string, Coin][];
-}
-
-const Index = ({ coins }: Props) => {
-  const setCoinList = useTickerStore((state) => state.setCoinList);
+const Index = () => {
   const { searchWord, setSearchWord } = useTickerStore(
     (state) => ({ searchWord: state.searchWord, setSearchWord: state.setSearchWord }),
     shallow
   );
-
-  useEffect(() => {
-    setCoinList(new Map(coins));
-  }, [coins, setCoinList]);
 
   return (
     <>
@@ -50,26 +38,9 @@ const Index = ({ coins }: Props) => {
   );
 };
 
-const convertCoinsDataToMap = (coins: (typeof coinsData)['coins'], symbols: string[]) => {
-  const map = new Map<string, Coin>();
-
-  coins.forEach((coin) => {
-    if (coin.symbol === 'MIOTA') {
-      map.set('IOTA', coin);
-    }
-    if (coin.symbol === 'FCT') {
-      map.set('FCT2', coin);
-    }
-    if (!symbols.includes(coin.symbol) || map.get(coin.symbol)) return;
-    map.set(coin.symbol, { symbol: coin.symbol, thumb: coin.thumb });
-  });
-
-  return map;
-};
-
-export const getServerSideProps: GetServerSideProps<PageProps & Props> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const queryClient = new QueryClient();
-  const upbitKRWMarket = await queryClient.fetchQuery({
+  await queryClient.fetchQuery({
     queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
     queryFn: () => fetchUpbitMarket('KRW'),
   });
@@ -78,12 +49,9 @@ export const getServerSideProps: GetServerSideProps<PageProps & Props> = async (
     queryFn: fetchQuotation,
   });
 
-  const coinsMap = convertCoinsDataToMap(coinsData.coins, [...upbitKRWMarket.map(({ market }) => market)]);
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      coins: [...coinsMap.entries()],
     },
   };
 };
