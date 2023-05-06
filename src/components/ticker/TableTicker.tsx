@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';
 import TableTickerBody from './TableTickerBody';
@@ -35,9 +36,21 @@ const TableTicker = () => {
         </tr>
       </thead>
 
-      <TableTickerBody />
+      <Suspense fallback={<Loading />}>
+        <TableTickerBody />
+      </Suspense>
     </table>
   );
 };
+
+const Loading = () => (
+  <tbody>
+    <tr className="relative">
+      <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">
+        <i className="text-5xl fa-solid fa-circle-notch fa-spin sm:text-7xl" />
+      </td>
+    </tr>
+  </tbody>
+);
 
 export default TableTicker;

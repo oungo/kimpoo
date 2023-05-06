@@ -28,31 +28,19 @@ const TableTickerBody = () => {
 
   return (
     <tbody>
-      {tickerList.length < 1 ? (
-        <Loading />
-      ) : (
-        tickerList.map((ticker) => (
-          <TickerItem
-            key={ticker.symbol}
-            ticker={ticker}
-            thumb={
-              isBithumb
-                ? coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
-                : createUpbitSymbolIconUrl(ticker.symbol)
-            }
-          />
-        ))
-      )}
+      {tickerList.map((ticker) => (
+        <TickerItem
+          key={ticker.symbol}
+          ticker={ticker}
+          thumb={
+            isBithumb
+              ? coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
+              : createUpbitSymbolIconUrl(ticker.symbol)
+          }
+        />
+      ))}
     </tbody>
   );
 };
-
-const Loading = () => (
-  <tr className="relative">
-    <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">
-      <i className="text-5xl fa-solid fa-circle-notch fa-spin sm:text-7xl" />
-    </td>
-  </tr>
-);
 
 export default TableTickerBody;
