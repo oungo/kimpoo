@@ -46,7 +46,7 @@ export const useTickerStore = create<Store>()(
         ({ tickerMap }) => {
           const tickerItem = tickerMap.get(symbol);
           if (!tickerItem) {
-            return { tickerMap: new Map(tickerMap).set(symbol, ticker as DomesticTicker) };
+            return { tickerMap: new Map(tickerMap).set(symbol, ticker as Ticker) };
           }
 
           let premium;
