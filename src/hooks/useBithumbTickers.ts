@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
-import type { DomesticTicker } from '@/components/ticker/types';
+import type { DomesticTicker, DomesticTickerWithSymbolName } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useBithumbMarketPriceQuery } from './useBithumbMarketPriceQuery';
+import { useBithumbMarketQuery } from './useBithumbMarketQuery';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';
@@ -59,16 +60,18 @@ export const useBithumbTickers = (symbolList: string[] = []) => {
     shallow
   );
 
-  const { data: bithumbMarket } = useBithumbMarketPriceQuery();
+  const { data: bithumbMarketPrice } = useBithumbMarketPriceQuery();
+  const { data: bithumbMarket } = useBithumbMarketQuery();
 
   useEffect(() => {
-    if (domesticExchange !== 'BITHUMB' || !bithumbMarket?.data) return;
+    if (domesticExchange !== 'BITHUMB' || !bithumbMarketPrice?.data) return;
 
-    const bithumbTickerMap: Map<string, DomesticTicker> = new Map();
+    const bithumbTickerMap: Map<string, DomesticTickerWithSymbolName> = new Map();
 
-    for (const market of bithumbMarket?.data) {
-      const ticker: DomesticTicker = {
+    for (const market of bithumbMarketPrice?.data) {
+      const ticker: DomesticTickerWithSymbolName = {
         symbol: market.symbol,
+        symbolName: bithumbMarket?.find(({ coinSymbol }) => coinSymbol === market.symbol)?.coinName || '',
         currentPrice: market.closing_price,
         changeRate: market.closing_price / market.prev_closing_price - 1,
         transactionAmount: market.acc_trade_value_24H,
@@ -77,7 +80,7 @@ export const useBithumbTickers = (symbolList: string[] = []) => {
     }
 
     setTickerMap(new Map(bithumbTickerMap));
-  }, [bithumbMarket, domesticExchange, setTickerMap]);
+  }, [bithumbMarketPrice, bithumbMarket, domesticExchange, setTickerMap]);
 
   useEffect(() => {
     if (domesticExchange !== 'BITHUMB') return;
@@ -112,7 +115,7 @@ export const useBithumbTickers = (symbolList: string[] = []) => {
 
       const { symbol, closePrice, value, prevClosePrice } = data.content;
       const newSymbol = symbol.replace('_KRW', '');
-      const newData: DomesticTicker = {
+      const newData = {
         symbol: newSymbol,
         currentPrice: parseFloat(closePrice),
         changeRate: parseFloat(closePrice) / parseFloat(prevClosePrice) - 1,

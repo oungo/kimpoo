@@ -40,11 +40,6 @@ const TableTickerBody = () => {
                 ? coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
                 : createUpbitSymbolIconUrl(ticker.symbol)
             }
-            symbolName={
-              isBithumb
-                ? bithumbMarket?.find(({ coinSymbol }) => coinSymbol === ticker.symbol)?.coinName
-                : upbitMarket?.find(({ market }) => market === ticker.symbol)?.korean_name
-            }
           />
         ))
       )}

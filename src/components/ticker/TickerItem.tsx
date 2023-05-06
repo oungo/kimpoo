@@ -6,10 +6,9 @@ import type { Ticker } from './types';
 interface Props {
   ticker: Ticker;
   thumb?: string;
-  symbolName?: string;
 }
 
-const TickerItem = ({ ticker, thumb, symbolName }: Props) => (
+const TickerItem = ({ ticker, thumb }: Props) => (
   <tr className="text-right border-b-gray-200 border-b tracking-tight [&>td]:py-1 dark:border-b-neutral-700">
     <td className="text-left">
       <div className="flex items-center gap-1">
@@ -19,7 +18,7 @@ const TickerItem = ({ ticker, thumb, symbolName }: Props) => (
           <div className="w-[15px] h-[15px] rounded-full bg-gray-500 dark:bg-gray-400" />
         )}
 
-        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{symbolName}</p>
+        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{ticker.symbolName}</p>
       </div>
       <div className="flex items-center gap-1">
         <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>

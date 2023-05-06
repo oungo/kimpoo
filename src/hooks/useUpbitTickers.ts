@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { shallow } from 'zustand/shallow';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
+import { useUpbitMarketQuery } from './useUpbitMarketQuery';
 
 interface UpbitTicker {
   /** 마켓 코드  */
@@ -42,6 +43,8 @@ const convertTicker = async (event: MessageEvent<Blob>) => {
 
 export const useUpbitTickers = (symbolList: string[] = []) => {
   const btcPriceRef = useRef(0);
+
+  const { data: upbitMarket } = useUpbitMarketQuery();
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const { setTicker, setTickerMap } = useTickerStore(
@@ -87,7 +90,10 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
     const intervalId = setInterval(updateTicker, 500);
 
     socket.onmessage = async (event: MessageEvent<Blob>) => {
-      const ticker = await convertTicker(event);
+      const convertedTicker = await convertTicker(event);
+      const symbolName = upbitMarket?.find(({ market }) => market === convertedTicker.symbol)?.korean_name;
+      const ticker = Object.assign(convertedTicker, { symbolName });
+
       if (ticker.symbol === 'BTC') {
         btcPriceRef.current = ticker.currentPrice;
       }
@@ -109,5 +115,5 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setTickerMap, isKRWMarket]);
+  }, [setTicker, symbolList, domesticExchange, setTickerMap, isKRWMarket, upbitMarket]);
 };

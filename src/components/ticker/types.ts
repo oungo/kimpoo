@@ -1,4 +1,4 @@
-export type Ticker = DomesticTicker & Partial<OverseasTicker> & { premium?: number };
+export type Ticker = DomesticTicker & Partial<OverseasTicker> & { symbolName: string; premium?: number };
 
 export interface DomesticTicker {
   symbol: string;
@@ -7,6 +7,8 @@ export interface DomesticTicker {
   transactionAmount: number;
   caution?: boolean;
 }
+
+export type DomesticTickerWithSymbolName = DomesticTicker & { symbolName: string };
 
 type PickedDomesticTicker = Pick<DomesticTicker, 'currentPrice' | 'transactionAmount'>;
 export type OverseasTicker = {
