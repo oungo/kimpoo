@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { shallow } from 'zustand/shallow';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
 import { useUpbitMarketQuery } from './useUpbitMarketQuery';
@@ -47,13 +46,7 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
   const { data: upbitMarket } = useUpbitMarketQuery();
 
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
-  const { setTicker, setTickerMap } = useTickerStore(
-    (state) => ({
-      setTicker: state.setTicker,
-      setTickerMap: state.setTickerMap,
-    }),
-    shallow
-  );
+  const setTicker = useTickerStore((state) => state.setTicker);
 
   const isKRWMarket = domesticExchange === 'UPBIT_KRW';
 
@@ -115,5 +108,5 @@ export const useUpbitTickers = (symbolList: string[] = []) => {
       clearInterval(intervalId);
       socket.close();
     };
-  }, [setTicker, symbolList, domesticExchange, setTickerMap, isKRWMarket, upbitMarket]);
+  }, [setTicker, symbolList, domesticExchange, isKRWMarket, upbitMarket]);
 };
