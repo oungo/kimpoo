@@ -31,9 +31,19 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="subject" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
-        <meta name="description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다. " />
+        <meta name="description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
         <meta name="author" content="oungo" />
         <meta name="robots" content="index,follow" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kimpoo.vercel.app" />
+        <meta property="og:title" content="KIMPOO - 김치 프리미엄 및 암호화폐 실시간 시세 확인" />
+        {/* <meta property="og:image" content="" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" /> */}
+        <meta property="og:description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
+        <meta property="og:site_name" content="KIMPOO - 김치 프리미엄 및 암호화폐 실시간 시세 확인" />
+        <meta property="og:locale" content="ko_KR" />
       </Head>
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       <QueryClientProvider client={queryClient}>
