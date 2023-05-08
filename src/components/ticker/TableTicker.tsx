@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';
 import TableTickerBody from './TableTickerBody';
@@ -36,9 +35,7 @@ const TableTicker = () => {
         </tr>
       </thead>
 
-      <Suspense fallback={<Loading />}>
-        <TableTickerBody />
-      </Suspense>
+      <TableTickerBody />
     </table>
   );
 };
