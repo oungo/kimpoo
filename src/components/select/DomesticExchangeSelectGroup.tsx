@@ -1,15 +1,23 @@
 import Image from 'next/image';
+import { shallow } from 'zustand/shallow';
 import type { DomesticExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';
 import { useTickerStore } from 'store/useTickerStore';
 
 const DomesticExchangeSelectGroup = () => {
-  const setDomesticExchange = useTickerStore((state) => state.setDomesticExchange);
+  const { domesticExchange, setDomesticExchange } = useTickerStore(
+    (state) => ({ domesticExchange: state.domesticExchange, setDomesticExchange: state.setDomesticExchange }),
+    shallow
+  );
   const setTickerMap = useTickerStore((state) => state.setTickerMap);
+  const setSearchWord = useTickerStore((state) => state.setSearchWord);
 
   const handleSelect = (option: string) => {
-    setDomesticExchange(option as DomesticExchange);
-    setTickerMap();
+    if (domesticExchange !== option) {
+      setDomesticExchange(option as DomesticExchange);
+      setTickerMap();
+      setSearchWord('');
+    }
   };
 
   return (
