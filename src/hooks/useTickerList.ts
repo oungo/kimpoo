@@ -7,7 +7,7 @@ export const useTickerList = () => {
 
   if (!searchWord) return sortedTickerList;
 
-  const tickerList = sortedTickerList.filter((ticker) => {
+  const tickerList = sortedTickerList?.filter((ticker) => {
     return ticker.symbol.toLowerCase().includes(searchWord.toLowerCase()) || ticker.symbolName.includes(searchWord);
   });
 
