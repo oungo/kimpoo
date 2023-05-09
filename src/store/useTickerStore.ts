@@ -12,7 +12,7 @@ interface SortOption {
 }
 
 interface State {
-  tickerMap: Map<Ticker['symbol'], Ticker>;
+  tickerMap?: Map<Ticker['symbol'], Ticker>;
   domesticExchange: DomesticExchange;
   overseasExchange: OverseasExchange;
   sortOption: SortOption;
@@ -31,7 +31,6 @@ interface Action {
 type Store = State & Action;
 
 const initalState: State = {
-  tickerMap: new Map(),
   domesticExchange: 'UPBIT_KRW',
   overseasExchange: 'BINANCE_USDT',
   sortOption: { type: 'premium', desc: true },
@@ -44,7 +43,7 @@ export const useTickerStore = create<Store>()(
     setTicker: (symbol, ticker) => {
       set(
         ({ tickerMap }) => {
-          const tickerItem = tickerMap.get(symbol);
+          const tickerItem = tickerMap?.get(symbol);
           if (!tickerItem) {
             return { tickerMap: new Map(tickerMap).set(symbol, ticker as Ticker) };
           }

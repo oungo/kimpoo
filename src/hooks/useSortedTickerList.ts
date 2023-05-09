@@ -4,6 +4,8 @@ export const useSortedTickerList = () => {
   const tickerMap = useTickerStore((state) => state.tickerMap);
   const { type, desc } = useTickerStore((state) => state.sortOption);
 
+  if (!tickerMap) return;
+
   const tickerList = [...tickerMap.values()];
 
   switch (type) {

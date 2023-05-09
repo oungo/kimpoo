@@ -9,7 +9,7 @@ const DomesticExchangeSelectGroup = () => {
 
   const handleSelect = (option: string) => {
     setDomesticExchange(option as DomesticExchange);
-    setTickerMap(new Map());
+    setTickerMap();
   };
 
   return (
