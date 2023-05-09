@@ -19,9 +19,9 @@ const Index = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2 text-center sm:w-1/2 sm:m-auto">
+      <div className="flex items-center justify-center gap-10 text-center sm:w-1/2 sm:m-auto">
         <DomesticExchangeSelectGroup />
-        <i className="text-xs fa-solid fa-right-left" />
+        <i className="absolute text-xs fa-solid fa-right-left" />
         <OverseasExchangeSelectGroup />
       </div>
 
