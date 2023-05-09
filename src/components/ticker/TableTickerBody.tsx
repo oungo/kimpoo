@@ -27,10 +27,11 @@ const TableTickerBody = () => {
   useBinanceTickers(symbolList);
 
   if (!tickerList) return <Loading />;
+  if (tickerList.length < 1) return <Empty />;
 
   return (
     <tbody>
-      {tickerList?.map((ticker) => (
+      {tickerList.map((ticker) => (
         <TickerItem
           key={ticker.symbol}
           ticker={ticker}
@@ -51,6 +52,14 @@ const Loading = () => (
       <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">
         <i className="text-5xl fa-solid fa-circle-notch fa-spin sm:text-7xl" />
       </td>
+    </tr>
+  </tbody>
+);
+
+const Empty = () => (
+  <tbody>
+    <tr className="relative">
+      <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">암호화폐를 찾을 수 없습니다.</td>
     </tr>
   </tbody>
 );
