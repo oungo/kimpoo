@@ -34,17 +34,14 @@ const Nav = () => {
           KIMPOO
         </Link>
         <button
+          aria-label="다크모드 변경"
           className={`${
             effect && 'animate-rotate'
           } text-2xl  w-10 h-10 justify-center flex items-center rounded-full hover:bg-gray-200 hover:dark:bg-neutral-700 p-2`}
           onAnimationEnd={() => setEffect(false)}
           onClick={handleClickButton}
         >
-          {theme === 'light' ? (
-            <i className="fa-solid fa-sun" />
-          ) : (
-            <i className="fa-solid fa-moon" />
-          )}
+          {theme === 'light' ? <i className="fa-solid fa-sun" /> : <i className="fa-solid fa-moon" />}
         </button>
       </div>
     </nav>
