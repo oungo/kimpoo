@@ -3,8 +3,9 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import Layout from '@/components/layout';
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import type { ReactElement, ReactNode } from 'react';
 import type { DehydratedState } from 'react-query';
 import '@/styles/globals.css';
 
@@ -17,8 +18,18 @@ const roboto = Roboto_Flex({
   variable: '--font-roboto',
 });
 
-const App = ({ Component, pageProps }: AppProps<PageProps>) => {
+export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps<PageProps> & {
+  Component: NextPageWithLayout<PageProps>;
+};
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const [queryClient] = useState(() => new QueryClient());
+
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
     <>
@@ -48,11 +59,7 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Layout>
-            <main className={`max-w-screen-lg min-h-screen px-2 py-4 m-auto ${roboto.variable} font-roboto`}>
-              <Component {...pageProps} />
-            </main>
-          </Layout>
+          <main className={`${roboto.variable} font-roboto`}>{getLayout(<Component {...pageProps} />)}</main>
         </Hydrate>
       </QueryClientProvider>
     </>
