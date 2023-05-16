@@ -55,6 +55,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta property="og:description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
         <meta property="og:site_name" content="KIMPOO - 김치 프리미엄 및 암호화폐 실시간 시세 확인" />
         <meta property="og:locale" content="ko_KR" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       <QueryClientProvider client={queryClient}>
