@@ -1,0 +1,13 @@
+{
+  "name": "KIMPOO",
+  "short_name": "KIMPOO",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "theme_color": "#171717",
+  "background_color": "#171717",
+  "display": "standalone",
+  "description": "암호화폐 시세 및 김치프리미엄을 실시간 제공합니다."
+}
