@@ -1,6 +1,6 @@
 const ContentSecurityPolicy = `
   default-src 'self' https: wss:;
-  script-src 'self' https://kit.fontawesome.com 'unsafe-eval';
+  script-src 'self' https://kit.fontawesome.com https://www.googletagmanager.com 'unsafe-eval' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
   font-src 'self' https:;
 `;
