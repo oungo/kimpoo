@@ -49,7 +49,7 @@ export const useTickerStore = create<Store>()(
           }
 
           let premium;
-          if (tickerItem?.oCurrentPrice && tickerItem.currentPrice) {
+          if (tickerItem.oCurrentPrice && tickerItem.currentPrice) {
             premium = tickerItem.currentPrice / tickerItem.oCurrentPrice - 1;
           }
 
