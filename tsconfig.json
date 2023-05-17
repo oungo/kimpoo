@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./src",
+    "types": ["@types/gtag.js"],
     "paths": {
       "@/api/*": ["api/*"],
       "@/components/*": ["components/*"],
