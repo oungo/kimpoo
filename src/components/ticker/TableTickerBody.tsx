@@ -31,10 +31,11 @@ const TableTickerBody = () => {
 
   return (
     <tbody>
-      {tickerList.map((ticker) => (
+      {tickerList.map((ticker, index) => (
         <TickerItem
           key={ticker.symbol}
           ticker={ticker}
+          priority={index < 10}
           thumb={
             isBithumb
               ? coinsData.coins.find((coin) => coin.symbol === ticker.symbol)?.thumb
