@@ -13,7 +13,14 @@ const TickerItem = ({ ticker, thumb }: Props) => (
     <td className="text-left">
       <div className="flex items-center gap-1">
         {thumb ? (
-          <Image src={thumb} alt={`${ticker.symbol} 아이콘`} width={15} height={15} className="rounded-full" />
+          <Image
+            unoptimized
+            src={thumb}
+            alt={`${ticker.symbol} 아이콘`}
+            width={15}
+            height={15}
+            className="rounded-full"
+          />
         ) : (
           <div className="w-[15px] h-[15px] rounded-full bg-gray-500 dark:bg-gray-400" />
         )}
