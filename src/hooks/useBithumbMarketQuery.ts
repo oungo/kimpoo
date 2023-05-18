@@ -12,5 +12,6 @@ export const useBithumbMarketQuery = () => {
     enabled: domesticExchange === 'BITHUMB',
     refetchOnWindowFocus: false,
     retry: false,
+    useErrorBoundary: true,
   });
 };

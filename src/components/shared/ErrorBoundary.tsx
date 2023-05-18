@@ -3,7 +3,7 @@ import type { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
-  fallback?: ReactNode;
+  fallback: ReactNode;
 }
 
 interface State {
@@ -20,12 +20,12 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught errora:', error, errorInfo);
+    console.error('Uncaught error:', error, errorInfo);
   }
 
   public render() {
     if (this.state.hasError) {
-      return <h1>{this.props.fallback}</h1>;
+      return <>{this.props.fallback}</>;
     }
 
     return this.props.children;
