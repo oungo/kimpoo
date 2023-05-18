@@ -20,7 +20,13 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    fetch('/api/logError', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ error, errorInfo }),
+    }).catch((error) => console.error(`Failed to log error in ErrorBoundary. ${error}`));
   }
 
   public render() {
