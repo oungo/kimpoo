@@ -42,14 +42,19 @@ const Index: NextPageWithLayout = () => {
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const queryClient = new QueryClient();
-  await queryClient.fetchQuery({
-    queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
-    queryFn: () => fetchUpbitMarket('KRW'),
-  });
-  await queryClient.prefetchQuery({
-    queryKey: [queryKeys.QUOTATION],
-    queryFn: fetchQuotation,
-  });
+
+  try {
+    await queryClient.fetchQuery({
+      queryKey: [queryKeys.UPBIT_MARKET, 'UPBIT_KRW'],
+      queryFn: () => fetchUpbitMarket('KRW'),
+    });
+    await queryClient.prefetchQuery({
+      queryKey: [queryKeys.QUOTATION],
+      queryFn: fetchQuotation,
+    });
+  } catch (error) {
+    return { redirect: { destination: '/500', permanent: false } };
+  }
 
   return {
     props: {
