@@ -50,18 +50,18 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>KIMPUU - 김치프리미엄 암호화폐 시세</title>
-        <meta name="description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
+        <title>김프 김치프리미엄(kimchi premium) - KIMPUU</title>
+        <meta name="description" content="김치프리미엄(김프) 및 암호화폐 시세를 실시간 제공합니다." />
         <meta name="robots" content="index,follow" />
 
-        <meta property="og:title" content="KIMPUU - 김치프리미엄 암호화폐 시세" />
-        <meta property="og:description" content="암호화폐 시세 및 김치프리미엄을 실시간 제공합니다." />
+        <meta property="og:title" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" />
+        <meta property="og:description" content="김치프리미엄 및 암호화폐 시세를 실시간 제공합니다." />
         <meta property="og:url" content="https://kimpuu.com" />
         <meta property="og:image" content="https://kimpuu.com/og-image.svg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIMPUU - 김치프리미엄 암호화폐 시세" />
+        <meta property="og:site_name" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" />
         <meta property="og:locale" content="ko_KR" />
 
         <link rel="icon" href="/favicon.ico" />
