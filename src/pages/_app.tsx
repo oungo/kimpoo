@@ -74,12 +74,17 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <link rel="canonical" href="https://kimpuu.com" />
       </Head>
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
-      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+      {process.env.NODE_ENV === 'production' && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -87,8 +92,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
               page_path: window.location.pathname,
             });
           `,
-        }}
-      />
+            }}
+          />
+        </>
+      )}
+
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <main className={`${roboto.variable} font-roboto`}>{getLayout(<Component {...pageProps} />)}</main>
