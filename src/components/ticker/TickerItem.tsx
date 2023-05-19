@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { memo } from 'react';
 import { useFlashTextAnimation } from '@/hooks/useFlashTextAnimation';
 import { formatCurrentPrice, formatNumber, formatPercent } from '@/utils/common';
+import IconCaution from './IconCaution';
 import type { Ticker } from './types';
 
 interface Props {
@@ -35,7 +36,7 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
         </div>
         <div className="flex items-center gap-1">
           <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
-          {ticker.caution && <i className="text-yellow-400 fa-solid fa-circle-exclamation" />}
+          {ticker.caution && <IconCaution />}
         </div>
       </td>
 
