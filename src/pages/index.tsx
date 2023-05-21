@@ -21,13 +21,13 @@ const Index: NextPageWithLayout = () => {
 
   return (
     <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
-      <div className="flex items-center justify-center gap-10 text-center sm:w-1/2 sm:m-auto">
-        <DomesticExchangeSelectGroup />
-        <i className="absolute text-xs fa-solid fa-right-left" />
-        <OverseasExchangeSelectGroup />
-      </div>
+      <div className="sm:flex sm:items-center sm:justify-between">
+        <div className="flex items-center justify-center gap-10 mb-5 text-center sm:w-1/2 sm:mb-0">
+          <DomesticExchangeSelectGroup />
+          <i className="absolute text-xs fa-solid fa-right-left" />
+          <OverseasExchangeSelectGroup />
+        </div>
 
-      <div className="mt-4 text-right">
         <SearchInput
           value={searchWord}
           onChange={(e) => setSearchWord(e.target.value)}
