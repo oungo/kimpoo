@@ -36,7 +36,7 @@ const DomesticExchangeSelectGroup = () => {
       </Option>
       <Option value="BITHUMB">
         <div className="flex items-center h-5 gap-2">
-          <Image width={20} height={20} src="/images/bithumb.webp" alt="bithumb" />
+          <Image width={20} height={20} src="/images/bithumb.webp" alt="bithumb" priority />
           <span className="text-xs">빗썸</span>
         </div>
       </Option>

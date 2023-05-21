@@ -22,17 +22,19 @@ const Index: NextPageWithLayout = () => {
   return (
     <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
       <div className="sm:flex sm:items-center sm:justify-between">
-        <div className="flex items-center justify-center gap-10 mb-5 text-center sm:w-1/2 sm:mb-0">
+        <div className="relative flex items-center justify-between gap-10 mb-4 text-center sm:mb-0">
           <DomesticExchangeSelectGroup />
-          <i className="absolute text-xs fa-solid fa-right-left" />
+          <i className="absolute text-xs -translate-x-1/2 fa-solid fa-right-left left-1/2" />
           <OverseasExchangeSelectGroup />
         </div>
 
-        <SearchInput
-          value={searchWord}
-          onChange={(e) => setSearchWord(e.target.value)}
-          onClear={() => setSearchWord('')}
-        />
+        <div className="text-right">
+          <SearchInput
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+            onClear={() => setSearchWord('')}
+          />
+        </div>
       </div>
 
       <TableTicker />

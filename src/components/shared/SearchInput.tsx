@@ -8,7 +8,7 @@ interface Props {
 
 const SearchInput = ({ value, onChange, onClear }: Props) => {
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block text-right">
       <i className="absolute -translate-y-1/2 top-1/2 fa-solid fa-magnifying-glass left-2" />
       <input
         value={value}
