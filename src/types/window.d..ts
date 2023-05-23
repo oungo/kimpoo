@@ -1,7 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Window {
-  TradingView: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    widget: any;
-  };
+/* eslint-disable @typescript-eslint/no-explicit-any */
+declare global {
+  interface Window {
+    TradingView: {
+      widget: any;
+    };
+  }
 }
+
+export {};
