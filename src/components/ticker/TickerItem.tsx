@@ -3,6 +3,7 @@ import { memo, useState } from 'react';
 import { useFlashTextAnimation } from '@/hooks/useFlashTextAnimation';
 import { formatCurrentPrice, formatNumber, formatPercent } from '@/utils/common';
 import IconCaution from './IconCaution';
+import IconFavorite from './IconFavorite';
 import TradingViewWidget from './TradingViewWidget';
 import type { Ticker } from './types';
 
@@ -41,11 +42,7 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
             <p className="overflow-hidden whitespace-nowrap text-ellipsis">{ticker.symbolName}</p>
           </div>
           <div className="flex items-center gap-1">
-            <i
-              className={`text-gray-500 cursor-pointer fa-solid ${
-                showChart ? 'fa-angle-up' : 'fa-angle-down'
-              } dark:text-gray-400 reletive`}
-            />
+            <IconFavorite symbol={ticker.symbol} />
             <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
             {ticker.caution && <IconCaution />}
           </div>
