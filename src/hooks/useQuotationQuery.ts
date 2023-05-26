@@ -7,4 +7,5 @@ export const useQuotationQuery = () =>
     queryKey: [queryKeys.QUOTATION],
     queryFn: fetchQuotation,
     refetchOnWindowFocus: false,
+    refetchInterval: 1000 * 60,
   });
