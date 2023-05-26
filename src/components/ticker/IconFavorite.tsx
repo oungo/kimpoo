@@ -37,7 +37,7 @@ const IconFavorite = ({ symbol }: Props) => {
     <i
       className={`${
         isFavorite ? 'text-yellow-500 dark:text-yellow-400' : 'text-gray-300 dark:text-gray-500'
-      } cursor-pointer fa-solid fa-star w-[15px] h-[15px]`}
+      } cursor-pointer fa-solid fa-star w-[15px] h-[15px] !flex !items-center !justify-center`}
       onClick={handleClick}
     />
   );
