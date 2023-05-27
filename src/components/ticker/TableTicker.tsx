@@ -9,11 +9,12 @@ const TableTicker = () => {
   return (
     <table className="w-full max-w-screen-lg mt-4 text-xs table-fixed sm:text-sm">
       <colgroup>
-        <col width="30%" />
+        <col width="25%" />
         <col />
         <col />
         <col />
         <col width="20%" />
+        <col width="3%" />
       </colgroup>
 
       <thead className="text-xs">

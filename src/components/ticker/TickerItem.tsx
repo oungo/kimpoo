@@ -86,11 +86,13 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
             {ticker.oTransactionAmount ? formatNumber(ticker.oTransactionAmount, { notation: 'compact' }) : '-'}
           </p>
         </td>
+
+        <td>{showChart ? <i className="fa-solid fa-angle-up" /> : <i className="fa-solid fa-angle-down" />}</td>
       </tr>
 
       {showChart && (
         <tr>
-          <td colSpan={5} className="h-80">
+          <td colSpan={6} className="h-80">
             <TradingViewWidget symbol={ticker.symbol} />
           </td>
         </tr>
