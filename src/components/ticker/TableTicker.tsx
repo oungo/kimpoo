@@ -14,7 +14,6 @@ const TableTicker = () => {
         <col />
         <col />
         <col width="20%" />
-        <col width="3%" />
       </colgroup>
 
       <thead className="text-xs">
