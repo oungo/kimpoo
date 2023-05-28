@@ -49,7 +49,10 @@ const Select = ({ children, defaultValue = '', placeholder, onSelect }: Props) =
         className="relative w-full bg-white border border-gray-200 rounded-md dark:border-neutral-700 dark:bg-neutral-800 sm:w-40"
         ref={selectContainerRef}
       >
-        <button className="px-5 py-2.5 rounded-md [&>*]:justify-center" onClick={() => setShowDropdown(!showDropdown)}>
+        <button
+          className="w-full px-5 py-2.5 rounded-md [&>*]:justify-center"
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
           {selectedOptionChild || selectedPlaceholder}
         </button>
         <ul
