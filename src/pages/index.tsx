@@ -11,7 +11,7 @@ import TableTicker from '@/components/ticker/TableTicker';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';
 import type { NextPageWithLayout, PageProps } from './_app';
-import type { GetServerSideProps } from 'next';
+import type { GetStaticProps } from 'next';
 import type { ReactElement } from 'react';
 
 const Index: NextPageWithLayout = () => {
@@ -47,7 +47,7 @@ const Index: NextPageWithLayout = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
   const queryClient = new QueryClient();
 
   try {
@@ -67,6 +67,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 60,
   };
 };
 
