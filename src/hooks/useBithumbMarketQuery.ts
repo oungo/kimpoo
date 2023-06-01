@@ -10,8 +10,6 @@ export const useBithumbMarketQuery = () => {
     queryKey: [queryKeys.BITHUMB_MARKET],
     queryFn: fetchBithumb,
     enabled: domesticExchange === 'BITHUMB',
-    refetchOnWindowFocus: false,
-    retry: false,
     useErrorBoundary: true,
   });
 };

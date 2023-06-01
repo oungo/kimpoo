@@ -8,7 +8,7 @@ import * as gtag from '@/utils/gtag';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
-import type { DehydratedState } from 'react-query';
+import type { DehydratedState, QueryClientConfig } from 'react-query';
 import '@/styles/globals.css';
 
 export interface PageProps {
@@ -28,8 +28,17 @@ type AppPropsWithLayout = AppProps<PageProps> & {
   Component: NextPageWithLayout<PageProps>;
 };
 
+const defaultOptions: QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+};
+
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient(defaultOptions));
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -64,10 +73,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta property="og:site_name" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" />
         <meta property="og:locale" content="ko_KR" />
 
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717" />
         <link rel="manifest" href="/manifest.json" />

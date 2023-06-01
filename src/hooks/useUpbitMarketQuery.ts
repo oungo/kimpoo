@@ -10,7 +10,5 @@ export const useUpbitMarketQuery = () => {
     queryKey: [queryKeys.UPBIT_MARKET, domesticExchange],
     queryFn: () => fetchUpbitMarket(domesticExchange === 'UPBIT_KRW' ? 'KRW' : 'BTC'),
     enabled: domesticExchange === 'UPBIT_KRW' || domesticExchange === 'UPBIT_BTC',
-    refetchOnWindowFocus: false,
-    retry: false,
   });
 };

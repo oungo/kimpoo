@@ -10,7 +10,5 @@ export const useBithumbMarketPriceQuery = () => {
     queryKey: [queryKeys.BITHUMB_MARKET_PRICE],
     queryFn: fetchBithumbMarketPrice,
     enabled: domesticExchange === 'BITHUMB',
-    refetchOnWindowFocus: false,
-    retry: false,
   });
 };
