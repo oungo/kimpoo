@@ -1,14 +1,14 @@
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Roboto_Flex } from 'next/font/google';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import * as gtag from '@/utils/gtag';
+import type { DehydratedState, QueryClientConfig } from '@tanstack/react-query';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
-import type { DehydratedState, QueryClientConfig } from 'react-query';
 import '@/styles/globals.css';
 
 export interface PageProps {

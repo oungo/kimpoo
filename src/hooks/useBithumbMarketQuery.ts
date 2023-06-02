@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchBithumb } from '@/api/fetchBithumbMarket';
 import { useTickerStore } from '@/store/useTickerStore';
 import * as queryKeys from '@/utils/queryKeys';

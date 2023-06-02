@@ -1,5 +1,5 @@
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import Script from 'next/script';
-import { dehydrate, QueryClient } from 'react-query';
 import { shallow } from 'zustand/shallow';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import { fetchUpbitMarket } from '@/api/fetchUpbitMarket';

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchQuotation } from '@/api/fetchQuotation';
 import * as queryKeys from '@/utils/queryKeys';
 
