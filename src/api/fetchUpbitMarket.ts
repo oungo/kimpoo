@@ -6,7 +6,7 @@ export interface UpbitMarket {
 }
 
 export const fetchUpbitMarket = async (type: 'BTC' | 'KRW' = 'KRW'): Promise<UpbitMarket[]> => {
-  const response = await fetch('https://api.upbit.com/v1/market/all');
+  const response = await fetch('https://api.upbit.com/v1/market/all', { cache: 'no-store' });
 
   if (response.ok) {
     const upbitMarket: UpbitMarket[] = await response.json();

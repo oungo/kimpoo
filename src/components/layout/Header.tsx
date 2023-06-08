@@ -1,9 +1,7 @@
-'use client';
+import { fetchQuotation } from '@/api/fetchQuotation';
 
-import { useQuotationQuery } from '@/hooks/useQuotationQuery';
-
-const Header = () => {
-  const { data: quotation } = useQuotationQuery();
+const Header = async () => {
+  const quotation = await fetchQuotation();
 
   return (
     <header className="p-2 border-b dark:border-neutral-700">
