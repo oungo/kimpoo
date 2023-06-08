@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { SelectContext } from './selectContext';

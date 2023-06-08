@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { shallow } from 'zustand/shallow';
 import type { DomesticExchange } from '@/components/ticker/types';

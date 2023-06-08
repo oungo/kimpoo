@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 import type { DomesticTicker, DomesticTickerWithSymbolName } from '@/components/ticker/types';

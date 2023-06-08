@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import type { OverseasExchange } from '@/components/ticker/types';
 import { Select, Option } from '.';

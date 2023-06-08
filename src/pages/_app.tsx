@@ -56,30 +56,26 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* <meta charSet="utf-8" /> */}
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
 
-        <title>김프 김치프리미엄(kimchi premium) - KIMPUU</title>
-        <meta name="description" content="김치프리미엄(김프) 및 암호화폐 시세를 실시간 제공합니다." />
-        <meta name="robots" content="index,follow" />
+        {/* <meta name="robots" content="index,follow" /> */}
 
-        <meta property="og:title" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" />
-        <meta property="og:description" content="김치프리미엄 및 암호화폐 시세를 실시간 제공합니다." />
-        <meta property="og:url" content="https://kimpuu.com" />
-        <meta property="og:image" content="https://kimpuu.com/og-image.svg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" />
-        <meta property="og:locale" content="ko_KR" />
+        {/* <meta property="og:title" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" /> */}
+        {/* <meta property="og:description" content="김치프리미엄 및 암호화폐 시세를 실시간 제공합니다." /> */}
+        {/* <meta property="og:url" content="https://kimpuu.com" /> */}
+        {/* <meta property="og:image:width" content="1200" /> */}
+        {/* <meta property="og:image:height" content="630" /> */}
+        {/* <meta property="og:type" content="website" /> */}
+        {/* <meta property="og:site_name" content="KIMPUU - 김치프리미엄 및 암호화폐 시세 확인" /> */}
+        {/* <meta property="og:locale" content="ko_KR" /> */}
 
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://kimpuu.com" />
+        {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
+        {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> */}
+        {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /> */}
+        {/* <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" /> */}
+        {/* <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717" /> */}
+        {/* <link rel="manifest" href="/manifest.json" /> */}
       </Head>
       <Script src="https://kit.fontawesome.com/110e54d917.js" crossOrigin="anonymous" key="fontawesome" />
       {process.env.NODE_ENV === 'production' && (

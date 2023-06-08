@@ -1,3 +1,5 @@
+'use client';
+
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';

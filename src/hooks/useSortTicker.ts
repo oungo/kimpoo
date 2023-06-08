@@ -1,3 +1,5 @@
+'use client';
+
 import { shallow } from 'zustand/shallow';
 import type { SortType } from '@/store/useTickerStore';
 import { useTickerStore } from '@/store/useTickerStore';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuotationQuery } from '@/hooks/useQuotationQuery';
 
 const Header = () => {

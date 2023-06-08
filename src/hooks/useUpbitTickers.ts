@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import type { DomesticTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';

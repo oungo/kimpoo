@@ -15,9 +15,7 @@ const TableHeader = ({ sortType, onSort, children }: Props) => {
     <th
       onClick={onSort}
       className={`py-2 cursor-pointer ${sortType === 'symbol' ? 'text-left' : 'text-right'} ${
-        sortOption.type === sortType
-          ? '!text-black dark:!text-white'
-          : 'text-neutral-400 dark:text-neutral-400'
+        sortOption.type === sortType ? '!text-black dark:!text-white' : 'text-neutral-400 dark:text-neutral-400'
       }`}
     >
       {children}

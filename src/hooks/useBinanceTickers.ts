@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import type { OverseasExchange, OverseasTicker } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/useTickerStore';
