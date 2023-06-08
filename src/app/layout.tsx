@@ -14,6 +14,10 @@ const roboto = Roboto_Flex({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/js/theme.js" />
+      </head>
       <body className={`${roboto.variable} font-roboto`}>
         <Provider>
           <Layout>{children}</Layout>
