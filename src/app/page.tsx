@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Script from 'next/script';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
@@ -12,7 +11,6 @@ const Page: NextPageWithLayout = () => {
     <>
       <Script src="https://s3.tradingview.com/tv.js" />
 
-      <Link href="/about">asdf</Link>
       <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="relative flex items-center justify-between gap-10 mb-4 text-center sm:mb-0">
