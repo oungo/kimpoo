@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Script from 'next/script';
 import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
 import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
@@ -5,6 +6,31 @@ import SearchInput from '@/components/shared/SearchInput';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Metadata } from 'next';
 import type { NextPageWithLayout } from 'pages/_app';
+
+const Page: NextPageWithLayout = () => {
+  return (
+    <>
+      <Script src="https://s3.tradingview.com/tv.js" />
+
+      <Link href="/about">asdf</Link>
+      <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="relative flex items-center justify-between gap-10 mb-4 text-center sm:mb-0">
+            <DomesticExchangeSelectGroup />
+            <i className="absolute text-xs -translate-x-1/2 fa-solid fa-right-left left-1/2" />
+            <OverseasExchangeSelectGroup />
+          </div>
+
+          <div className="text-right">
+            <SearchInput />
+          </div>
+        </div>
+
+        <TableTicker />
+      </article>
+    </>
+  );
+};
 
 export const metadata: Metadata = {
   title: {
@@ -58,31 +84,7 @@ export const metadata: Metadata = {
       color: '#171717',
     },
   ],
-  manifest: 'https://kimpuu/manifest.json',
-};
-
-const Page: NextPageWithLayout = () => {
-  return (
-    <>
-      <Script src="https://s3.tradingview.com/tv.js" />
-
-      <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="relative flex items-center justify-between gap-10 mb-4 text-center sm:mb-0">
-            <DomesticExchangeSelectGroup />
-            <i className="absolute text-xs -translate-x-1/2 fa-solid fa-right-left left-1/2" />
-            <OverseasExchangeSelectGroup />
-          </div>
-
-          <div className="text-right">
-            <SearchInput />
-          </div>
-        </div>
-
-        <TableTicker />
-      </article>
-    </>
-  );
+  manifest: 'https://kimpuu.com/manifest.json',
 };
 
 export default Page;
