@@ -4,9 +4,8 @@ import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSel
 import SearchInput from '@/components/shared/SearchInput';
 import TableTicker from '@/components/ticker/TableTicker';
 import type { Metadata } from 'next';
-import type { NextPageWithLayout } from 'pages/_app';
 
-const Page: NextPageWithLayout = () => {
+const Page = () => {
   return (
     <>
       <Script src="https://s3.tradingview.com/tv.js" />
