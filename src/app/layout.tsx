@@ -1,9 +1,7 @@
 import { Roboto_Flex } from 'next/font/google';
 import Script from 'next/script';
 import { NavigationEvents } from '@/components/NavigationEvents';
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
-import Nav from '@/components/layout/Nav';
+import Layout from '@/components/layout';
 import * as gtag from '@/utils/gtag';
 import Provider from 'app/provider';
 import '@/styles/globals.css';
@@ -18,10 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className={`${roboto.variable} font-roboto`}>
         <Provider>
-          <Header />
-          <Nav />
-          {children}
-          <Footer />
+          <Layout>{children}</Layout>
         </Provider>
 
         <NavigationEvents />
