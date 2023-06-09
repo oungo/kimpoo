@@ -32,7 +32,7 @@ const Nav = () => {
   return (
     <nav className="h-20 p-2 border-b dark:border-neutral-700">
       <div className="flex items-center justify-between h-full max-w-screen-lg m-auto">
-        <Link className="text-2xl font-extrabold text-pink-500 sm:text-4xl" href="/">
+        <Link className="text-2xl font-extrabold text-pink-500 sm:text-4xl" href="/(test)/index">
           KIMPUU
         </Link>
         <button
