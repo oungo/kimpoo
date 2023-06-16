@@ -36,17 +36,6 @@ export const metadata: Metadata = {
   },
   description: '김치프리미엄(김프) 및 암호화폐 시세를 실시간 제공합니다.',
   referrer: 'origin-when-cross-origin',
-  keywords: [
-    '김프',
-    '김치프리미엄',
-    '암호화폐',
-    '코인',
-    '암호화폐 시세',
-    '비트코인',
-    '이더리움',
-    'btc',
-    'kimchi premium',
-  ],
   authors: [{ name: 'oungo' }],
   metadataBase: new URL('https://kimpuu.com'),
   alternates: {
