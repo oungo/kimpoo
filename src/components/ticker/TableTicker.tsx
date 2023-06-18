@@ -1,9 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';
 import TableTickerBody from './TableTickerBody';
+import Loading from 'app/(ticker)/loading';
 
 const TableTicker = () => {
   const { sortTicker } = useSortTicker();
@@ -39,7 +41,9 @@ const TableTicker = () => {
       </thead>
 
       <ErrorBoundary fallback={<Error />}>
-        <TableTickerBody />
+        <Suspense fallback={<Loading />}>
+          <TableTickerBody />
+        </Suspense>
       </ErrorBoundary>
     </table>
   );
