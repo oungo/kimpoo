@@ -10,6 +10,8 @@ const defaultOptions: QueryClientConfig = {
     queries: {
       retry: false,
       refetchOnWindowFocus: false,
+      suspense: true,
+      useErrorBoundary: true,
     },
   },
 };
