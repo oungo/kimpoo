@@ -9,6 +9,7 @@ import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/useTickerStore';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
 import TickerItem from './TickerItem';
+import Loading from 'app/(ticker)/loading';
 
 const TableTickerBody = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
@@ -46,16 +47,6 @@ const TableTickerBody = () => {
     </tbody>
   );
 };
-
-const Loading = () => (
-  <tbody>
-    <tr className="relative">
-      <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">
-        <i className="text-5xl fa-solid fa-circle-notch fa-spin sm:text-7xl" />
-      </td>
-    </tr>
-  </tbody>
-);
 
 const Empty = () => (
   <tbody>
