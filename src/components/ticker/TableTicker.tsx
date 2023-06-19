@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense } from 'react';
-import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';
 import TableTickerBody from './TableTickerBody';
@@ -40,21 +39,11 @@ const TableTicker = () => {
         </tr>
       </thead>
 
-      <ErrorBoundary fallback={<Error />}>
-        <Suspense fallback={<Loading />}>
-          <TableTickerBody />
-        </Suspense>
-      </ErrorBoundary>
+      <Suspense fallback={<Loading />}>
+        <TableTickerBody />
+      </Suspense>
     </table>
   );
 };
-
-const Error = () => (
-  <tbody>
-    <tr className="relative">
-      <td className="absolute mt-5 text-center -translate-x-1/2 left-1/2">에러가 발생헀습니다.</td>
-    </tr>
-  </tbody>
-);
 
 export default TableTicker;
