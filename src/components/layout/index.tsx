@@ -1,6 +1,6 @@
-import Footer from './footerr';
+import Footer from './footer';
 import Header from './header';
-import Nav from './navv';
+import Nav from './nav';
 import type { ReactNode } from 'react';
 
 interface Props {
