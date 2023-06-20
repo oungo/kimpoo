@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import type { OverseasExchange, OverseasTicker } from '@/components/ticker/types';
-import { useTickerStore } from '@/store/useTickerStore';
-import { useQuotationQuery } from './useQuotationQuery';
+import { useTickerStore } from '@/store/use-ticker-store';
+import { useQuotationQuery } from './use-quotation-query';
 
 export interface BinanceTicker {
   /** Symbol */

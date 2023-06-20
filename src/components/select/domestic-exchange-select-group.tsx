@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { shallow } from 'zustand/shallow';
 import type { DomesticExchange } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/use-ticker-store';
 import { Select, Option } from '.';
-import { useTickerStore } from 'store/useTickerStore';
 
 const DomesticExchangeSelectGroup = () => {
   const { domesticExchange, setDomesticExchange } = useTickerStore(

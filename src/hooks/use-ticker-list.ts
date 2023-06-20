@@ -1,5 +1,5 @@
-import { useTickerStore } from '@/store/useTickerStore';
-import { useSortedTickerList } from './useSortedTickerList';
+import { useTickerStore } from '@/store/use-ticker-store';
+import { useSortedTickerList } from './use-sorted-ticker-list';
 
 export const useTickerList = () => {
   const sortedTickerList = useSortedTickerList();

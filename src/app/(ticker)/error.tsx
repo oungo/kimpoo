@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import logError from '@/api/logError';
+import logError from '@/api/log-error';
 
 interface Props {
   error: Error;

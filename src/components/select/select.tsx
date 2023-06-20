@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRef, useState } from 'react';
-import { SelectContext } from './selectContext';
+import { SelectContext } from './select-context';
 import type { ReactElement } from 'react';
 
 interface ChildrenProps {

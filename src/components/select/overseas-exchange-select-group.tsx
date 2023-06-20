@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import type { OverseasExchange } from '@/components/ticker/types';
+import { useTickerStore } from '@/store/use-ticker-store';
 import { Select, Option } from '.';
-import { useTickerStore } from 'store/useTickerStore';
 
 const OverseasExchangeSelectGroup = () => {
   const setOverseasExchange = useTickerStore((state) => state.setOverseasExchange);

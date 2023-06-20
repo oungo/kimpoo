@@ -3,9 +3,9 @@
 import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 import type { DomesticTicker, DomesticTickerWithSymbolName } from '@/components/ticker/types';
-import { useTickerStore } from '@/store/useTickerStore';
-import { useBithumbMarketPriceQuery } from './useBithumbMarketPriceQuery';
-import { useBithumbMarketQuery } from './useBithumbMarketQuery';
+import { useTickerStore } from '@/store/use-ticker-store';
+import { useBithumbMarketPriceQuery } from './use-bithumb-market-price-query';
+import { useBithumbMarketQuery } from './use-bithumb-market-query';
 
 interface SocketStatusResponse {
   status: '0000' | '5100';

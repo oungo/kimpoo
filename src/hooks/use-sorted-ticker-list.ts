@@ -1,4 +1,4 @@
-import { useTickerStore } from '@/store/useTickerStore';
+import { useTickerStore } from '@/store/use-ticker-store';
 
 export const useSortedTickerList = () => {
   const tickerMap = useTickerStore((state) => state.tickerMap);

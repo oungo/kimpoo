@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { useTickerStore } from '@/store/useTickerStore';
+import { useTickerStore } from '@/store/use-ticker-store';
 import type { DomesticExchange } from './types';
 
 interface Props {

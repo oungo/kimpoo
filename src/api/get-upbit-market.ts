@@ -5,7 +5,7 @@ export interface UpbitMarket {
   market_warning: 'NONE' | 'CAUTION';
 }
 
-export const fetchUpbitMarket = async (type: 'BTC' | 'KRW' = 'KRW'): Promise<UpbitMarket[]> => {
+export const getUpbitMarket = async (type: 'BTC' | 'KRW' = 'KRW'): Promise<UpbitMarket[]> => {
   const response = await fetch('https://api.upbit.com/v1/market/all', { cache: 'no-store' });
 
   if (response.ok) {

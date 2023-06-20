@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import type { DomesticTicker } from '@/components/ticker/types';
-import { useTickerStore } from '@/store/useTickerStore';
-import { useUpbitMarketQuery } from './useUpbitMarketQuery';
+import { useTickerStore } from '@/store/use-ticker-store';
+import { useUpbitMarketQuery } from './use-upbit-market-query';
 
 interface UpbitTicker {
   /** 마켓 코드  */

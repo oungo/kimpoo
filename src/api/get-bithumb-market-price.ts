@@ -29,7 +29,7 @@ type JSONResponse = {
   data: Record<string, OriginBithumbTicker>;
 };
 
-export const fetchBithumbMarketPrice = async (): Promise<BithumbMarket> => {
+export const getBithumbMarketPrice = async (): Promise<BithumbMarket> => {
   const response = await fetch('https://api.bithumb.com/public/ticker/ALL_KRW');
 
   if (response.ok) {

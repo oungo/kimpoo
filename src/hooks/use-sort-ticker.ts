@@ -1,8 +1,8 @@
 'use client';
 
 import { shallow } from 'zustand/shallow';
-import type { SortType } from '@/store/useTickerStore';
-import { useTickerStore } from '@/store/useTickerStore';
+import type { SortType } from '@/store/use-ticker-store';
+import { useTickerStore } from '@/store/use-ticker-store';
 
 export const useSortTicker = () => {
   const { sortOption, setSortOption } = useTickerStore(

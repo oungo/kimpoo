@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SelectContext } from './selectContext';
+import { SelectContext } from './select-context';
 import type { ReactNode } from 'react';
 
 interface Props {

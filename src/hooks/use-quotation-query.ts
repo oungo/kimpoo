@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchQuotation } from '@/api/fetchQuotation';
-import * as queryKeys from '@/utils/queryKeys';
+import { getQuotation } from '@/api/get-quotation';
+import * as queryKeys from '@/utils/query-keys';
 
 export const useQuotationQuery = () =>
   useQuery({
     queryKey: [queryKeys.QUOTATION],
-    queryFn: fetchQuotation,
+    queryFn: getQuotation,
     refetchOnWindowFocus: false,
     refetchInterval: 1000 * 60,
   });

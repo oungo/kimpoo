@@ -1,5 +1,5 @@
-import { useSortTicker } from '@/hooks/useSortTicker';
-import type { SortType } from '@/store/useTickerStore';
+import { useSortTicker } from '@/hooks/use-sort-ticker';
+import type { SortType } from '@/store/use-ticker-store';
 import type { ReactNode } from 'react';
 
 interface Props {

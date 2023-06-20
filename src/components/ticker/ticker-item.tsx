@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { memo, useState } from 'react';
-import { useFlashTextAnimation } from '@/hooks/useFlashTextAnimation';
+import { useFlashTextAnimation } from '@/hooks/use-flash-text-animation';
 import { formatCurrentPrice, formatNumber, formatPercent } from '@/utils/common';
-import IconCaution from './IconCaution';
-import IconFavorite from './IconFavorite';
-import TradingViewWidget from './TradingViewWidget';
+import IconCaution from './icon-caution';
+import IconFavorite from './icon-favorite';
+import TradingViewWidget from './trading-view-widget';
 import type { Ticker } from './types';
 
 interface Props {

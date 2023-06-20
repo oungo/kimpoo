@@ -1,7 +1,7 @@
-import { fetchQuotation } from '@/api/fetchQuotation';
+import { getQuotation } from '@/api/get-quotation';
 
 const Header = async () => {
-  const quotation = await fetchQuotation();
+  const quotation = await getQuotation();
 
   return (
     <header className="p-2 border-b dark:border-neutral-700">

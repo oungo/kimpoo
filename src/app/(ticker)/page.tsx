@@ -1,8 +1,8 @@
 import Script from 'next/script';
-import DomesticExchangeSelectGroup from '@/components/select/DomesticExchangeSelectGroup';
-import OverseasExchangeSelectGroup from '@/components/select/OverseasExchangeSelectGroup';
-import SearchInput from '@/components/shared/SearchInput';
-import TableTicker from '@/components/ticker/TableTicker';
+import DomesticExchangeSelectGroup from '@/components/select/domestic-exchange-select-group';
+import OverseasExchangeSelectGroup from '@/components/select/overseas-exchange-select-group';
+import SearchInput from '@/components/shared/search-input';
+import TableTicker from '@/components/ticker/table-ticker';
 import type { Metadata } from 'next';
 
 const Page = () => {

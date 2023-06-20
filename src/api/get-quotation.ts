@@ -2,7 +2,7 @@ export interface Quatation {
   basePrice: number;
 }
 
-export const fetchQuotation = async (): Promise<Quatation> => {
+export const getQuotation = async (): Promise<Quatation> => {
   const response = await fetch('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD', {
     cache: 'no-store',
   });

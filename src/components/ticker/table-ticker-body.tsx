@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
-import { useBinanceTickers } from '@/hooks/useBinanceTickers';
-import { useBithumbMarketQuery } from '@/hooks/useBithumbMarketQuery';
-import { useBithumbTickers } from '@/hooks/useBithumbTickers';
-import { useTickerList } from '@/hooks/useTickerList';
-import { useUpbitMarketQuery } from '@/hooks/useUpbitMarketQuery';
-import { useUpbitTickers } from '@/hooks/useUpbitTickers';
+import { useBinanceTickers } from '@/hooks/use-binance-tickers';
+import { useBithumbMarketQuery } from '@/hooks/use-bithumb-market-query';
+import { useBithumbTickers } from '@/hooks/use-bithumb-tickers';
+import { useTickerList } from '@/hooks/use-ticker-list';
+import { useUpbitMarketQuery } from '@/hooks/use-upbit-market-query';
+import { useUpbitTickers } from '@/hooks/use-upbit-tickers';
 import coinsData from '@/public/json/coins.json';
-import { useTickerStore } from '@/store/useTickerStore';
+import { useTickerStore } from '@/store/use-ticker-store';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
-import TickerItem from './TickerItem';
+import TickerItem from './ticker-item';
 import Loading from 'app/(ticker)/loading';
 
 const TableTickerBody = () => {

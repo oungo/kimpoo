@@ -17,7 +17,7 @@ interface Coin {
   isInvestment: boolean;
 }
 
-export const fetchBithumb = async (): Promise<Coin[]> => {
+export const getBithumbMarket = async (): Promise<Coin[]> => {
   const response = await fetch('https://gw.bithumb.com/exchange/v1/comn/intro');
 
   if (response.ok) {

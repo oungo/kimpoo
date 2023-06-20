@@ -1,7 +1,7 @@
 'use client';
 
 import { shallow } from 'zustand/shallow';
-import { useTickerStore } from '@/store/useTickerStore';
+import { useTickerStore } from '@/store/use-ticker-store';
 
 const SearchInput = () => {
   const { searchWord, setSearchWord } = useTickerStore(

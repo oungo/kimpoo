@@ -1,8 +1,8 @@
 'use client';
 
-import { useSortTicker } from '@/hooks/useSortTicker';
-import TableHeader from './TableHeader';
-import TableTickerBody from './TableTickerBody';
+import { useSortTicker } from '@/hooks/use-sort-ticker';
+import TableHeader from './table-header';
+import TableTickerBody from './table-ticker-body';
 
 const TableTicker = () => {
   const { sortTicker } = useSortTicker();
