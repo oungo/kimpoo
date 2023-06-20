@@ -1,4 +1,4 @@
-import Option from './Option';
-import Select from './Select';
+import Option from './option';
+import Select from './select';
 
 export { Select, Option };
