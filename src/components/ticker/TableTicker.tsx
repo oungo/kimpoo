@@ -1,10 +1,8 @@
 'use client';
 
-import { Suspense } from 'react';
 import { useSortTicker } from '@/hooks/useSortTicker';
 import TableHeader from './TableHeader';
 import TableTickerBody from './TableTickerBody';
-import Loading from 'app/(ticker)/loading';
 
 const TableTicker = () => {
   const { sortTicker } = useSortTicker();
@@ -39,9 +37,7 @@ const TableTicker = () => {
         </tr>
       </thead>
 
-      <Suspense fallback={<Loading />}>
-        <TableTickerBody />
-      </Suspense>
+      <TableTickerBody />
     </table>
   );
 };
