@@ -46,6 +46,9 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
           <div className="flex items-center gap-1">
             <IconFavorite symbol={ticker.symbol} />
             <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
+            <i
+              className={`${showChart ? 'text-pink-600' : 'text-gray-500 dark:text-gray-400'} fa-solid fa-chart-line`}
+            />
             {ticker.caution && <IconCaution />}
           </div>
         </td>
