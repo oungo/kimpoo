@@ -17,6 +17,7 @@ interface State {
   overseasExchange: OverseasExchange;
   sortOption: SortOption;
   searchWord: string;
+  favoriteSymbols: string[];
 }
 
 interface Action {
@@ -26,6 +27,7 @@ interface Action {
   setOverseasExchange: (exchange: OverseasExchange) => void;
   setSortOption: (option: SortOption) => void;
   setSearchWord: (searchKeyword: string) => void;
+  setFavoriteSymbols: (favoriteSymbols: string[]) => void;
 }
 
 type Store = State & Action;
@@ -35,6 +37,7 @@ const initalState: State = {
   overseasExchange: 'BINANCE_USDT',
   sortOption: { type: 'premium', desc: true },
   searchWord: '',
+  favoriteSymbols: [],
 };
 
 export const useTickerStore = create<Store>()(
@@ -70,5 +73,6 @@ export const useTickerStore = create<Store>()(
     setOverseasExchange: (exchange) => set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
     setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
     setSearchWord: (searchKeyword) => set({ searchWord: searchKeyword }, false, 'setSearchKeyword'),
+    setFavoriteSymbols: (favoriteSymbols) => set({ favoriteSymbols }, false, 'setFavoriteSymbols'),
   }))
 );

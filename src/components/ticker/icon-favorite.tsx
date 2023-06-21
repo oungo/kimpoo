@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTickerStore } from '@/store/use-ticker-store';
 import type { MouseEvent } from 'react';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 
 const IconFavorite = ({ symbol }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const setFavoriteSymbols = useTickerStore((state) => state.setFavoriteSymbols);
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -26,12 +28,14 @@ const IconFavorite = ({ symbol }: Props) => {
     const favorites: string[] = JSON.parse(favoritesItem);
     if (isFavorite) {
       const favoriteSet = [...new Set([...favorites, symbol])];
+      setFavoriteSymbols(favoriteSet);
       localStorage.setItem('favorites', JSON.stringify(favoriteSet));
     } else {
       const filteredFavorites = favorites.filter((favoriteSymbol) => favoriteSymbol !== symbol);
+      setFavoriteSymbols(filteredFavorites);
       localStorage.setItem('favorites', JSON.stringify(filteredFavorites));
     }
-  }, [isFavorite, symbol]);
+  }, [isFavorite, symbol, setFavoriteSymbols]);
 
   return (
     <i
