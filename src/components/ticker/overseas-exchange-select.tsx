@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { Select, Option } from '@/components/select';
 import type { OverseasExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/use-ticker-store';
-import { Select, Option } from '.';
 
-const OverseasExchangeSelectGroup = () => {
+const OverseasExchangeSelect = () => {
   const setOverseasExchange = useTickerStore((state) => state.setOverseasExchange);
 
   const handleSelect = (option: string) => {
@@ -30,4 +30,4 @@ const OverseasExchangeSelectGroup = () => {
   );
 };
 
-export default OverseasExchangeSelectGroup;
+export default OverseasExchangeSelect;

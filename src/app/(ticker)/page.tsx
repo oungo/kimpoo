@@ -1,7 +1,7 @@
 import Script from 'next/script';
-import DomesticExchangeSelectGroup from '@/components/select/domestic-exchange-select-group';
-import OverseasExchangeSelectGroup from '@/components/select/overseas-exchange-select-group';
 import SearchInput from '@/components/shared/search-input';
+import DomesticExchangeSelect from '@/components/ticker/domestic-exchange-select';
+import OverseasExchangeSelect from '@/components/ticker/overseas-exchange-select';
 import TableTicker from '@/components/ticker/table-ticker';
 import type { Metadata } from 'next';
 
@@ -13,9 +13,9 @@ const Page = () => {
       <article className="max-w-screen-lg min-h-screen px-2 py-4 m-auto">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="relative flex items-center justify-between gap-10 mb-4 text-center sm:mb-0">
-            <DomesticExchangeSelectGroup />
+            <DomesticExchangeSelect />
             <i className="absolute text-xs -translate-x-1/2 fa-solid fa-right-left left-1/2" />
-            <OverseasExchangeSelectGroup />
+            <OverseasExchangeSelect />
           </div>
 
           <div className="text-right">

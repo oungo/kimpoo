@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { shallow } from 'zustand/shallow';
+import { Select, Option } from '@/components/select';
 import type { DomesticExchange } from '@/components/ticker/types';
 import { useTickerStore } from '@/store/use-ticker-store';
-import { Select, Option } from '.';
 
-const DomesticExchangeSelectGroup = () => {
+const DomesticExchangeSelect = () => {
   const { domesticExchange, setDomesticExchange } = useTickerStore(
     (state) => ({ domesticExchange: state.domesticExchange, setDomesticExchange: state.setDomesticExchange }),
     shallow
@@ -46,4 +46,4 @@ const DomesticExchangeSelectGroup = () => {
   );
 };
 
-export default DomesticExchangeSelectGroup;
+export default DomesticExchangeSelect;
