@@ -1,7 +1,7 @@
 import Script from 'next/script';
-import SearchInput from '@/components/shared/search-input';
 import DomesticExchangeSelect from '@/components/ticker/domestic-exchange-select';
 import OverseasExchangeSelect from '@/components/ticker/overseas-exchange-select';
+import SearchInput from '@/components/ticker/search-input';
 import TableTicker from '@/components/ticker/table-ticker';
 import type { Metadata } from 'next';
 
