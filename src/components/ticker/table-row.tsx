@@ -15,7 +15,7 @@ interface Props {
   priority: boolean;
 }
 
-const TickerItem = ({ ticker, thumb, priority }: Props) => {
+const TableRow = ({ ticker, thumb, priority }: Props) => {
   const [showChart, setShowChart] = useState(false);
   const ref = useFlashTextAnimation();
 
@@ -104,4 +104,4 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
   );
 };
 
-export default memo(TickerItem);
+export default memo(TableRow);

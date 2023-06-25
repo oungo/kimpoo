@@ -2,7 +2,7 @@ import Script from 'next/script';
 import DomesticExchangeSelect from '@/components/ticker/domestic-exchange-select';
 import OverseasExchangeSelect from '@/components/ticker/overseas-exchange-select';
 import SearchInput from '@/components/ticker/search-input';
-import TableTicker from '@/components/ticker/table-ticker';
+import Table from '@/components/ticker/table';
 import type { Metadata } from 'next';
 
 const Page = () => {
@@ -23,7 +23,7 @@ const Page = () => {
           </div>
         </div>
 
-        <TableTicker />
+        <Table />
       </article>
     </>
   );

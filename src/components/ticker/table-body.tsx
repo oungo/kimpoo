@@ -8,10 +8,10 @@ import { useUpbitTickers } from '@/hooks/use-upbit-tickers';
 import coinsData from '@/public/json/coins.json';
 import { useTickerStore } from '@/store/use-ticker-store';
 import { createUpbitSymbolIconUrl } from '@/utils/common';
-import TickerItem from './ticker-item';
+import TableRow from './table-row';
 import Loading from 'app/(ticker)/loading';
 
-const TableTickerBody = () => {
+const TableBody = () => {
   const domesticExchange = useTickerStore((state) => state.domesticExchange);
   const isBithumb = domesticExchange === 'BITHUMB';
   const tickerList = useTickerList();
@@ -33,7 +33,7 @@ const TableTickerBody = () => {
   return (
     <tbody>
       {tickerList.map((ticker, index) => (
-        <TickerItem
+        <TableRow
           key={ticker.symbol}
           ticker={ticker}
           priority={index < 10}
@@ -56,4 +56,4 @@ const Empty = () => (
   </tbody>
 );
 
-export default TableTickerBody;
+export default TableBody;

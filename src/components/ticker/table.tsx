@@ -1,10 +1,10 @@
 'use client';
 
 import { useSortTicker } from '@/hooks/use-sort-ticker';
+import TableBody from './table-body';
 import TableHeader from './table-header';
-import TableTickerBody from './table-ticker-body';
 
-const TableTicker = () => {
+const Table = () => {
   const { sortTicker } = useSortTicker();
 
   return (
@@ -37,9 +37,9 @@ const TableTicker = () => {
         </tr>
       </thead>
 
-      <TableTickerBody />
+      <TableBody />
     </table>
   );
 };
 
-export default TableTicker;
+export default Table;
