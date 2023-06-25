@@ -6,7 +6,7 @@ interface Props {
   symbol: string;
 }
 
-const IconFavorite = ({ symbol }: Props) => {
+const FavoriteIcon = ({ symbol }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const setFavoriteSymbols = useTickerStore((state) => state.setFavoriteSymbols);
 
@@ -47,4 +47,4 @@ const IconFavorite = ({ symbol }: Props) => {
   );
 };
 
-export default IconFavorite;
+export default FavoriteIcon;

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { memo, useState } from 'react';
 import { useFlashTextAnimation } from '@/hooks/use-flash-text-animation';
 import { formatCurrentPrice, formatNumber, formatPercent } from '@/utils/common';
-import IconCaution from './icon-caution';
-import IconFavorite from './icon-favorite';
+import CautionIcon from './caution-icon';
+import FavoriteIcon from './favorite-icon';
 import TradingViewWidget from './trading-view-widget';
 import type { Ticker } from './types';
 
@@ -44,12 +44,12 @@ const TickerItem = ({ ticker, thumb, priority }: Props) => {
             <p className="overflow-hidden whitespace-nowrap text-ellipsis">{ticker.symbolName}</p>
           </div>
           <div className="flex items-center gap-1">
-            <IconFavorite symbol={ticker.symbol} />
+            <FavoriteIcon symbol={ticker.symbol} />
             <p className="inline-block text-gray-500 dark:text-gray-400">{ticker.symbol}</p>
             <i
               className={`${showChart ? 'text-pink-600' : 'text-gray-500 dark:text-gray-400'} fa-solid fa-chart-line`}
             />
-            {ticker.caution && <IconCaution />}
+            {ticker.caution && <CautionIcon />}
           </div>
         </td>
 

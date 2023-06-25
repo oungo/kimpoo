@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const IconCaution = () => {
+const CautionIcon = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
@@ -18,4 +18,4 @@ const IconCaution = () => {
   );
 };
 
-export default IconCaution;
+export default CautionIcon;
