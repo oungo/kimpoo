@@ -44,35 +44,31 @@ export const useTickerStore = create<Store>()(
   devtools((set) => ({
     ...initalState,
     setTicker: (symbol, ticker) => {
-      set(
-        ({ tickerMap }) => {
-          const tickerItem = tickerMap?.get(symbol);
-          if (!tickerItem) {
-            return { tickerMap: new Map(tickerMap).set(symbol, ticker as Ticker) };
-          }
+      set(({ tickerMap }) => {
+        const tickerItem = tickerMap?.get(symbol);
+        if (!tickerItem) {
+          return { tickerMap: new Map(tickerMap).set(symbol, ticker as Ticker) };
+        }
 
-          let premium;
-          if (tickerItem.oCurrentPrice && tickerItem.currentPrice) {
-            premium = tickerItem.currentPrice / tickerItem.oCurrentPrice - 1;
-          }
+        let premium;
+        if (tickerItem.oCurrentPrice && tickerItem.currentPrice) {
+          premium = tickerItem.currentPrice / tickerItem.oCurrentPrice - 1;
+        }
 
-          const newTickerData = {
-            ...tickerItem,
-            ...ticker,
-            premium,
-          };
+        const newTickerData = {
+          ...tickerItem,
+          ...ticker,
+          premium,
+        };
 
-          return { tickerMap: new Map(tickerMap).set(symbol, newTickerData) };
-        },
-        false,
-        { type: 'setTicker', symbol }
-      );
+        return { tickerMap: new Map(tickerMap).set(symbol, newTickerData) };
+      });
     },
-    setTickerMap: (tickerMap) => set({ tickerMap }, false, 'setTickerMap'),
-    setDomesticExchange: (exchange) => set({ domesticExchange: exchange }, false, 'setDomesticExchange'),
-    setOverseasExchange: (exchange) => set({ overseasExchange: exchange }, false, 'setOverseasExchange'),
-    setSortOption: (sortOption: SortOption) => set({ sortOption }, false, 'setSortOption'),
-    setSearchWord: (searchKeyword) => set({ searchWord: searchKeyword }, false, 'setSearchKeyword'),
-    setFavoriteSymbols: (favoriteSymbols) => set({ favoriteSymbols }, false, 'setFavoriteSymbols'),
+    setTickerMap: (tickerMap) => set({ tickerMap }),
+    setDomesticExchange: (exchange) => set({ domesticExchange: exchange }),
+    setOverseasExchange: (exchange) => set({ overseasExchange: exchange }),
+    setSortOption: (sortOption) => set({ sortOption }),
+    setSearchWord: (searchKeyword) => set({ searchWord: searchKeyword }),
+    setFavoriteSymbols: (favoriteSymbols) => set({ favoriteSymbols }),
   }))
 );
