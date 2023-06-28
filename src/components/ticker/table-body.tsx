@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useBinanceTickers } from '@/hooks/use-binance-tickers';
 import { useBithumbMarketQuery } from '@/hooks/use-bithumb-market-query';
@@ -19,9 +21,10 @@ const TableBody = () => {
   const { data: upbitMarket } = useUpbitMarketQuery();
   const { data: bithumbMarket } = useBithumbMarketQuery();
 
-  const symbolList = useMemo(() => {
-    return isBithumb ? bithumbMarket?.map(({ coinSymbol }) => coinSymbol) : upbitMarket?.map(({ market }) => market);
-  }, [upbitMarket, bithumbMarket, isBithumb]);
+  const symbolList = useMemo(
+    () => (isBithumb ? bithumbMarket?.map(({ coinSymbol }) => coinSymbol) : upbitMarket?.map(({ market }) => market)),
+    [upbitMarket, bithumbMarket, isBithumb]
+  );
 
   useUpbitTickers(symbolList);
   useBithumbTickers(symbolList);
