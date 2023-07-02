@@ -1,4 +1,4 @@
-export interface BithumbMarket {
+export interface BithumbMarketPrice {
   status: string;
   data: BithumbTicker[];
 }
@@ -29,13 +29,13 @@ type JSONResponse = {
   data: Record<string, OriginBithumbTicker>;
 };
 
-export const getBithumbMarketPrice = async (): Promise<BithumbMarket> => {
+export const getBithumbMarketPrice = async (): Promise<BithumbMarketPrice> => {
   const response = await fetch('https://api.bithumb.com/public/ticker/ALL_KRW');
 
   if (response.ok) {
     const { status, data }: JSONResponse = await response.json();
 
-    const newMarket: BithumbMarket['data'] = [];
+    const newMarket: BithumbMarketPrice['data'] = [];
     for (const symbol in data) {
       if (symbol === 'date') continue;
 

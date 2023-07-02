@@ -2,14 +2,14 @@ interface JSONResponse {
   code: string;
   data: {
     coinsOnMarketList: {
-      C0100: Coin[];
+      C0100: BithumbMarket[];
     };
   };
   message: string;
   status: number;
 }
 
-interface Coin {
+interface BithumbMarket {
   canTrade: boolean;
   coinName: string;
   coinSymbol: string;
@@ -17,7 +17,7 @@ interface Coin {
   isInvestment: boolean;
 }
 
-export const getBithumbMarket = async (): Promise<Coin[]> => {
+export const getBithumbMarket = async (): Promise<BithumbMarket[]> => {
   const response = await fetch('https://gw.bithumb.com/exchange/v1/comn/intro');
 
   if (response.ok) {
