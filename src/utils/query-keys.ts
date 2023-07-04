@@ -1,4 +1,8 @@
-export const UPBIT_MARKET = 'UPBIT_MARKET';
-export const BITHUMB_MARKET_PRICE = 'BITHUMB_MARKET_PRICE';
-export const BITHUMB_MARKET = 'BITHUMB_MARKET';
-export const QUOTATION = 'QUOTATION';
+import type { DomesticExchange } from '@/components/ticker/types';
+
+export const tickerKeys = {
+  upbitMarket: (domesticExchange: DomesticExchange) => ['upbitMarket', domesticExchange] as const,
+  bithumbMarket: ['bithumbMarket'],
+  bithumbMarketPrice: ['bithumbMarketPrice'],
+  quotation: ['quotation'],
+};
