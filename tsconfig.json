@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./src",
-    "types": ["@types/gtag.js"],
+    "types": ["@types/gtag.js", "@types/jest"],
     "paths": {
       "@/api/*": ["api/*"],
       "@/components/*": ["components/*"],
@@ -31,6 +31,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "src/**/*", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "src/**/*", ".next/types/**/*.ts", "**/*.spec.ts", "**/tests/*.test.ts"],
   "exclude": ["node_modules"]
 }
